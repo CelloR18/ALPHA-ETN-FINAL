@@ -1,0 +1,389 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulado Arrais-Amador</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to bottom, #111, #222);
+      color: #FFD700;
+      padding: 2rem;
+    }
+    h1, h2 {
+      color: #FFD700;
+    }
+    .question {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: #333;
+      border-radius: 10px;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #FFD700;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    #resultado {
+      margin-top: 2rem;
+      padding: 1rem;
+      background-color: #222;
+      border: 1px solid #FFD700;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Simulado Arrais-Amador</h1>
+  <form id="quizForm">
+<h2>Luzes e Sinais de Navegação</h2>
+<div class="question">
+<p><strong>Que cor é a luz de bombordo em uma embarcação?</strong></p>
+<label><input type="radio" name="q1" value="0"> Verde</label><br>
+<label><input type="radio" name="q1" value="1"> Branca</label><br>
+<label><input type="radio" name="q1" value="2"> Vermelha</label><br>
+<label><input type="radio" name="q1" value="3"> Amarela</label><br>
+<input type="hidden" name="q1_correta" value="2">
+</div>
+<div class="question">
+<p><strong>O que indica uma luz branca intermitente rápida no mar?</strong></p>
+<label><input type="radio" name="q2" value="0"> Área de perigo</label><br>
+<label><input type="radio" name="q2" value="1"> Farol</label><br>
+<label><input type="radio" name="q2" value="2"> Embarcação em movimento</label><br>
+<label><input type="radio" name="q2" value="3"> Embarcação fundeada</label><br>
+<input type="hidden" name="q2_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Qual a luz que uma embarcação de propulsão mecânica deve exibir quando navegando?</strong></p>
+<label><input type="radio" name="q3" value="0"> Luz de mastro e luzes de bordo</label><br>
+<label><input type="radio" name="q3" value="1"> Apenas luz de ré</label><br>
+<label><input type="radio" name="q3" value="2"> Luz de bombordo apenas</label><br>
+<label><input type="radio" name="q3" value="3"> Nenhuma</label><br>
+<input type="hidden" name="q3_correta" value="0">
+</div>
+<div class="question">
+<p><strong>O que significa uma luz azul intermitente em embarcações?</strong></p>
+<label><input type="radio" name="q4" value="0"> Luz de pesca</label><br>
+<label><input type="radio" name="q4" value="1"> Luz de emergência</label><br>
+<label><input type="radio" name="q4" value="2"> Luz de sinalização de socorro</label><br>
+<label><input type="radio" name="q4" value="3"> Luz de navegação normal</label><br>
+<input type="hidden" name="q4_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Luz de estibordo é de que cor?</strong></p>
+<label><input type="radio" name="q5" value="0"> Vermelha</label><br>
+<label><input type="radio" name="q5" value="1"> Amarela</label><br>
+<label><input type="radio" name="q5" value="2"> Verde</label><br>
+<label><input type="radio" name="q5" value="3"> Branca</label><br>
+<input type="hidden" name="q5_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Uma embarcação fundeada deve exibir:</strong></p>
+<label><input type="radio" name="q6" value="0"> Luz de bombordo</label><br>
+<label><input type="radio" name="q6" value="1"> Luz de mastro</label><br>
+<label><input type="radio" name="q6" value="2"> Luz branca visível de todos os lados</label><br>
+<label><input type="radio" name="q6" value="3"> Nenhuma luz</label><br>
+<input type="hidden" name="q6_correta" value="2">
+</div>
+<div class="question">
+<p><strong>A luz de ré deve ser:</strong></p>
+<label><input type="radio" name="q7" value="0"> Azul</label><br>
+<label><input type="radio" name="q7" value="1"> Branca e visível de 135°</label><br>
+<label><input type="radio" name="q7" value="2"> Vermelha</label><br>
+<label><input type="radio" name="q7" value="3"> Amarela e intermitente</label><br>
+<input type="hidden" name="q7_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Em que situação a embarcação deve usar a luz de alcance?</strong></p>
+<label><input type="radio" name="q8" value="0"> Quando ancorada</label><br>
+<label><input type="radio" name="q8" value="1"> Quando navegando com vela</label><br>
+<label><input type="radio" name="q8" value="2"> Quando navegando a motor</label><br>
+<label><input type="radio" name="q8" value="3"> Durante tempestade</label><br>
+<input type="hidden" name="q8_correta" value="2">
+</div>
+<div class="question">
+<p><strong>A luz de bordo da esquerda é:</strong></p>
+<label><input type="radio" name="q9" value="0"> Branca</label><br>
+<label><input type="radio" name="q9" value="1"> Amarela</label><br>
+<label><input type="radio" name="q9" value="2"> Vermelha</label><br>
+<label><input type="radio" name="q9" value="3"> Verde</label><br>
+<input type="hidden" name="q9_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Qual o alcance mínimo da luz de mastro em milhas náuticas?</strong></p>
+<label><input type="radio" name="q10" value="0"> 1</label><br>
+<label><input type="radio" name="q10" value="1"> 2</label><br>
+<label><input type="radio" name="q10" value="2"> 3</label><br>
+<label><input type="radio" name="q10" value="3"> 5</label><br>
+<input type="hidden" name="q10_correta" value="2">
+</div>
+<h2>Balizamento</h2>
+<div class="question">
+<p><strong>Qual a cor da boia lateral de bombordo no sistema IALA A?</strong></p>
+<label><input type="radio" name="q11" value="0"> Vermelha</label><br>
+<label><input type="radio" name="q11" value="1"> Verde</label><br>
+<label><input type="radio" name="q11" value="2"> Preta</label><br>
+<label><input type="radio" name="q11" value="3"> Amarela</label><br>
+<input type="hidden" name="q11_correta" value="0">
+</div>
+<div class="question">
+<p><strong>Uma boia cardeal norte é identificada por:</strong></p>
+<label><input type="radio" name="q12" value="0"> Topes com os vértices voltados para baixo</label><br>
+<label><input type="radio" name="q12" value="1"> Cor amarela sobre preta</label><br>
+<label><input type="radio" name="q12" value="2"> Topes com vértices para cima</label><br>
+<label><input type="radio" name="q12" value="3"> Cor preta sobre amarela</label><br>
+<input type="hidden" name="q12_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Boia com faixas horizontais vermelha e branca indica:</strong></p>
+<label><input type="radio" name="q13" value="0"> Perigo isolado</label><br>
+<label><input type="radio" name="q13" value="1"> Águas seguras</label><br>
+<label><input type="radio" name="q13" value="2"> Proibido fundear</label><br>
+<label><input type="radio" name="q13" value="3"> Canal preferencial</label><br>
+<input type="hidden" name="q13_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Qual sinalização marca um perigo isolado?</strong></p>
+<label><input type="radio" name="q14" value="0"> Boia preta com uma faixa vermelha</label><br>
+<label><input type="radio" name="q14" value="1"> Boia toda amarela</label><br>
+<label><input type="radio" name="q14" value="2"> Boia verde e vermelha</label><br>
+<label><input type="radio" name="q14" value="3"> Boia preta e branca</label><br>
+<input type="hidden" name="q14_correta" value="0">
+</div>
+<div class="question">
+<p><strong>O que significa uma boia amarela com cruz preta no topo?</strong></p>
+<label><input type="radio" name="q15" value="0"> Águas seguras</label><br>
+<label><input type="radio" name="q15" value="1"> Zona de ancoragem</label><br>
+<label><input type="radio" name="q15" value="2"> Área especial</label><br>
+<label><input type="radio" name="q15" value="3"> Perigo isolado</label><br>
+<input type="hidden" name="q15_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Boias de canal principal são de qual cor no sistema IALA A?</strong></p>
+<label><input type="radio" name="q16" value="0"> Verde</label><br>
+<label><input type="radio" name="q16" value="1"> Vermelha</label><br>
+<label><input type="radio" name="q16" value="2"> Preta</label><br>
+<label><input type="radio" name="q16" value="3"> Amarela</label><br>
+<input type="hidden" name="q16_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Qual o significado de uma boia preta com topo esférico?</strong></p>
+<label><input type="radio" name="q17" value="0"> Cardeal leste</label><br>
+<label><input type="radio" name="q17" value="1"> Águas seguras</label><br>
+<label><input type="radio" name="q17" value="2"> Canal preferencial à esquerda</label><br>
+<label><input type="radio" name="q17" value="3"> Perigo isolado</label><br>
+<input type="hidden" name="q17_correta" value="3">
+</div>
+<div class="question">
+<p><strong>Boia com topos em cone indica cardeal:</strong></p>
+<label><input type="radio" name="q18" value="0"> Sul</label><br>
+<label><input type="radio" name="q18" value="1"> Leste</label><br>
+<label><input type="radio" name="q18" value="2"> Norte</label><br>
+<label><input type="radio" name="q18" value="3"> Oeste</label><br>
+<input type="hidden" name="q18_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Cor e marca de uma boia cardeal oeste:</strong></p>
+<label><input type="radio" name="q19" value="0"> Preto sobre amarelo, topos opostos</label><br>
+<label><input type="radio" name="q19" value="1"> Amarelo sobre preto, topos opostos</label><br>
+<label><input type="radio" name="q19" value="2"> Verde sólida</label><br>
+<label><input type="radio" name="q19" value="3"> Listrada horizontalmente</label><br>
+<input type="hidden" name="q19_correta" value="1">
+</div>
+<div class="question">
+<p><strong>A marca de águas seguras indica:</strong></p>
+<label><input type="radio" name="q20" value="0"> Perigo</label><br>
+<label><input type="radio" name="q20" value="1"> Centro do canal</label><br>
+<label><input type="radio" name="q20" value="2"> Canal secundário</label><br>
+<label><input type="radio" name="q20" value="3"> Área militar</label><br>
+<input type="hidden" name="q20_correta" value="1">
+</div>
+<h2>Manobras e Conduta no Mar</h2>
+<div class="question">
+<p><strong>Quando duas embarcações a motor se cruzam, quem deve manobrar?</strong></p>
+<label><input type="radio" name="q21" value="0"> A da direita</label><br>
+<label><input type="radio" name="q21" value="1"> A maior</label><br>
+<label><input type="radio" name="q21" value="2"> Ambas</label><br>
+<label><input type="radio" name="q21" value="3"> A menor</label><br>
+<input type="hidden" name="q21_correta" value="3">
+</div>
+<div class="question">
+<p><strong>Qual embarcação tem prioridade: a motor ou à vela?</strong></p>
+<label><input type="radio" name="q22" value="0"> A motor</label><br>
+<label><input type="radio" name="q22" value="1"> À vela</label><br>
+<label><input type="radio" name="q22" value="2"> Depende da velocidade</label><br>
+<label><input type="radio" name="q22" value="3"> A maior</label><br>
+<input type="hidden" name="q22_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Embarcação menor deve sempre:</strong></p>
+<label><input type="radio" name="q23" value="0"> Ceder a maior</label><br>
+<label><input type="radio" name="q23" value="1"> Dar prioridade a todas</label><br>
+<label><input type="radio" name="q23" value="2"> Evitar colisão</label><br>
+<label><input type="radio" name="q23" value="3"> Manter rumo</label><br>
+<input type="hidden" name="q23_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Qual a regra básica de ultrapassagem?</strong></p>
+<label><input type="radio" name="q24" value="0"> Pode ser feita por bombordo</label><br>
+<label><input type="radio" name="q24" value="1"> Sempre por estibordo</label><br>
+<label><input type="radio" name="q24" value="2"> A embarcação que ultrapassa deve manter-se afastada</label><br>
+<label><input type="radio" name="q24" value="3"> Ambas devem alterar rumo</label><br>
+<input type="hidden" name="q24_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Quando ouvir um apito curto, significa:</strong></p>
+<label><input type="radio" name="q25" value="0"> Sinal de perigo</label><br>
+<label><input type="radio" name="q25" value="1"> Alerta de emergência</label><br>
+<label><input type="radio" name="q25" value="2"> Mudança de rumo para boreste</label><br>
+<label><input type="radio" name="q25" value="3"> Parar imediatamente</label><br>
+<input type="hidden" name="q25_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Três apitos curtos significam:</strong></p>
+<label><input type="radio" name="q26" value="0"> Recuar</label><br>
+<label><input type="radio" name="q26" value="1"> Avançar</label><br>
+<label><input type="radio" name="q26" value="2"> Dar ré</label><br>
+<label><input type="radio" name="q26" value="3"> Parar</label><br>
+<input type="hidden" name="q26_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Como indicar intenção de ultrapassar pela esquerda?</strong></p>
+<label><input type="radio" name="q27" value="0"> Um apito longo</label><br>
+<label><input type="radio" name="q27" value="1"> Dois apitos longos</label><br>
+<label><input type="radio" name="q27" value="2"> Dois curtos</label><br>
+<label><input type="radio" name="q27" value="3"> Um curto</label><br>
+<input type="hidden" name="q27_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Ao ver embarcação à direita, o que fazer?</strong></p>
+<label><input type="radio" name="q28" value="0"> Manter curso</label><br>
+<label><input type="radio" name="q28" value="1"> Acelerar</label><br>
+<label><input type="radio" name="q28" value="2"> Reduzir velocidade</label><br>
+<label><input type="radio" name="q28" value="3"> Desviar para boreste</label><br>
+<input type="hidden" name="q28_correta" value="3">
+</div>
+<div class="question">
+<p><strong>Quando duas embarcações estão em rumo de colisão:</strong></p>
+<label><input type="radio" name="q29" value="0"> Ambas devem desviar</label><br>
+<label><input type="radio" name="q29" value="1"> A menor cede</label><br>
+<label><input type="radio" name="q29" value="2"> A maior cede</label><br>
+<label><input type="radio" name="q29" value="3"> A mais veloz cede</label><br>
+<input type="hidden" name="q29_correta" value="0">
+</div>
+<div class="question">
+<p><strong>Ultrapassar em canais estreitos deve ser feito:</strong></p>
+<label><input type="radio" name="q30" value="0"> Rápido</label><br>
+<label><input type="radio" name="q30" value="1"> Com atenção e sinal sonoro</label><br>
+<label><input type="radio" name="q30" value="2"> Sempre por estibordo</label><br>
+<label><input type="radio" name="q30" value="3"> Sem aviso</label><br>
+<input type="hidden" name="q30_correta" value="1">
+</div>
+<h2>Segurança e Salvamento</h2>
+<div class="question">
+<p><strong>Coletes salva-vidas devem estar:</strong></p>
+<label><input type="radio" name="q31" value="0"> A bordo, em local acessível</label><br>
+<label><input type="radio" name="q31" value="1"> Guardados trancados</label><br>
+<label><input type="radio" name="q31" value="2"> Disponíveis somente para maiores de idade</label><br>
+<label><input type="radio" name="q31" value="3"> Usados apenas à noite</label><br>
+<input type="hidden" name="q31_correta" value="0">
+</div>
+<div class="question">
+<p><strong>Qual item é obrigatório em embarcação de esporte e recreio?</strong></p>
+<label><input type="radio" name="q32" value="0"> Buzina</label><br>
+<label><input type="radio" name="q32" value="1"> Bóia circular com retenção</label><br>
+<label><input type="radio" name="q32" value="2"> Extintor de incêndio</label><br>
+<label><input type="radio" name="q32" value="3"> Todos os anteriores</label><br>
+<input type="hidden" name="q32_correta" value="3">
+</div>
+<div class="question">
+<p><strong>Extintores devem ser verificados:</strong></p>
+<label><input type="radio" name="q33" value="0"> Semestralmente</label><br>
+<label><input type="radio" name="q33" value="1"> Anualmente</label><br>
+<label><input type="radio" name="q33" value="2"> Mensalmente</label><br>
+<label><input type="radio" name="q33" value="3"> Nunca</label><br>
+<input type="hidden" name="q33_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Ao cair alguém ao mar, o que fazer primeiro?</strong></p>
+<label><input type="radio" name="q34" value="0"> Ligar para a polícia</label><br>
+<label><input type="radio" name="q34" value="1"> Dar marcha à ré</label><br>
+<label><input type="radio" name="q34" value="2"> Lançar bóia</label><br>
+<label><input type="radio" name="q34" value="3"> Nadar até a pessoa</label><br>
+<input type="hidden" name="q34_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Fumaça laranja é sinal de:</strong></p>
+<label><input type="radio" name="q35" value="0"> Emergência</label><br>
+<label><input type="radio" name="q35" value="1"> Perigo ambiental</label><br>
+<label><input type="radio" name="q35" value="2"> Festa</label><br>
+<label><input type="radio" name="q35" value="3"> Baixa visibilidade</label><br>
+<input type="hidden" name="q35_correta" value="0">
+</div>
+<div class="question">
+<p><strong>Documentação obrigatória inclui:</strong></p>
+<label><input type="radio" name="q36" value="0"> Carteira de Habilitação Náutica</label><br>
+<label><input type="radio" name="q36" value="1"> Licença ambiental</label><br>
+<label><input type="radio" name="q36" value="2"> IPVA</label><br>
+<label><input type="radio" name="q36" value="3"> Título eleitoral</label><br>
+<input type="hidden" name="q36_correta" value="0">
+</div>
+<div class="question">
+<p><strong>Em caso de incêndio a bordo, deve-se:</strong></p>
+<label><input type="radio" name="q37" value="0"> Abandonar imediatamente</label><br>
+<label><input type="radio" name="q37" value="1"> Usar extintor adequado</label><br>
+<label><input type="radio" name="q37" value="2"> Molhar tudo</label><br>
+<label><input type="radio" name="q37" value="3"> Chamar ajuda</label><br>
+<input type="hidden" name="q37_correta" value="1">
+</div>
+<div class="question">
+<p><strong>É permitido conduzir embarcação sob efeito de álcool?</strong></p>
+<label><input type="radio" name="q38" value="0"> Sim</label><br>
+<label><input type="radio" name="q38" value="1"> Sim com moderação</label><br>
+<label><input type="radio" name="q38" value="2"> Não</label><br>
+<label><input type="radio" name="q38" value="3"> Apenas em mar aberto</label><br>
+<input type="hidden" name="q38_correta" value="2">
+</div>
+<div class="question">
+<p><strong>Antes de sair ao mar, deve-se:</strong></p>
+<label><input type="radio" name="q39" value="0"> Avisar a família</label><br>
+<label><input type="radio" name="q39" value="1"> Verificar equipamentos e condições</label><br>
+<label><input type="radio" name="q39" value="2"> Rezar</label><br>
+<label><input type="radio" name="q39" value="3"> Navegar sem rumo</label><br>
+<input type="hidden" name="q39_correta" value="1">
+</div>
+<div class="question">
+<p><strong>Em águas abrigadas, o uso de colete é:</strong></p>
+<label><input type="radio" name="q40" value="0"> Opcional</label><br>
+<label><input type="radio" name="q40" value="1"> Obrigatório sempre</label><br>
+<label><input type="radio" name="q40" value="2"> Dispensado para experientes</label><br>
+<label><input type="radio" name="q40" value="3"> Somente para crianças</label><br>
+<input type="hidden" name="q40_correta" value="1">
+</div>
+
+    <button type="button" onclick="corrigir()">Corrigir</button>
+  </form>
+  <div id="resultado"></div>
+
+  <script>
+    function corrigir() {
+      const form = document.forms["quizForm"];
+      let acertos = 0;
+
+      for (let i = 1; i <= 40; i++) {
+        const correta = form[`q${i}_correta`].value;
+        const marcada = form[`q${i}`].value;
+
+        if (marcada === correta) acertos++;
+      }
+
+      document.getElementById("resultado").innerHTML = `<h2>Resultado</h2><p>Você acertou ${acertos} de 40 questões.</p>`;
+    }
+  </script>
+</body>
+</html>

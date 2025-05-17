@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Área Administrativa - Alpha Cursos Náuticos</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #5a0e99;
+      color: white;
+      padding: 2rem;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background-color:  #5a0e99;
+      padding: 2rem;
+      border-radius: 8px;
+    }
+
+    h2 {
+      color: #FFD700;
+      text-align: center;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.5rem;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+      border: none;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 0.5rem 1rem;
+      background-color: #FFD700;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background-color: #e6c200;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    li {
+      background: #003366;
+      margin: 0.5rem 0;
+      padding: 0.5rem;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logout {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .logout button {
+      background-color: #ff4d4d;
+    }
+
+    #painel {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div id="login">
+      <h2>Login Administrativo</h2>
+      <input type="text" id="usuario" placeholder="Usuário" />
+      <input type="password" id="senha" placeholder="Senha" />
+      <button onclick="verificarLogin()">Entrar</button>
+    </div>
+
+    <div id="painel">
+      <h2>Painel de Agenda</h2>
+      <input type="text" id="nova-entrada" placeholder="Ex: 20/05 - Aula prática às 8h" />
+      <button onclick="adicionarEntrada()">Adicionar</button>
+
+      <ul id="lista-agenda"></ul>
+
+      <div class="logout">
+        <button onclick="logout()">Sair</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function verificarLogin() {
+      const usuario = document.getElementById("usuario").value;
+      const senha = document.getElementById("senha").value;
+
+      if (usuario === "gustavo.vieira" && senha === "AlphaETN2025") {
+        localStorage.setItem("logadoAlphaETN", "sim");
+        exibirPainel();
+      } else {
+        alert("Usuário ou senha incorretos!");
+      }
+    }
+
+    function exibirPainel() {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("painel").style.display = "block";
+      carregarAgenda();
+    }
+
+    function logout() {
+      localStorage.removeItem("logadoAlphaETN");
+      location.reload();
+    }
+
+    function carregarAgenda() {
+      const lista = document.getElementById("lista-agenda");
+      lista.innerHTML = "";
+      const dados = JSON.parse(localStorage.getItem("agendaAlpha")) || [];
+
+      dados.forEach((item, index) => {
+        const li = document.createElement("li");
+        li.textContent = item;
+
+        const btnRemover = document.createElement("button");
+        btnRemover.textContent = "✖";
+        btnRemover.style.marginLeft = "10px";
+        btnRemover.onclick = () => removerEntrada(index);
+
+        li.appendChild(btnRemover);
+        lista.appendChild(li);
+      });
+    }
+
+    function adicionarEntrada() {
+      const input = document.getElementById("nova-entrada");
+      const valor = input.value.trim();
+      if (valor === "") return;
+
+      const dados = JSON.parse(localStorage.getItem("agendaAlpha")) || [];
+      dados.push(valor);
+      localStorage.setItem("agendaAlpha", JSON.stringify(dados));
+      input.value = "";
+      carregarAgenda();
+    }
+
+    function removerEntrada(index) {
+      const dados = JSON.parse(localStorage.getItem("agendaAlpha")) || [];
+      dados.splice(index, 1);
+      localStorage.setItem("agendaAlpha", JSON.stringify(dados));
+      carregarAgenda();
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("logadoAlphaETN") === "sim") {
+        exibirPainel();
+      }
+    };
+  </script>
+</body>
+</html>
