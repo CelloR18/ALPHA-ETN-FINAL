@@ -1,389 +1,2525 @@
-
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulado Arrais-Amador</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom, #111, #222);
-      color: #FFD700;
-      padding: 2rem;
-    }
-    h1, h2 {
-      color: #FFD700;
-    }
-    .question {
-      margin-bottom: 1.5rem;
-      padding: 1rem;
-      background: #333;
-      border-radius: 10px;
-    }
-    button {
-      padding: 0.5rem 1rem;
-      background-color: #FFD700;
-      color: #000;
-      border: none;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    #resultado {
-      margin-top: 2rem;
-      padding: 1rem;
-      background-color: #222;
-      border: 1px solid #FFD700;
-      border-radius: 10px;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulado Náutico - Alpha Cursos</title>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #6c757d;
+            --success: #28a745;
+            --danger: #dc3545;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --white: #ffffff;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background: var(--white);
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        header {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 15px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-family: 'Anton', sans-serif;
+            letter-spacing: 1px;
+            font-weight: 400;
+        }
+        
+        .simulado-info {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .progress-container {
+            width: 100%;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            height: 10px;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            border-radius: 5px;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        .question-card {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+        
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+        
+        .question-text {
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .options-container {
+            margin-left: 10px;
+        }
+        
+        .option {
+            margin-bottom: 12px;
+            padding: 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 4px solid transparent;
+        }
+        
+        .option:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .option.selected {
+            border-left: 4px solid var(--primary);
+            background-color: #e7f1ff;
+        }
+        
+        .option.correct {
+            border-left: 4px solid var(--success);
+            background-color: #d4edda;
+        }
+        
+        .option.incorrect {
+            border-left: 4px solid var(--danger);
+            background-color: #f8d7da;
+        }
+        
+        .navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+        
+        .btn-primary:hover {
+            background-color: #004494;
+        }
+        
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+        }
+        
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
+        
+        .btn-disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        
+        .results-container {
+            text-align: center;
+            padding: 30px;
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+        
+        .results-container h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+        
+        .score {
+            font-size: 2rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .correct-answers {
+            color: var(--success);
+        }
+        
+        .incorrect-answers {
+            color: var(--danger);
+        }
+        
+        .restart-btn {
+            margin-top: 20px;
+        }
+        
+        .topic-badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: var(--primary);
+            color: var(--white);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .question-card {
+                padding: 15px;
+            }
+            
+            .navigation-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            button {
+                width: 100%;
+            }
+        }
+    </style>
 </head>
 <body>
-  <h1>Simulado Arrais-Amador</h1>
-  <form id="quizForm">
-<h2>Luzes e Sinais de Navegação</h2>
-<div class="question">
-<p><strong>Que cor é a luz de bombordo em uma embarcação?</strong></p>
-<label><input type="radio" name="q1" value="0"> Verde</label><br>
-<label><input type="radio" name="q1" value="1"> Branca</label><br>
-<label><input type="radio" name="q1" value="2"> Vermelha</label><br>
-<label><input type="radio" name="q1" value="3"> Amarela</label><br>
-<input type="hidden" name="q1_correta" value="2">
-</div>
-<div class="question">
-<p><strong>O que indica uma luz branca intermitente rápida no mar?</strong></p>
-<label><input type="radio" name="q2" value="0"> Área de perigo</label><br>
-<label><input type="radio" name="q2" value="1"> Farol</label><br>
-<label><input type="radio" name="q2" value="2"> Embarcação em movimento</label><br>
-<label><input type="radio" name="q2" value="3"> Embarcação fundeada</label><br>
-<input type="hidden" name="q2_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Qual a luz que uma embarcação de propulsão mecânica deve exibir quando navegando?</strong></p>
-<label><input type="radio" name="q3" value="0"> Luz de mastro e luzes de bordo</label><br>
-<label><input type="radio" name="q3" value="1"> Apenas luz de ré</label><br>
-<label><input type="radio" name="q3" value="2"> Luz de bombordo apenas</label><br>
-<label><input type="radio" name="q3" value="3"> Nenhuma</label><br>
-<input type="hidden" name="q3_correta" value="0">
-</div>
-<div class="question">
-<p><strong>O que significa uma luz azul intermitente em embarcações?</strong></p>
-<label><input type="radio" name="q4" value="0"> Luz de pesca</label><br>
-<label><input type="radio" name="q4" value="1"> Luz de emergência</label><br>
-<label><input type="radio" name="q4" value="2"> Luz de sinalização de socorro</label><br>
-<label><input type="radio" name="q4" value="3"> Luz de navegação normal</label><br>
-<input type="hidden" name="q4_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Luz de estibordo é de que cor?</strong></p>
-<label><input type="radio" name="q5" value="0"> Vermelha</label><br>
-<label><input type="radio" name="q5" value="1"> Amarela</label><br>
-<label><input type="radio" name="q5" value="2"> Verde</label><br>
-<label><input type="radio" name="q5" value="3"> Branca</label><br>
-<input type="hidden" name="q5_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Uma embarcação fundeada deve exibir:</strong></p>
-<label><input type="radio" name="q6" value="0"> Luz de bombordo</label><br>
-<label><input type="radio" name="q6" value="1"> Luz de mastro</label><br>
-<label><input type="radio" name="q6" value="2"> Luz branca visível de todos os lados</label><br>
-<label><input type="radio" name="q6" value="3"> Nenhuma luz</label><br>
-<input type="hidden" name="q6_correta" value="2">
-</div>
-<div class="question">
-<p><strong>A luz de ré deve ser:</strong></p>
-<label><input type="radio" name="q7" value="0"> Azul</label><br>
-<label><input type="radio" name="q7" value="1"> Branca e visível de 135°</label><br>
-<label><input type="radio" name="q7" value="2"> Vermelha</label><br>
-<label><input type="radio" name="q7" value="3"> Amarela e intermitente</label><br>
-<input type="hidden" name="q7_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Em que situação a embarcação deve usar a luz de alcance?</strong></p>
-<label><input type="radio" name="q8" value="0"> Quando ancorada</label><br>
-<label><input type="radio" name="q8" value="1"> Quando navegando com vela</label><br>
-<label><input type="radio" name="q8" value="2"> Quando navegando a motor</label><br>
-<label><input type="radio" name="q8" value="3"> Durante tempestade</label><br>
-<input type="hidden" name="q8_correta" value="2">
-</div>
-<div class="question">
-<p><strong>A luz de bordo da esquerda é:</strong></p>
-<label><input type="radio" name="q9" value="0"> Branca</label><br>
-<label><input type="radio" name="q9" value="1"> Amarela</label><br>
-<label><input type="radio" name="q9" value="2"> Vermelha</label><br>
-<label><input type="radio" name="q9" value="3"> Verde</label><br>
-<input type="hidden" name="q9_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Qual o alcance mínimo da luz de mastro em milhas náuticas?</strong></p>
-<label><input type="radio" name="q10" value="0"> 1</label><br>
-<label><input type="radio" name="q10" value="1"> 2</label><br>
-<label><input type="radio" name="q10" value="2"> 3</label><br>
-<label><input type="radio" name="q10" value="3"> 5</label><br>
-<input type="hidden" name="q10_correta" value="2">
-</div>
-<h2>Balizamento</h2>
-<div class="question">
-<p><strong>Qual a cor da boia lateral de bombordo no sistema IALA A?</strong></p>
-<label><input type="radio" name="q11" value="0"> Vermelha</label><br>
-<label><input type="radio" name="q11" value="1"> Verde</label><br>
-<label><input type="radio" name="q11" value="2"> Preta</label><br>
-<label><input type="radio" name="q11" value="3"> Amarela</label><br>
-<input type="hidden" name="q11_correta" value="0">
-</div>
-<div class="question">
-<p><strong>Uma boia cardeal norte é identificada por:</strong></p>
-<label><input type="radio" name="q12" value="0"> Topes com os vértices voltados para baixo</label><br>
-<label><input type="radio" name="q12" value="1"> Cor amarela sobre preta</label><br>
-<label><input type="radio" name="q12" value="2"> Topes com vértices para cima</label><br>
-<label><input type="radio" name="q12" value="3"> Cor preta sobre amarela</label><br>
-<input type="hidden" name="q12_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Boia com faixas horizontais vermelha e branca indica:</strong></p>
-<label><input type="radio" name="q13" value="0"> Perigo isolado</label><br>
-<label><input type="radio" name="q13" value="1"> Águas seguras</label><br>
-<label><input type="radio" name="q13" value="2"> Proibido fundear</label><br>
-<label><input type="radio" name="q13" value="3"> Canal preferencial</label><br>
-<input type="hidden" name="q13_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Qual sinalização marca um perigo isolado?</strong></p>
-<label><input type="radio" name="q14" value="0"> Boia preta com uma faixa vermelha</label><br>
-<label><input type="radio" name="q14" value="1"> Boia toda amarela</label><br>
-<label><input type="radio" name="q14" value="2"> Boia verde e vermelha</label><br>
-<label><input type="radio" name="q14" value="3"> Boia preta e branca</label><br>
-<input type="hidden" name="q14_correta" value="0">
-</div>
-<div class="question">
-<p><strong>O que significa uma boia amarela com cruz preta no topo?</strong></p>
-<label><input type="radio" name="q15" value="0"> Águas seguras</label><br>
-<label><input type="radio" name="q15" value="1"> Zona de ancoragem</label><br>
-<label><input type="radio" name="q15" value="2"> Área especial</label><br>
-<label><input type="radio" name="q15" value="3"> Perigo isolado</label><br>
-<input type="hidden" name="q15_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Boias de canal principal são de qual cor no sistema IALA A?</strong></p>
-<label><input type="radio" name="q16" value="0"> Verde</label><br>
-<label><input type="radio" name="q16" value="1"> Vermelha</label><br>
-<label><input type="radio" name="q16" value="2"> Preta</label><br>
-<label><input type="radio" name="q16" value="3"> Amarela</label><br>
-<input type="hidden" name="q16_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Qual o significado de uma boia preta com topo esférico?</strong></p>
-<label><input type="radio" name="q17" value="0"> Cardeal leste</label><br>
-<label><input type="radio" name="q17" value="1"> Águas seguras</label><br>
-<label><input type="radio" name="q17" value="2"> Canal preferencial à esquerda</label><br>
-<label><input type="radio" name="q17" value="3"> Perigo isolado</label><br>
-<input type="hidden" name="q17_correta" value="3">
-</div>
-<div class="question">
-<p><strong>Boia com topos em cone indica cardeal:</strong></p>
-<label><input type="radio" name="q18" value="0"> Sul</label><br>
-<label><input type="radio" name="q18" value="1"> Leste</label><br>
-<label><input type="radio" name="q18" value="2"> Norte</label><br>
-<label><input type="radio" name="q18" value="3"> Oeste</label><br>
-<input type="hidden" name="q18_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Cor e marca de uma boia cardeal oeste:</strong></p>
-<label><input type="radio" name="q19" value="0"> Preto sobre amarelo, topos opostos</label><br>
-<label><input type="radio" name="q19" value="1"> Amarelo sobre preto, topos opostos</label><br>
-<label><input type="radio" name="q19" value="2"> Verde sólida</label><br>
-<label><input type="radio" name="q19" value="3"> Listrada horizontalmente</label><br>
-<input type="hidden" name="q19_correta" value="1">
-</div>
-<div class="question">
-<p><strong>A marca de águas seguras indica:</strong></p>
-<label><input type="radio" name="q20" value="0"> Perigo</label><br>
-<label><input type="radio" name="q20" value="1"> Centro do canal</label><br>
-<label><input type="radio" name="q20" value="2"> Canal secundário</label><br>
-<label><input type="radio" name="q20" value="3"> Área militar</label><br>
-<input type="hidden" name="q20_correta" value="1">
-</div>
-<h2>Manobras e Conduta no Mar</h2>
-<div class="question">
-<p><strong>Quando duas embarcações a motor se cruzam, quem deve manobrar?</strong></p>
-<label><input type="radio" name="q21" value="0"> A da direita</label><br>
-<label><input type="radio" name="q21" value="1"> A maior</label><br>
-<label><input type="radio" name="q21" value="2"> Ambas</label><br>
-<label><input type="radio" name="q21" value="3"> A menor</label><br>
-<input type="hidden" name="q21_correta" value="3">
-</div>
-<div class="question">
-<p><strong>Qual embarcação tem prioridade: a motor ou à vela?</strong></p>
-<label><input type="radio" name="q22" value="0"> A motor</label><br>
-<label><input type="radio" name="q22" value="1"> À vela</label><br>
-<label><input type="radio" name="q22" value="2"> Depende da velocidade</label><br>
-<label><input type="radio" name="q22" value="3"> A maior</label><br>
-<input type="hidden" name="q22_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Embarcação menor deve sempre:</strong></p>
-<label><input type="radio" name="q23" value="0"> Ceder a maior</label><br>
-<label><input type="radio" name="q23" value="1"> Dar prioridade a todas</label><br>
-<label><input type="radio" name="q23" value="2"> Evitar colisão</label><br>
-<label><input type="radio" name="q23" value="3"> Manter rumo</label><br>
-<input type="hidden" name="q23_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Qual a regra básica de ultrapassagem?</strong></p>
-<label><input type="radio" name="q24" value="0"> Pode ser feita por bombordo</label><br>
-<label><input type="radio" name="q24" value="1"> Sempre por estibordo</label><br>
-<label><input type="radio" name="q24" value="2"> A embarcação que ultrapassa deve manter-se afastada</label><br>
-<label><input type="radio" name="q24" value="3"> Ambas devem alterar rumo</label><br>
-<input type="hidden" name="q24_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Quando ouvir um apito curto, significa:</strong></p>
-<label><input type="radio" name="q25" value="0"> Sinal de perigo</label><br>
-<label><input type="radio" name="q25" value="1"> Alerta de emergência</label><br>
-<label><input type="radio" name="q25" value="2"> Mudança de rumo para boreste</label><br>
-<label><input type="radio" name="q25" value="3"> Parar imediatamente</label><br>
-<input type="hidden" name="q25_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Três apitos curtos significam:</strong></p>
-<label><input type="radio" name="q26" value="0"> Recuar</label><br>
-<label><input type="radio" name="q26" value="1"> Avançar</label><br>
-<label><input type="radio" name="q26" value="2"> Dar ré</label><br>
-<label><input type="radio" name="q26" value="3"> Parar</label><br>
-<input type="hidden" name="q26_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Como indicar intenção de ultrapassar pela esquerda?</strong></p>
-<label><input type="radio" name="q27" value="0"> Um apito longo</label><br>
-<label><input type="radio" name="q27" value="1"> Dois apitos longos</label><br>
-<label><input type="radio" name="q27" value="2"> Dois curtos</label><br>
-<label><input type="radio" name="q27" value="3"> Um curto</label><br>
-<input type="hidden" name="q27_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Ao ver embarcação à direita, o que fazer?</strong></p>
-<label><input type="radio" name="q28" value="0"> Manter curso</label><br>
-<label><input type="radio" name="q28" value="1"> Acelerar</label><br>
-<label><input type="radio" name="q28" value="2"> Reduzir velocidade</label><br>
-<label><input type="radio" name="q28" value="3"> Desviar para boreste</label><br>
-<input type="hidden" name="q28_correta" value="3">
-</div>
-<div class="question">
-<p><strong>Quando duas embarcações estão em rumo de colisão:</strong></p>
-<label><input type="radio" name="q29" value="0"> Ambas devem desviar</label><br>
-<label><input type="radio" name="q29" value="1"> A menor cede</label><br>
-<label><input type="radio" name="q29" value="2"> A maior cede</label><br>
-<label><input type="radio" name="q29" value="3"> A mais veloz cede</label><br>
-<input type="hidden" name="q29_correta" value="0">
-</div>
-<div class="question">
-<p><strong>Ultrapassar em canais estreitos deve ser feito:</strong></p>
-<label><input type="radio" name="q30" value="0"> Rápido</label><br>
-<label><input type="radio" name="q30" value="1"> Com atenção e sinal sonoro</label><br>
-<label><input type="radio" name="q30" value="2"> Sempre por estibordo</label><br>
-<label><input type="radio" name="q30" value="3"> Sem aviso</label><br>
-<input type="hidden" name="q30_correta" value="1">
-</div>
-<h2>Segurança e Salvamento</h2>
-<div class="question">
-<p><strong>Coletes salva-vidas devem estar:</strong></p>
-<label><input type="radio" name="q31" value="0"> A bordo, em local acessível</label><br>
-<label><input type="radio" name="q31" value="1"> Guardados trancados</label><br>
-<label><input type="radio" name="q31" value="2"> Disponíveis somente para maiores de idade</label><br>
-<label><input type="radio" name="q31" value="3"> Usados apenas à noite</label><br>
-<input type="hidden" name="q31_correta" value="0">
-</div>
-<div class="question">
-<p><strong>Qual item é obrigatório em embarcação de esporte e recreio?</strong></p>
-<label><input type="radio" name="q32" value="0"> Buzina</label><br>
-<label><input type="radio" name="q32" value="1"> Bóia circular com retenção</label><br>
-<label><input type="radio" name="q32" value="2"> Extintor de incêndio</label><br>
-<label><input type="radio" name="q32" value="3"> Todos os anteriores</label><br>
-<input type="hidden" name="q32_correta" value="3">
-</div>
-<div class="question">
-<p><strong>Extintores devem ser verificados:</strong></p>
-<label><input type="radio" name="q33" value="0"> Semestralmente</label><br>
-<label><input type="radio" name="q33" value="1"> Anualmente</label><br>
-<label><input type="radio" name="q33" value="2"> Mensalmente</label><br>
-<label><input type="radio" name="q33" value="3"> Nunca</label><br>
-<input type="hidden" name="q33_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Ao cair alguém ao mar, o que fazer primeiro?</strong></p>
-<label><input type="radio" name="q34" value="0"> Ligar para a polícia</label><br>
-<label><input type="radio" name="q34" value="1"> Dar marcha à ré</label><br>
-<label><input type="radio" name="q34" value="2"> Lançar bóia</label><br>
-<label><input type="radio" name="q34" value="3"> Nadar até a pessoa</label><br>
-<input type="hidden" name="q34_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Fumaça laranja é sinal de:</strong></p>
-<label><input type="radio" name="q35" value="0"> Emergência</label><br>
-<label><input type="radio" name="q35" value="1"> Perigo ambiental</label><br>
-<label><input type="radio" name="q35" value="2"> Festa</label><br>
-<label><input type="radio" name="q35" value="3"> Baixa visibilidade</label><br>
-<input type="hidden" name="q35_correta" value="0">
-</div>
-<div class="question">
-<p><strong>Documentação obrigatória inclui:</strong></p>
-<label><input type="radio" name="q36" value="0"> Carteira de Habilitação Náutica</label><br>
-<label><input type="radio" name="q36" value="1"> Licença ambiental</label><br>
-<label><input type="radio" name="q36" value="2"> IPVA</label><br>
-<label><input type="radio" name="q36" value="3"> Título eleitoral</label><br>
-<input type="hidden" name="q36_correta" value="0">
-</div>
-<div class="question">
-<p><strong>Em caso de incêndio a bordo, deve-se:</strong></p>
-<label><input type="radio" name="q37" value="0"> Abandonar imediatamente</label><br>
-<label><input type="radio" name="q37" value="1"> Usar extintor adequado</label><br>
-<label><input type="radio" name="q37" value="2"> Molhar tudo</label><br>
-<label><input type="radio" name="q37" value="3"> Chamar ajuda</label><br>
-<input type="hidden" name="q37_correta" value="1">
-</div>
-<div class="question">
-<p><strong>É permitido conduzir embarcação sob efeito de álcool?</strong></p>
-<label><input type="radio" name="q38" value="0"> Sim</label><br>
-<label><input type="radio" name="q38" value="1"> Sim com moderação</label><br>
-<label><input type="radio" name="q38" value="2"> Não</label><br>
-<label><input type="radio" name="q38" value="3"> Apenas em mar aberto</label><br>
-<input type="hidden" name="q38_correta" value="2">
-</div>
-<div class="question">
-<p><strong>Antes de sair ao mar, deve-se:</strong></p>
-<label><input type="radio" name="q39" value="0"> Avisar a família</label><br>
-<label><input type="radio" name="q39" value="1"> Verificar equipamentos e condições</label><br>
-<label><input type="radio" name="q39" value="2"> Rezar</label><br>
-<label><input type="radio" name="q39" value="3"> Navegar sem rumo</label><br>
-<input type="hidden" name="q39_correta" value="1">
-</div>
-<div class="question">
-<p><strong>Em águas abrigadas, o uso de colete é:</strong></p>
-<label><input type="radio" name="q40" value="0"> Opcional</label><br>
-<label><input type="radio" name="q40" value="1"> Obrigatório sempre</label><br>
-<label><input type="radio" name="q40" value="2"> Dispensado para experientes</label><br>
-<label><input type="radio" name="q40" value="3"> Somente para crianças</label><br>
-<input type="hidden" name="q40_correta" value="1">
-</div>
+    <header>
+        <h1>Alpha Cursos Náuticos</h1>
+        <p>Simulado Preparatório</p>
+    </header>
 
-    <button type="button" onclick="corrigir()">Corrigir</button>
-  </form>
-  <div id="resultado"></div>
+    <div class="container">
+        <div class="simulado-info">
+            <div class="progress-text">Questão <span id="current-question">1</span> de <span id="total-questions">40</span></div>
+            <div class="timer">Tempo: <span id="time">00:00</span></div>
+        </div>
 
-  <script>
-    function corrigir() {
-      const form = document.forms["quizForm"];
-      let acertos = 0;
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
 
-      for (let i = 1; i <= 40; i++) {
-        const correta = form[`q${i}_correta`].value;
-        const marcada = form[`q${i}`].value;
+        <div id="quiz-container">
+            <!-- As questões serão inseridas aqui pelo JavaScript -->
+        </div>
 
-        if (marcada === correta) acertos++;
-      }
+        <div class="navigation-buttons">
+            <button id="prev-btn" class="btn-secondary btn-disabled" disabled>Anterior</button>
+            <button id="next-btn" class="btn-primary">Próxima</button>
+            <button id="finish-btn" class="btn-primary hidden">Finalizar Simulado</button>
+        </div>
 
-      document.getElementById("resultado").innerHTML = `<h2>Resultado</h2><p>Você acertou ${acertos} de 40 questões.</p>`;
-    }
-  </script>
+        <div id="results-container" class="results-container hidden">
+            <h2>Resultado do Simulado</h2>
+            <div class="topic-badge" id="result-topic"></div>
+            <div class="score">Sua pontuação: <span id="score">0</span>/<span id="max-score">40</span></div>
+            <div>
+                <span class="correct-answers">Acertos: <span id="correct-count">0</span></span> | 
+                <span class="incorrect-answers">Erros: <span id="incorrect-count">0</span></span>
+            </div>
+            <button id="restart-btn" class="btn-primary restart-btn">Refazer Simulado</button>
+            <a href="index.html" class="btn-secondary" style="margin-top: 10px; display: inline-block;">Voltar ao Site</a>
+        </div>
+    </div>
+
+    <script>
+        // Função para obter parâmetro da URL
+        function getUrlParameter(name) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+            const results = regex.exec(window.location.search);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+
+        // Determinar o tópico do simulado
+        const topic = getUrlParameter('topico') || 'completo';
+        const topicNames = {
+            'luzes': 'Luzes e Sinais',
+            'balizamento': 'Balizamento',
+            'manobras': 'Manobras',
+            'seguranca': 'Segurança',
+            'completo': 'Simulado Completo'
+        };
+
+        // Configurações por tópico
+        const topicConfig = {
+            'luzes': { count: 40, title: 'Luzes e Sinais' },
+            'balizamento': { count: 40, title: 'Balizamento' },
+            'manobras': { count: 40, title: 'Manobras' },
+            'seguranca': { count: 40, title: 'Segurança' },
+            'completo': { count: 40, title: 'Completo' }
+        };
+
+        // Todas as questões organizadas por tópico
+        const allQuestions = {
+            'luzes': [
+                {
+                    question: "Uma luz branca contínua, situada sobre o eixo longitudinal da embarcação, visível em um setor horizontal de 225° desde a proa até 22,5° por ante-a-vante do través, chama-se:",
+                    options: [
+                        "a) luz de proa",
+                        "b) luz de alcançado",
+                        "c) perigo isolado",
+                        "d) luz de mastro",
+                        "e) luz de boreste"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "Esta é a definição da luz de mastro, que deve ser exibida por embarcações a motor em movimento."
+                },
+                {
+                    question: "Embarcações, sem propulsão a motor, com menos de 5 metros de comprimento estão:",
+                    options: [
+                        "a) obrigadas a ter pelo menos as luzes de bordos",
+                        "b) dispensadas de exibir luzes à noite",
+                        "c) obrigadas a exibir uma luz branca circular",
+                        "d) dispensadas de usar buzina ou outro dispositivo que a substitua",
+                        "e) obrigadas a ter pelo menos uma bóia circular"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Embarcações sem propulsão a motor com menos de 5 metros devem exibir uma luz branca circular à noite."
+                },
+                {
+                    question: "Uma embarcação menor que 50 metros com uma luz branca onde melhor possa ser vista está:",
+                    options: [
+                        "a) fundeada",
+                        "b) sem governo",
+                        "c) carregando carga perigosa",
+                        "d) navegando",
+                        "e) em faina de remoção de minas"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação menor que 50 metros exibindo uma luz branca onde melhor possa ser vista está fundeada."
+                },
+                {
+                    question: "Embarcação com reboque de menos de 200 metros de comprimento deverá exibir:",
+                    options: [
+                        "a) uma luz branca no mastro",
+                        "b) duas luzes brancas no mastro",
+                        "c) três luzes brancas no mastro",
+                        "d) quatro luzes brancas no mastro",
+                        "e) cinco luzes brancas no mastro"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcação rebocando outro objeto com menos de 200 metros deve exibir duas luzes brancas verticais no mastro."
+                },
+                {
+                    question: "Uma luz vermelha visível em um setor de 112,5° desde a proa até 22,5° por ré do través de bombordo é chamada de:",
+                    options: [
+                        "a) luz de navegação",
+                        "b) luz de alcançado",
+                        "c) luz de bombordo",
+                        "d) luz de mastro",
+                        "e) luz de ré"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A luz vermelha visível no setor de bombordo é chamada de luz de bombordo."
+                },
+                {
+                    question: "Uma luz verde visível em um setor de 112,5° desde a proa até 22,5° por ré do través de boreste é chamada de:",
+                    options: [
+                        "a) luz de navegação",
+                        "b) luz de alcançado",
+                        "c) luz de boreste",
+                        "d) luz de mastro",
+                        "e) luz de ré"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A luz verde visível no setor de boreste é chamada de luz de boreste."
+                },
+                {
+                    question: "Uma luz branca visível em um setor de 135° por ré (67,5° de cada borda) é chamada de:",
+                    options: [
+                        "a) luz de navegação",
+                        "b) luz de alcançado",
+                        "c) luz de proa",
+                        "d) luz de mastro",
+                        "e) luz de ré"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "A luz branca visível por ré é chamada de luz de alcançado."
+                },
+                {
+                    question: "Uma embarcação a motor em movimento deve exibir:",
+                    options: [
+                        "a) luz de mastro, luzes de boreste e bombordo e luz de alcançado",
+                        "b) apenas luz de mastro e luz de alcançado",
+                        "c) apenas luzes de boreste e bombordo",
+                        "d) luz de mastro e luzes de boreste e bombordo",
+                        "e) luz de mastro e luz de alcançado"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações a motor em movimento devem exibir luz de mastro, luzes de boreste (verde) e bombordo (vermelha), e luz de alcançado (branca)."
+                },
+                {
+                    question: "Uma embarcação à vela em movimento deve exibir:",
+                    options: [
+                        "a) luz de mastro, luzes de boreste e bombordo e luz de alcançado",
+                        "b) apenas luzes de boreste e bombordo e luz de alcançado",
+                        "c) apenas luzes de boreste e bombordo",
+                        "d) luz de mastro e luzes de boreste e bombordo",
+                        "e) luz de mastro e luz de alcançado"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações à vela em movimento devem exibir luzes de boreste (verde) e bombordo (vermelha), e luz de alcançado (branca), mas não a luz de mastro."
+                },
+                {
+                    question: "Uma embarcação a motor com menos de 12 metros pode combinar as luzes de boreste e bombordo em uma única lanterna:",
+                    options: [
+                        "a) nunca",
+                        "b) sim, desde que seja uma lanterna bicolor",
+                        "c) apenas em águas interiores",
+                        "d) apenas durante o dia",
+                        "e) apenas para embarcações de pesca"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações a motor com menos de 12 metros podem combinar as luzes de boreste e bombordo em uma única lanterna bicolor."
+                },
+                {
+                    question: "Uma embarcação a motor com menos de 7 metros e velocidade máxima inferior a 7 nós pode exibir:",
+                    options: [
+                        "a) apenas uma luz branca circular",
+                        "b) luzes de boreste e bombordo e luz de alcançado",
+                        "c) luz de mastro e luz de alcançado",
+                        "d) luz de mastro, luzes de boreste e bombordo e luz de alcançado",
+                        "e) nenhuma luz é necessária"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações a motor com menos de 7 metros e velocidade inferior a 7 nós podem exibir apenas uma luz branca circular."
+                },
+                {
+                    question: "Uma embarcação fundeada deve exibir:",
+                    options: [
+                        "a) uma luz branca circular",
+                        "b) duas luzes brancas circulares em linha vertical",
+                        "c) três luzes brancas circulares em linha vertical",
+                        "d) uma luz vermelha circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações fundeadas devem exibir duas luzes brancas circulares em linha vertical onde melhor possam ser vistas."
+                },
+                {
+                    question: "Uma embarcação com menos de 50 metros fundeada pode exibir:",
+                    options: [
+                        "a) apenas uma luz branca circular",
+                        "b) duas luzes brancas circulares em linha vertical",
+                        "c) três luzes brancas circulares em linha vertical",
+                        "d) uma luz vermelha circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 50 metros fundeadas podem exibir apenas uma luz branca circular onde melhor possa ser vista."
+                },
+                {
+                    question: "Uma embarcação encalhada deve exibir:",
+                    options: [
+                        "a) duas luzes vermelhas circulares em linha vertical",
+                        "b) duas luzes brancas circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) uma luz vermelha e uma luz branca em linha vertical",
+                        "e) uma luz verde e uma luz branca em linha vertical"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações encalhadas devem exibir duas luzes vermelhas circulares em linha vertical onde melhor possam ser vistas."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros encalhada:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de encalhe",
+                        "b) deve exibir duas luzes vermelhas circulares",
+                        "c) deve exibir três luzes vermelhas circulares",
+                        "d) deve exibir uma luz vermelha circular",
+                        "e) deve exibir uma luz branca circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros encalhadas não são obrigadas a exibir as luzes de encalhe."
+                },
+                {
+                    question: "Uma embarcação com restrições de manobra deve exibir:",
+                    options: [
+                        "a) três luzes circulares em linha vertical (vermelha, branca, vermelha)",
+                        "b) duas luzes vermelhas circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) duas luzes brancas circulares em linha vertical",
+                        "e) três luzes brancas circulares em linha vertical"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com restrições de manobra devem exibir três luzes circulares em linha vertical (vermelha, branca, vermelha)."
+                },
+                {
+                    question: "Uma embarcação rebocando outro objeto com menos de 200 metros de comprimento deve exibir:",
+                    options: [
+                        "a) duas luzes amarelas em linha vertical",
+                        "b) duas luzes brancas em linha vertical",
+                        "c) três luzes brancas em linha vertical",
+                        "d) uma luz amarela e uma luz branca em linha vertical",
+                        "e) uma luz amarela circular"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações rebocando outro objeto com menos de 200 metros de comprimento devem exibir duas luzes brancas em linha vertical."
+                },
+                {
+                    question: "Uma embarcação rebocando outro objeto com mais de 200 metros de comprimento deve exibir:",
+                    options: [
+                        "a) duas luzes amarelas em linha vertical",
+                        "b) duas luzes brancas em linha vertical",
+                        "c) três luzes brancas em linha vertical",
+                        "d) uma luz amarela e uma luz branca em linha vertical",
+                        "e) uma luz amarela circular"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Embarcações rebocando outro objeto com mais de 200 metros de comprimento devem exibir três luzes brancas em linha vertical."
+                },
+                {
+                    question: "Uma embarcação engajada em pesca de arrasto deve exibir:",
+                    options: [
+                        "a) duas luzes circulares em linha vertical (verde sobre branca)",
+                        "b) duas luzes circulares em linha vertical (vermelha sobre branca)",
+                        "c) duas luzes circulares em linha vertical (branca sobre verde)",
+                        "d) duas luzes circulares em linha vertical (branca sobre vermelha)",
+                        "e) três luzes circulares em linha vertical (verde, branca, vermelha)"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações engajadas em pesca de arrasto devem exibir duas luzes circulares em linha vertical (verde sobre branca)."
+                },
+                {
+                    question: "Uma embarcação engajada em pesca que não seja de arrasto deve exibir:",
+                    options: [
+                        "a) duas luzes circulares em linha vertical (vermelha sobre branca)",
+                        "b) duas luzes circulares em linha vertical (branca sobre vermelha)",
+                        "c) duas luzes circulares em linha vertical (verde sobre branca)",
+                        "d) duas luzes circulares em linha vertical (branca sobre verde)",
+                        "e) três luzes circulares em linha vertical (vermelha, branca, verde)"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações engajadas em pesca que não seja de arrasto devem exibir duas luzes circulares em linha vertical (vermelha sobre branca)."
+                },
+                {
+                    question: "Uma embarcação engajada em pesca com menos de 20 metros pode exibir:",
+                    options: [
+                        "a) um cesto preto",
+                        "b) uma luz branca circular",
+                        "c) uma luz vermelha circular",
+                        "d) uma luz verde circular",
+                        "e) um cesto branco"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações engajadas em pesca com menos de 20 metros podem exibir um cesto preto onde melhor possa ser visto."
+                },
+                {
+                    question: "Uma embarcação sem governo deve exibir:",
+                    options: [
+                        "a) duas luzes vermelhas circulares em linha vertical",
+                        "b) duas luzes brancas circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) uma luz vermelha e uma luz branca em linha vertical",
+                        "e) uma luz verde e uma luz branca em linha vertical"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações sem governo devem exibir duas luzes vermelhas circulares em linha vertical onde melhor possam ser vistas."
+                },
+                {
+                    question: "Uma embarcação com restrições de calado deve exibir:",
+                    options: [
+                        "a) três luzes circulares em linha vertical (vermelha, branca, vermelha)",
+                        "b) duas luzes vermelhas circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) duas luzes brancas circulares em linha vertical",
+                        "e) três luzes brancas circulares em linha vertical"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Embarcações com restrições de calado devem exibir três luzes vermelhas circulares em linha vertical."
+                },
+                {
+                    question: "Uma embarcação em faina de remoção de minas deve exibir:",
+                    options: [
+                        "a) três luzes verdes circulares em linha vertical",
+                        "b) duas luzes verdes circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) duas luzes vermelhas circulares em linha vertical",
+                        "e) três luzes brancas circulares em linha vertical"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações em faina de remoção de minas devem exibir três luzes verdes circulares em linha vertical."
+                },
+                {
+                    question: "Uma embarcação de pilotagem em serviço deve exibir:",
+                    options: [
+                        "a) duas luzes brancas em linha vertical",
+                        "b) duas luzes vermelhas em linha vertical",
+                        "c) uma luz branca e uma luz vermelha em linha vertical",
+                        "d) uma luz branca e uma luz verde em linha vertical",
+                        "e) uma luz vermelha e uma luz verde em linha vertical"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Embarcações de pilotagem em serviço devem exibir uma luz branca e uma luz vermelha em linha vertical."
+                },
+                {
+                    question: "Uma embarcação com menos de 20 metros engajada em pesca pode combinar as luzes de pesca com as luzes de navegação:",
+                    options: [
+                        "a) nunca",
+                        "b) sim, desde que a luz branca esteja acima da luz de pesca",
+                        "c) sim, desde que a luz branca esteja abaixo da luz de pesca",
+                        "d) apenas em águas interiores",
+                        "e) apenas durante o dia"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações com menos de 20 metros engajadas em pesca podem combinar as luzes de pesca com as luzes de navegação, desde que a luz branca esteja acima da luz de pesca."
+                },
+                {
+                    question: "Uma embarcação a vela com menos de 20 metros pode combinar as luzes de boreste e bombordo e a luz de alcançado em uma única lanterna:",
+                    options: [
+                        "a) nunca",
+                        "b) sim, na parte superior do mastro",
+                        "c) sim, na popa",
+                        "d) apenas em águas interiores",
+                        "e) apenas durante o dia"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações à vela com menos de 20 metros podem combinar as luzes de boreste e bombordo e a luz de alcançado em uma única lanterna na parte superior do mastro."
+                },
+                {
+                    question: "Uma embarcação que esteja rebocando e sendo rebocada simultaneamente deve exibir:",
+                    options: [
+                        "a) as luzes de embarcação rebocando e as luzes de embarcação rebocada",
+                        "b) apenas as luzes de embarcação rebocando",
+                        "c) apenas as luzes de embarcação rebocada",
+                        "d) uma luz amarela circular",
+                        "e) três luzes brancas em linha vertical"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações que estejam rebocando e sendo rebocadas simultaneamente devem exibir as luzes de embarcação rebocando e as luzes de embarcação rebocada."
+                },
+                {
+                    question: "Uma embarcação empurrando outro objeto deve exibir:",
+                    options: [
+                        "a) duas luzes amarelas em linha vertical",
+                        "b) duas luzes brancas em linha vertical",
+                        "c) três luzes brancas em linha vertical",
+                        "d) uma luz amarela e uma luz branca em linha vertical",
+                        "e) uma luz amarela circular"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Embarcações empurrando outro objeto devem exibir duas luzes brancas em linha vertical."
+                },
+                {
+                    question: "Uma embarcação empurrando e rebocando simultaneamente deve exibir:",
+                    options: [
+                        "a) duas luzes amarelas em linha vertical",
+                        "b) duas luzes brancas em linha vertical",
+                        "c) três luzes brancas em linha vertical",
+                        "d) uma luz amarela e uma luz branca em linha vertical",
+                        "e) uma luz amarela circular"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Embarcações empurrando e rebocando simultaneamente devem exibir três luzes brancas em linha vertical."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros rebocando outro objeto pode exibir:",
+                    options: [
+                        "a) apenas uma luz branca circular",
+                        "b) duas luzes brancas em linha vertical",
+                        "c) três luzes brancas em linha vertical",
+                        "d) uma luz amarela circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros rebocando outro objeto podem exibir apenas uma luz branca circular."
+                },
+                {
+                    question: "Uma embarcação com menos de 7 metros rebocando outro objeto:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de rebocador",
+                        "b) deve exibir duas luzes brancas em linha vertical",
+                        "c) deve exibir três luzes brancas em linha vertical",
+                        "d) deve exibir uma luz amarela circular",
+                        "e) deve exibir uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 7 metros rebocando outro objeto não são obrigadas a exibir luzes de rebocador."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros engajada em pesca pode exibir:",
+                    options: [
+                        "a) um cesto preto",
+                        "b) duas luzes circulares em linha vertical (verde sobre branca)",
+                        "c) duas luzes circulares em linha vertical (vermelha sobre branca)",
+                        "d) uma luz branca circular",
+                        "e) uma luz vermelha circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros engajadas em pesca podem exibir um cesto preto onde melhor possa ser visto."
+                },
+                {
+                    question: "Uma embarcação com menos de 7 metros engajada em pesca:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de pesca",
+                        "b) deve exibir duas luzes circulares em linha vertical (verde sobre branca)",
+                        "c) deve exibir duas luzes circulares em linha vertical (vermelha sobre branca)",
+                        "d) deve exibir uma luz branca circular",
+                        "e) deve exibir uma luz vermelha circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 7 metros engajadas em pesca não são obrigadas a exibir luzes de pesca."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros sem governo pode exibir:",
+                    options: [
+                        "a) uma luz vermelha circular",
+                        "b) duas luzes vermelhas circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) uma luz branca circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros sem governo podem exibir apenas uma luz vermelha circular."
+                },
+                {
+                    question: "Uma embarcação com menos de 7 metros sem governo:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de embarcação sem governo",
+                        "b) deve exibir duas luzes vermelhas circulares em linha vertical",
+                        "c) deve exibir três luzes vermelhas circulares em linha vertical",
+                        "d) deve exibir uma luz branca circular",
+                        "e) deve exibir uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 7 metros sem governo não são obrigadas a exibir luzes de embarcação sem governo."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros encalhada pode exibir:",
+                    options: [
+                        "a) uma luz vermelha circular",
+                        "b) duas luzes vermelhas circulares em linha vertical",
+                        "c) três luzes vermelhas circulares em linha vertical",
+                        "d) uma luz branca circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros encalhadas podem exibir apenas uma luz vermelha circular."
+                },
+                {
+                    question: "Uma embarcação com menos de 7 metros encalhada:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de embarcação encalhada",
+                        "b) deve exibir duas luzes vermelhas circulares em linha vertical",
+                        "c) deve exibir três luzes vermelhas circulares em linha vertical",
+                        "d) deve exibir uma luz branca circular",
+                        "e) deve exibir uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 7 metros encalhadas não são obrigadas a exibir luzes de embarcação encalhada."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros com restrições de manobra pode exibir:",
+                    options: [
+                        "a) uma luz vermelha, uma luz branca e uma luz vermelha em linha vertical",
+                        "b) duas luzes vermelhas em linha vertical",
+                        "c) três luzes vermelhas em linha vertical",
+                        "d) uma luz branca circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros com restrições de manobra podem exibir uma luz vermelha, uma luz branca e uma luz vermelha em linha vertical."
+                },
+                {
+                    question: "Uma embarcação com menos de 7 metros com restrições de manobra:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de embarcação com restrições de manobra",
+                        "b) deve exibir duas luzes vermelhas em linha vertical",
+                        "c) deve exibir três luzes vermelhas em linha vertical",
+                        "d) deve exibir uma luz branca circular",
+                        "e) deve exibir uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 7 metros com restrições de manobra não são obrigadas a exibir luzes de embarcação com restrições de manobra."
+                },
+                {
+                    question: "Uma embarcação com menos de 12 metros em faina de remoção de minas pode exibir:",
+                    options: [
+                        "a) três luzes verdes em linha vertical",
+                        "b) duas luzes verdes em linha vertical",
+                        "c) três luzes vermelhas em linha vertical",
+                        "d) uma luz branca circular",
+                        "e) uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 12 metros em faina de remoção de minas podem exibir três luzes verdes em linha vertical."
+                },
+                {
+                    question: "Uma embarcação com menos de 7 metros em faina de remoção de minas:",
+                    options: [
+                        "a) não é obrigada a exibir luzes de embarcação em faina de remoção de minas",
+                        "b) deve exibir duas luzes verdes em linha vertical",
+                        "c) deve exibir três luzes verdes em linha vertical",
+                        "d) deve exibir uma luz branca circular",
+                        "e) deve exibir uma luz verde circular"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Embarcações com menos de 7 metros em faina de remoção de minas não são obrigadas a exibir luzes de embarcação em faina de remoção de minas."
+                }
+            ],
+            'balizamento': [
+                {
+                    question: "O balizamento que indica águas seguras possui as cores:",
+                    options: [
+                        "a) preta e encarnada",
+                        "b) branca e preta",
+                        "c) encarnada e amarela",
+                        "d) verde e encarnada",
+                        "e) branca e encarnada"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "O balizamento de águas seguras é identificado pelas cores branca e vermelha em listras verticais."
+                },
+                {
+                    question: "O balizamento que indica perigo isolado possui as cores:",
+                    options: [
+                        "a) branca e encarnada",
+                        "b) preta e encarnada",
+                        "c) verde e encarnada",
+                        "d) branca e preta",
+                        "e) encarnada e amarela"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O balizamento de perigo isolado é preto com uma ou mais faixas horizontais vermelhas."
+                },
+                {
+                    question: "Durante o dia, observou-se uma haste em forma de pilar, com duas esferas pretas na sua parte de cima. Provavelmente estamos diante de:",
+                    options: [
+                        "a) um balizamento cego",
+                        "b) uma bóia cônica",
+                        "c) uma baliza",
+                        "d) um balizamento de águas seguras",
+                        "e) um perigo isolado"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Duas esferas pretas são a marca diurna para identificar um perigo isolado."
+                },
+                {
+                    question: "Uma bóia cilíndrica vermelha com uma faixa horizontal branca indica:",
+                    options: [
+                        "a) perigo isolado",
+                        "b) águas seguras",
+                        "c) perigo com águas navegáveis a leste",
+                        "d) perigo com águas navegáveis a oeste",
+                        "e) perigo com águas navegáveis ao norte"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Uma bóia cilíndrica vermelha com faixa horizontal branca indica perigo com águas navegáveis a leste."
+                },
+                {
+                    question: "Uma bóia cônica verde com uma faixa horizontal branca indica:",
+                    options: [
+                        "a) perigo isolado",
+                        "b) águas seguras",
+                        "c) perigo com águas navegáveis a leste",
+                        "d) perigo com águas navegáveis a oeste",
+                        "e) perigo com águas navegáveis ao norte"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "Uma bóia cônica verde com faixa horizontal branca indica perigo com águas navegáveis a oeste."
+                },
+                {
+                    question: "Uma bóia esférica vermelha e branca em listras verticais indica:",
+                    options: [
+                        "a) perigo isolado",
+                        "b) águas seguras",
+                        "c) perigo com águas navegáveis a leste",
+                        "d) perigo com águas navegáveis a oeste",
+                        "e) perigo com águas navegáveis ao norte"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Uma bóia esférica vermelha e branca em listras verticais indica águas seguras."
+                },
+                {
+                    question: "Uma bóia em forma de pilar preta com uma ou mais faixas horizontais vermelhas indica:",
+                    options: [
+                        "a) perigo isolado",
+                        "b) águas seguras",
+                        "c) perigo com águas navegáveis a leste",
+                        "d) perigo com águas navegáveis a oeste",
+                        "e) perigo com águas navegáveis ao norte"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma bóia em forma de pilar preta com faixas horizontais vermelhas indica perigo isolado."
+                },
+                {
+                    question: "Uma bóia cilíndrica vermelha indica:",
+                    options: [
+                        "a) lado de bombordo do canal",
+                        "b) lado de boreste do canal",
+                        "c) águas seguras",
+                        "d) perigo isolado",
+                        "e) bifurcação do canal"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma bóia cilíndrica vermelha indica o lado de bombordo do canal (lado esquerdo ao entrar)."
+                },
+                {
+                    question: "Uma bóia cônica verde indica:",
+                    options: [
+                        "a) lado de bombordo do canal",
+                        "b) lado de boreste do canal",
+                        "c) águas seguras",
+                        "d) perigo isolado",
+                        "e) bifurcação do canal"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Uma bóia cônica verde indica o lado de boreste do canal (lado direito ao entrar)."
+                },
+                {
+                    question: "Uma bóia cilíndrica vermelha com topo em forma de cone indica:",
+                    options: [
+                        "a) lado de bombordo do canal",
+                        "b) lado de boreste do canal",
+                        "c) águas seguras",
+                        "d) perigo isolado",
+                        "e) bifurcação do canal (preferência por bombordo)"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Uma bóia cilíndrica vermelha com topo em forma de cone indica bifurcação do canal com preferência por bombordo."
+                },
+                {
+                    question: "Uma bóia cônica verde com topo em forma de cilindro indica:",
+                    options: [
+                        "a) lado de bombordo do canal",
+                        "b) lado de boreste do canal",
+                        "c) águas seguras",
+                        "d) perigo isolado",
+                        "e) bifurcação do canal (preferência por boreste)"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Uma bóia cônica verde com topo em forma de cilindro indica bifurcação do canal com preferência por boreste."
+                },
+                {
+                    question: "Durante o dia, uma bóia cilíndrica vermelha é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho",
+                        "b) um cone verde",
+                        "c) uma esfera vermelha",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante o dia, uma bóia cilíndrica vermelha é identificada por um cilindro vermelho."
+                },
+                {
+                    question: "Durante o dia, uma bóia cônica verde é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho",
+                        "b) um cone verde",
+                        "c) uma esfera vermelha",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Durante o dia, uma bóia cônica verde é identificada por um cone verde."
+                },
+                {
+                    question: "Durante o dia, uma bóia de águas seguras é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho",
+                        "b) um cone verde",
+                        "c) uma esfera vermelha e branca",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Durante o dia, uma bóia de águas seguras é identificada por uma esfera vermelha e branca."
+                },
+                {
+                    question: "Durante o dia, uma bóia de perigo isolado é identificada por:",
+                    options: [
+                        "a) duas esferas pretas",
+                        "b) um cone verde",
+                        "c) uma esfera vermelha e branca",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante o dia, uma bóia de perigo isolado é identificada por duas esferas pretas."
+                },
+                {
+                    question: "Durante o dia, uma bóia de bifurcação com preferência por bombordo é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho com topo em forma de cone",
+                        "b) um cone verde com topo em forma de cilindro",
+                        "c) uma esfera vermelha e branca",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante o dia, uma bóia de bifurcação com preferência por bombordo é identificada por um cilindro vermelho com topo em forma de cone."
+                },
+                {
+                    question: "Durante o dia, uma bóia de bifurcação com preferência por boreste é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho com topo em forma de cone",
+                        "b) um cone verde com topo em forma de cilindro",
+                        "c) uma esfera vermelha e branca",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Durante o dia, uma bóia de bifurcação com preferência por boreste é identificada por um cone verde com topo em forma de cilindro."
+                },
+                {
+                    question: "Durante a noite, uma bóia cilíndrica vermelha é identificada por:",
+                    options: [
+                        "a) uma luz vermelha fixa",
+                        "b) uma luz verde fixa",
+                        "c) uma luz branca fixa",
+                        "d) uma luz vermelha isofase",
+                        "e) uma luz verde isofase"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante a noite, uma bóia cilíndrica vermelha é identificada por uma luz vermelha fixa."
+                },
+                {
+                    question: "Durante a noite, uma bóia cônica verde é identificada por:",
+                    options: [
+                        "a) uma luz vermelha fixa",
+                        "b) uma luz verde fixa",
+                        "c) uma luz branca fixa",
+                        "d) uma luz vermelha isofase",
+                        "e) uma luz verde isofase"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Durante a noite, uma bóia cônica verde é identificada por uma luz verde fixa."
+                },
+                {
+                    question: "Durante a noite, uma bóia de águas seguras é identificada por:",
+                    options: [
+                        "a) uma luz branca de longa duração a cada 10 segundos",
+                        "b) uma luz branca isofase",
+                        "c) uma luz branca de grupos de duas",
+                        "d) uma luz branca de grupos de três",
+                        "e) uma luz branca de grupos de quatro"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante a noite, uma bóia de águas seguras é identificada por uma luz branca de longa duração a cada 10 segundos."
+                },
+                {
+                    question: "Durante a noite, uma bóia de perigo isolado é identificada por:",
+                    options: [
+                        "a) uma luz branca de grupos de dois",
+                        "b) uma luz branca isofase",
+                        "c) uma luz branca de grupos de três",
+                        "d) uma luz branca de grupos de quatro",
+                        "e) uma luz branca de grupos de cinco"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante a noite, uma bóia de perigo isolado é identificada por uma luz branca de grupos de dois."
+                },
+                {
+                    question: "Durante a noite, uma bóia de bifurcação com preferência por bombordo é identificada por:",
+                    options: [
+                        "a) uma luz vermelha de grupos de dois",
+                        "b) uma luz verde de grupos de dois",
+                        "c) uma luz vermelha isofase",
+                        "d) uma luz verde isofase",
+                        "e) uma luz branca de grupos de dois"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante a noite, uma bóia de bifurcação com preferência por bombordo é identificada por uma luz vermelha de grupos de dois."
+                },
+                {
+                    question: "Durante a noite, uma bóia de bifurcação com preferência por boreste é identificada por:",
+                    options: [
+                        "a) uma luz vermelha de grupos de dois",
+                        "b) uma luz verde de grupos de dois",
+                        "c) uma luz vermelha isofase",
+                        "d) uma luz verde isofase",
+                        "e) uma luz branca de grupos de dois"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Durante a noite, uma bóia de bifurcação com preferência por boreste é identificada por uma luz verde de grupos de dois."
+                },
+                {
+                    question: "Durante o dia, uma bóia de perigo com águas navegáveis a leste é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho com faixa horizontal branca",
+                        "b) um cone verde com faixa horizontal branca",
+                        "c) uma esfera vermelha e branca",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante o dia, uma bóia de perigo com águas navegáveis a leste é identificada por um cilindro vermelho com faixa horizontal branca."
+                },
+                {
+                    question: "Durante o dia, uma bóia de perigo com águas navegáveis a oeste é identificada por:",
+                    options: [
+                        "a) um cilindro vermelho com faixa horizontal branca",
+                        "b) um cone verde com faixa horizontal branca",
+                        "c) uma esfera vermelha e branca",
+                        "d) um cilindro verde",
+                        "e) um cone vermelho"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Durante o dia, uma bóia de perigo com águas navegáveis a oeste é identificada por um cone verde com faixa horizontal branca."
+                },
+                {
+                    question: "Durante a noite, uma bóia de perigo com águas navegáveis a leste é identificada por:",
+                    options: [
+                        "a) uma luz vermelha de grupos de três",
+                        "b) uma luz verde de grupos de três",
+                        "c) uma luz vermelha isofase",
+                        "d) uma luz verde isofase",
+                        "e) uma luz branca de grupos de três"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Durante a noite, uma bóia de perigo com águas navegáveis a leste é identificada por uma luz vermelha de grupos de três."
+                },
+                {
+                    question: "Durante a noite, uma bóia de perigo com águas navegáveis a oeste é identificada por:",
+                    options: [
+                        "a) uma luz vermelha de grupos de três",
+                        "b) uma luz verde de grupos de três",
+                        "c) uma luz vermelha isofase",
+                        "d) uma luz verde isofase",
+                        "e) uma luz branca de grupos de três"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Durante a noite, uma bóia de perigo com águas navegáveis a oeste é identificada por uma luz verde de grupos de três."
+                },
+                {
+                    question: "Uma bóia de bifurcação com preferência por bombordo deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma bóia de bifurcação com preferência por bombordo deve ser deixada por bombordo (lado esquerdo ao entrar)."
+                },
+                {
+                    question: "Uma bóia de bifurcação com preferência por boreste deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Uma bóia de bifurcação com preferência por boreste deve ser deixada por boreste (lado direito ao entrar)."
+                },
+                {
+                    question: "Uma bóia cilíndrica vermelha deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma bóia cilíndrica vermelha deve ser deixada por bombordo (lado esquerdo ao entrar)."
+                },
+                {
+                    question: "Uma bóia cônica verde deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Uma bóia cônica verde deve ser deixada por boreste (lado direito ao entrar)."
+                },
+                {
+                    question: "Uma bóia de perigo isolado deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz, mas com cuidado",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Uma bóia de perigo isolado pode ser deixada por qualquer bordo, mas com cuidado devido ao perigo que indica."
+                },
+                {
+                    question: "Uma bóia de águas seguras deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Uma bóia de águas seguras pode ser deixada por qualquer bordo, pois indica águas seguras ao redor."
+                },
+                {
+                    question: "Uma bóia de perigo com águas navegáveis a leste deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma bóia de perigo com águas navegáveis a leste deve ser deixada por bombordo (lado esquerdo ao entrar), navegando para leste."
+                },
+                {
+                    question: "Uma bóia de perigo com águas navegáveis a oeste deve ser deixada por que bordo?",
+                    options: [
+                        "a) bombordo",
+                        "b) boreste",
+                        "c) tanto faz",
+                        "d) depende da maré",
+                        "e) depende do vento"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Uma bóia de perigo com águas navegáveis a oeste deve ser deixada por boreste (lado direito ao entrar), navegando para oeste."
+                },
+                {
+                    question: "O sistema de balizamento que utiliza formas e cores para indicar o lado em que a bóia deve ser deixada é chamado de:",
+                    options: [
+                        "a) sistema lateral",
+                        "b) sistema cardinal",
+                        "c) sistema de perigo isolado",
+                        "d) sistema de águas seguras",
+                        "e) sistema especial"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O sistema que utiliza formas e cores para indicar o lado em que a bóia deve ser deixada é chamado de sistema lateral."
+                },
+                {
+                    question: "O sistema de balizamento que utiliza pontos cardeais para indicar a localização do perigo é chamado de:",
+                    options: [
+                        "a) sistema lateral",
+                        "b) sistema cardinal",
+                        "c) sistema de perigo isolado",
+                        "d) sistema de águas seguras",
+                        "e) sistema especial"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O sistema que utiliza pontos cardeais para indicar a localização do perigo é chamado de sistema cardinal."
+                },
+                {
+                    question: "O sistema de balizamento que indica perigos isolados com águas seguras ao redor é chamado de:",
+                    options: [
+                        "a) sistema lateral",
+                        "b) sistema cardinal",
+                        "c) sistema de perigo isolado",
+                        "d) sistema de águas seguras",
+                        "e) sistema especial"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "O sistema que indica perigos isolados com águas seguras ao redor é chamado de sistema de perigo isolado."
+                },
+                {
+                    question: "O sistema de balizamento que indica águas seguras em todos os sentidos é chamado de:",
+                    options: [
+                        "a) sistema lateral",
+                        "b) sistema cardinal",
+                        "c) sistema de perigo isolado",
+                        "d) sistema de águas seguras",
+                        "e) sistema especial"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "O sistema que indica águas seguras em todos os sentidos é chamado de sistema de águas seguras."
+                },
+                {
+                    question: "O sistema de balizamento que indica áreas ou objetos especiais é chamado de:",
+                    options: [
+                        "a) sistema lateral",
+                        "b) sistema cardinal",
+                        "c) sistema de perigo isolado",
+                        "d) sistema de águas seguras",
+                        "e) sistema especial"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "O sistema que indica áreas ou objetos especiais é chamado de sistema especial."
+                },
+                {
+                    question: "No sistema lateral, as bóias do lado esquerdo do canal (ao entrar) são:",
+                    options: [
+                        "a) cilíndricas e vermelhas",
+                        "b) cônicas e verdes",
+                        "c) esféricas e vermelhas",
+                        "d) cilíndricas e verdes",
+                        "e) cônicas e vermelhas"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "No sistema lateral, as bóias do lado esquerdo do canal (ao entrar) são cilíndricas e vermelhas."
+                },
+                {
+                    question: "No sistema lateral, as bóias do lado direito do canal (ao entrar) são:",
+                    options: [
+                        "a) cilíndricas e vermelhas",
+                        "b) cônicas e verdes",
+                        "c) esféricas e vermelhas",
+                        "d) cilíndricas e verdes",
+                        "e) cônicas e vermelhas"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "No sistema lateral, as bóias do lado direito do canal (ao entrar) são cônicas e verdes."
+                },
+                {
+                    question: "No sistema lateral, a regra mnemônica para lembrar as cores é:",
+                    options: [
+                        "a) vermelho à esquerda, verde à direita",
+                        "b) verde à esquerda, vermelho à direita",
+                        "c) branco à esquerda, preto à direita",
+                        "d) preto à esquerda, branco à direita",
+                        "e) amarelo à esquerda, azul à direita"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "No sistema lateral, a regra mnemônica é 'vermelho à esquerda, verde à direita' (ao entrar no canal)."
+                },
+                {
+                    question: "No sistema lateral, a regra mnemônica para lembrar as formas é:",
+                    options: [
+                        "a) cilindro à esquerda, cone à direita",
+                        "b) cone à esquerda, cilindro à direita",
+                        "c) esfera à esquerda, cilindro à direita",
+                        "d) cilindro à esquerda, esfera à direita",
+                        "e) cone à esquerda, esfera à direita"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "No sistema lateral, a regra mnemônica é 'cilindro à esquerda, cone à direita' (ao entrar no canal)."
+                }
+            ],
+            'manobras': [
+                {
+                    question: "Toda manobra deverá ser feita de que forma?",
+                    options: [
+                        "a) franca e positiva, feita com ampla antecedência, demonstrando à outra embarcação que houve alteração de movimento",
+                        "b) gradual e com pouca alteração de velocidade, para se evitar confusão no acampamento da outra embarcação",
+                        "c) brusca e com variações constantes de velocidade, para que a outra embarcação perceba a alteração do rumo",
+                        "d) lenta e com pequenos ângulos de leme, para que não haja confusão na interpretação dos movimentos pela outra embarcação",
+                        "e) lenta e gradual, feita com ampla antecedência, demonstrando à outra embarcação que houve alteração de movimento"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "As manobras devem ser francas e positivas, feitas com ampla antecedência para que outras embarcações possam perceber claramente a alteração de movimento."
+                },
+                {
+                    question: "Uma embarcação no visual da minha, para existir, com certeza, o risco de colisão, deverá apresentar a seguinte situação:",
+                    options: [
+                        "a) marcação variando e distância aumentando",
+                        "b) marcação variando e distância diminuindo",
+                        "c) marcação constante e distância aumentando",
+                        "d) marcação diminuindo e distância variando",
+                        "e) marcação constante e distância diminuindo"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Quando a marcação (direção) permanece constante enquanto a distância diminui, há risco certo de colisão."
+                },
+                {
+                    question: "Na situação de 'roda a roda', ou seja, ____, as embarcações deverão manobrar de que forma:",
+                    options: [
+                        "a) proa com proa, as duas guinam para boreste",
+                        "b) rumos cruzados, as duas guinam para boreste",
+                        "c) rumos cruzados, as duas guinam para os bordos opostos",
+                        "d) proa com proa, as duas guinam para os bordos opostos",
+                        "e) rumos cruzados, as duas guinam para bombordo"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Na situação 'roda a roda' (proa com proa), ambas as embarcações devem guinar para boreste (direita)."
+                },
+                {
+                    question: "Em uma situação de rumos cruzados, a embarcação que tem a outra por seu boreste deve:",
+                    options: [
+                        "a) manter rumo e velocidade",
+                        "b) guinar para bombordo",
+                        "c) guinar para boreste",
+                        "d) reduzir a velocidade",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Em rumos cruzados, a embarcação que tem a outra por seu boreste deve manter rumo e velocidade, sendo a outra obrigada a manobrar."
+                },
+                {
+                    question: "Em uma situação de rumos cruzados, a embarcação que tem a outra por seu bombordo deve:",
+                    options: [
+                        "a) manter rumo e velocidade",
+                        "b) guinar para bombordo",
+                        "c) guinar para boreste",
+                        "d) reduzir a velocidade",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Em rumos cruzados, a embarcação que tem a outra por seu bombordo deve manobrar, preferencialmente guinando para bombordo."
+                },
+                {
+                    question: "Uma embarcação alcançante deve:",
+                    options: [
+                        "a) manter rumo e velocidade",
+                        "b) guinar para bombordo",
+                        "c) guinar para boreste",
+                        "d) afastar-se da embarcação alcançada",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "Uma embarcação alcançante deve afastar-se da embarcação alcançada, mantendo-se bem distante até que a ultrapassagem seja completada com segurança."
+                },
+                {
+                    question: "Uma embarcação alcançada deve:",
+                    options: [
+                        "a) manter rumo e velocidade",
+                        "b) guinar para bombordo",
+                        "c) guinar para boreste",
+                        "d) afastar-se da embarcação alcançante",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação alcançada deve manter seu rumo e velocidade, permitindo que a embarcação alcançante execute a manobra de ultrapassagem com segurança."
+                },
+                {
+                    question: "Uma embarcação com restrições de manobra tem prioridade sobre:",
+                    options: [
+                        "a) todas as outras embarcações",
+                        "b) apenas sobre embarcações à vela",
+                        "c) apenas sobre embarcações a motor",
+                        "d) apenas sobre embarcações engajadas em pesca",
+                        "e) nenhuma embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação com restrições de manobra tem prioridade sobre todas as outras embarcações, que devem manobrar para evitá-la."
+                },
+                {
+                    question: "Uma embarcação engajada em pesca tem prioridade sobre:",
+                    options: [
+                        "a) embarcações a motor",
+                        "b) embarcações à vela",
+                        "c) embarcações com restrições de manobra",
+                        "d) embarcações sem governo",
+                        "e) nenhuma embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação engajada em pesca tem prioridade apenas sobre embarcações a motor, devendo ceder passagem para embarcações à vela, com restrições de manobra ou sem governo."
+                },
+                {
+                    question: "Uma embarcação à vela tem prioridade sobre:",
+                    options: [
+                        "a) embarcações a motor",
+                        "b) embarcações engajadas em pesca",
+                        "c) embarcações com restrições de manobra",
+                        "d) embarcações sem governo",
+                        "e) nenhuma embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação à vela tem prioridade apenas sobre embarcações a motor, devendo ceder passagem para embarcações engajadas em pesca, com restrições de manobra ou sem governo."
+                },
+                {
+                    question: "Uma embarcação a motor deve ceder passagem para:",
+                    options: [
+                        "a) embarcações à vela",
+                        "b) embarcações engajadas em pesca",
+                        "c) embarcações com restrições de manobra",
+                        "d) embarcações sem governo",
+                        "e) todas as anteriores"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Uma embarcação a motor deve ceder passagem para embarcações à vela, engajadas em pesca, com restrições de manobra e sem governo."
+                },
+                {
+                    question: "Uma embarcação sem governo tem prioridade sobre:",
+                    options: [
+                        "a) embarcações a motor",
+                        "b) embarcações à vela",
+                        "c) embarcações engajadas em pesca",
+                        "d) embarcações com restrições de manobra",
+                        "e) nenhuma embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação sem governo tem prioridade apenas sobre embarcações a motor, devendo ceder passagem para embarcações à vela, engajadas em pesca e com restrições de manobra."
+                },
+                {
+                    question: "Em um canal estreito, uma embarcação de pequeno porte deve:",
+                    options: [
+                        "a) navegar o mais próximo possível do limite exterior do canal do seu boreste",
+                        "b) navegar no meio do canal",
+                        "c) navegar o mais próximo possível do limite exterior do canal do seu bombordo",
+                        "d) navegar onde houver menos correnteza",
+                        "e) navegar onde houver mais profundidade"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Em um canal estreito, uma embarcação de pequeno porte deve navegar o mais próximo possível do limite exterior do canal do seu bombordo (lado direito ao entrar)."
+                },
+                {
+                    question: "Em um canal estreito, uma embarcação de grande porte deve:",
+                    options: [
+                        "a) navegar o mais próximo possível do limite exterior do canal do seu boreste",
+                        "b) navegar no meio do canal",
+                        "c) navegar o mais próximo possível do limite exterior do canal do seu bombordo",
+                        "d) navegar onde houver menos correnteza",
+                        "e) navegar onde houver mais profundidade"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Em um canal estreito, uma embarcação de grande porte deve navegar no meio do canal, desde que isso não prejudique a navegação segura de outras embarcações."
+                },
+                {
+                    question: "Ao aproximar-se de uma curva em um canal estreito onde outras embarcações podem não ser visíveis, uma embarcação deve:",
+                    options: [
+                        "a) aumentar a velocidade para passar rápido pela curva",
+                        "b) reduzir a velocidade e soar um longo toque",
+                        "c) manter a velocidade e soar dois longos toques",
+                        "d) parar a embarcação e esperar",
+                        "e) soar cinco toques curtos e rápidos"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Ao aproximar-se de uma curva em um canal estreito, a embarcação deve reduzir a velocidade e soar um longo toque para alertar outras embarcações que possam estar se aproximando."
+                },
+                {
+                    question: "Ao ultrapassar outra embarcação em um canal estreito, a embarcação ultrapassante deve:",
+                    options: [
+                        "a) soar dois longos toques seguidos de dois curtos",
+                        "b) soar um longo toque seguido de dois curtos",
+                        "c) soar dois longos toques seguidos de um curto",
+                        "d) soar cinco toques curtos e rápidos",
+                        "e) não é necessário soar qualquer toque"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao ultrapassar outra embarcação em um canal estreito, a embarcação ultrapassante deve soar dois longos toques seguidos de dois curtos para indicar sua intenção de ultrapassar pelo boreste (direita) da embarcação a ser ultrapassada."
+                },
+                {
+                    question: "Ao ser ultrapassada em um canal estreito, a embarcação ultrapassada deve:",
+                    options: [
+                        "a) soar um longo, um curto, um longo e um curto",
+                        "b) soar um longo toque seguido de dois curtos",
+                        "c) soar dois longos toques seguidos de um curto",
+                        "d) soar cinco toques curtos e rápidos",
+                        "e) não é necessário soar qualquer toque"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao ser ultrapassada em um canal estreito, a embarcação ultrapassada deve soar um longo, um curto, um longo e um curto para indicar que compreendeu a intenção da embarcação ultrapassante e concorda com a manobra."
+                },
+                {
+                    question: "Em uma situação de emergência onde há risco iminente de colisão, a ação mais recomendada é:",
+                    options: [
+                        "a) parar ou reduzir drasticamente a velocidade",
+                        "b) aumentar a velocidade para passar rápido pelo perigo",
+                        "c) guinar bruscamente para um dos lados",
+                        "d) soar cinco toques curtos e rápidos",
+                        "e) desligar os motores"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Em situação de emergência com risco iminente de colisão, a ação mais recomendada é parar ou reduzir drasticamente a velocidade, pois isso pode dar tempo para que ambas as embarcações avaliem melhor a situação e tomem as devidas providências."
+                },
+                {
+                    question: "O sinal de cinco toques curtos e rápidos significa:",
+                    options: [
+                        "a) dúvida sobre as intenções da outra embarcação",
+                        "b) intenção de ultrapassar",
+                        "c) concordância com a ultrapassagem",
+                        "d) embarcação com restrições de manobra",
+                        "e) embarcação sem governo"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O sinal de cinco toques curtos e rápidos indica dúvida sobre as intenções da outra embarcação ou desacordo com sua manobra."
+                },
+                {
+                    question: "Uma embarcação que esteja fundeada em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) um toque rápido a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) um toque prolongado seguido de dois curtos a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) dois toques prolongados a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação fundeada em condições de visibilidade reduzida deve soar um toque rápido no sino por cerca de 5 segundos a cada minuto."
+                },
+                {
+                    question: "Uma embarcação que esteja encalhada em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) um toque prolongado seguido de dois curtos a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) dois toques prolongados a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação encalhada em condições de visibilidade reduzida deve soar três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto."
+                },
+                {
+                    question: "Uma embarcação com restrições de manobra em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) um toque prolongado seguido de dois curtos a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) dois toques prolongados a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação com restrições de manobra em condições de visibilidade reduzida deve soar um toque prolongado seguido de dois curtos a cada minuto."
+                },
+                {
+                    question: "Uma embarcação sem governo em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) dois toques prolongados a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) um toque prolongado seguido de dois curtos a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação sem governo em condições de visibilidade reduzida deve soar dois toques prolongados a cada minuto."
+                },
+                {
+                    question: "Uma embarcação engajada em pesca em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) um toque prolongado seguido de dois curtos a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) dois toques prolongados a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação engajada em pesca em condições de visibilidade reduzida deve soar um toque prolongado seguido de dois curtos a cada minuto."
+                },
+                {
+                    question: "Uma embarcação à vela em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) um toque prolongado seguido de dois curtos a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) dois toques prolongados a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação à vela em condições de visibilidade reduzida deve soar um toque prolongado seguido de dois curtos a cada minuto."
+                },
+                {
+                    question: "Uma embarcação a motor em movimento em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) um toque prolongado a cada minuto",
+                        "b) um toque prolongado seguido de dois curtos a cada minuto",
+                        "c) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) dois toques prolongados a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação a motor em movimento em condições de visibilidade reduzida deve soar um toque prolongado a cada minuto."
+                },
+                {
+                    question: "Uma embarcação a motor parada (não fundeada) em condições de visibilidade reduzida deve soar:",
+                    options: [
+                        "a) dois toques prolongados a cada minuto",
+                        "b) um toque prolongado a cada minuto",
+                        "c) um toque prolongado seguido de dois curtos a cada minuto",
+                        "d) cinco toques curtos e rápidos a cada minuto",
+                        "e) três toques separados no sino (um prolongado seguido de dois curtos) a cada minuto"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Uma embarcação a motor parada (não fundeada) em condições de visibilidade reduzida deve soar dois toques prolongados a cada minuto."
+                },
+                {
+                    question: "Ao navegar em um canal estreito, uma embarcação deve manter-se:",
+                    options: [
+                        "a) no lado direito do canal (ao entrar)",
+                        "b) no lado esquerdo do canal (ao entrar)",
+                        "c) no centro do canal",
+                        "d) no lado com menos correnteza",
+                        "e) no lado com mais profundidade"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito, uma embarcação deve manter-se no lado direito do canal (ao entrar), conforme a regra geral de navegação em canais estreitos."
+                },
+                {
+                    question: "Ao aproximar-se de um cruzamento em um canal estreito, uma embarcação deve:",
+                    options: [
+                        "a) reduzir a velocidade e soar um longo toque",
+                        "b) aumentar a velocidade para passar rápido pelo cruzamento",
+                        "c) manter a velocidade e soar dois longos toques",
+                        "d) parar a embarcação e esperar",
+                        "e) soar cinco toques curtos e rápidos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao aproximar-se de um cruzamento em um canal estreito, uma embarcação deve reduzir a velocidade e soar um longo toque para alertar outras embarcações que possam estar se aproximando."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a prioridade de passagem é determinada por:",
+                    options: [
+                        "a) o tamanho da embarcação",
+                        "b) o tipo de embarcação",
+                        "c) a direção da correnteza",
+                        "d) a direção do vento",
+                        "e) a profundidade do canal"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a prioridade de passagem é determinada pelo tipo de embarcação, sendo que embarcações com restrições de manobra, engajadas em pesca ou sem governo têm prioridade sobre outras."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, embarcações que descem o rio têm prioridade sobre embarcações que sobem o rio:",
+                    options: [
+                        "a) sempre",
+                        "b) nunca",
+                        "c) apenas em canais muito estreitos",
+                        "d) apenas durante o dia",
+                        "e) apenas à noite"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, embarcações que descem o rio têm prioridade sobre embarcações que sobem o rio apenas em canais muito estreitos onde a manobra seja particularmente difícil."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, embarcações com passageiros têm prioridade sobre embarcações de carga:",
+                    options: [
+                        "a) sempre",
+                        "b) nunca",
+                        "c) apenas em canais muito estreitos",
+                        "d) apenas durante o dia",
+                        "e) apenas à noite"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, embarcações com passageiros não têm prioridade automática sobre embarcações de carga - a prioridade é determinada pelo tipo de embarcação e suas restrições de manobra."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a embarcação mais manobrável deve:",
+                    options: [
+                        "a) ceder passagem para a menos manobrável",
+                        "b) manter sua posição e exigir passagem",
+                        "c) aumentar a velocidade para passar primeiro",
+                        "d) soar cinco toques curtos e rápidos",
+                        "e) parar e esperar"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a embarcação mais manobrável deve ceder passagem para a menos manobrável, facilitando a navegação segura de todas as embarcações."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, em caso de dúvida sobre as intenções da outra embarcação, deve-se:",
+                    options: [
+                        "a) soar cinco toques curtos e rápidos",
+                        "b) reduzir a velocidade e esperar",
+                        "c) guinar para bombordo",
+                        "d) guinar para boreste",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, em caso de dúvida sobre as intenções da outra embarcação, deve-se soar cinco toques curtos e rápidos para indicar a dúvida."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a ultrapassagem deve ser feita:",
+                    options: [
+                        "a) apenas pelo boreste (lado direito) da embarcação a ser ultrapassada",
+                        "b) apenas pelo bombordo (lado esquerdo) da embarcação a ser ultrapassada",
+                        "c) pelo lado que for mais seguro na ocasião",
+                        "d) apenas durante o dia",
+                        "e) apenas com vento favorável"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a ultrapassagem deve ser feita pelo lado que for mais seguro na ocasião, após comunicação clara entre as embarcações."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a embarcação que pretende ultrapassar deve:",
+                    options: [
+                        "a) soar dois longos toques seguidos de dois curtos se for ultrapassar pelo boreste",
+                        "b) soar dois longos toques seguidos de um curto se for ultrapassar pelo bombordo",
+                        "c) aguardar a resposta da embarcação a ser ultrapassada",
+                        "d) todas as anteriores",
+                        "e) nenhuma das anteriores"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a embarcação que pretende ultrapassar deve soar dois longos toques seguidos de dois curtos se for ultrapassar pelo boreste ou dois longos seguidos de um curto se for pelo bombordo, e aguardar a resposta da embarcação a ser ultrapassada."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a embarcação que concorda com a ultrapassagem deve:",
+                    options: [
+                        "a) soar um longo, um curto, um longo e um curto",
+                        "b) manter rumo e velocidade",
+                        "c) guinar para bombordo para facilitar a ultrapassagem",
+                        "d) reduzir a velocidade",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a embarcação que concorda com a ultrapassagem deve soar um longo, um curto, um longo e um curto para indicar que compreendeu a intenção e concorda com a manobra."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a embarcação que não concorda com a ultrapassagem deve:",
+                    options: [
+                        "a) soar cinco toques curtos e rápidos",
+                        "b) manter rumo e velocidade",
+                        "c) guinar para bombordo para bloquear a ultrapassagem",
+                        "d) aumentar a velocidade",
+                        "e) parar a embarcação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a embarcação que não concorda com a ultrapassagem deve soar cinco toques curtos e rápidos para indicar sua discordância com a manobra."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a ultrapassagem é proibida:",
+                    options: [
+                        "a) em curvas e áreas com visibilidade reduzida",
+                        "b) apenas durante a noite",
+                        "c) apenas com vento contrário",
+                        "d) apenas com maré baixa",
+                        "e) nunca é proibida"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a ultrapassagem é proibida em curvas e áreas com visibilidade reduzida, onde há maior risco de colisão."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a velocidade deve ser:",
+                    options: [
+                        "a) reduzida ao mínimo necessário para manter o governo",
+                        "b) mantida constante para facilitar as manobras",
+                        "c) aumentada para reduzir o tempo no canal",
+                        "d) determinada pelo tamanho da embarcação",
+                        "e) determinada pela direção da correnteza"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a velocidade deve ser reduzida ao mínimo necessário para manter o governo da embarcação, permitindo manobras seguras e evitando colisões."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a distância entre embarcações deve ser:",
+                    options: [
+                        "a) suficiente para permitir manobras seguras",
+                        "b) a menor possível para maximizar o fluxo",
+                        "c) determinada pelo tamanho da maior embarcação",
+                        "d) determinada pela direção da correnteza",
+                        "e) determinada pela visibilidade"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a distância entre embarcações deve ser suficiente para permitir manobras seguras em caso de emergência."
+                },
+                {
+                    question: "Ao navegar em um canal estreito com tráfego intenso, a melhor prática é:",
+                    options: [
+                        "a) manter comunicação constante com outras embarcações",
+                        "b) evitar qualquer comunicação para não causar confusão",
+                        "c) usar apenas sinais visuais",
+                        "d) usar apenas sinais sonoros",
+                        "e) confiar apenas no radar"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Ao navegar em um canal estreito com tráfego intenso, a melhor prática é manter comunicação constante com outras embarcações para coordenar manobras e evitar colisões."
+                }
+            ],
+            'seguranca': [
+                {
+                    question: "O colete salva-vidas deve ser:",
+                    options: [
+                        "a) vestido com a parte flutuante para as costas, após retirar as roupas",
+                        "b) conduzido pelo náufrago, na mão",
+                        "c) jogado na água, para o náufrago se apoiar",
+                        "d) vestido com a parte flutuante para frente, por cima das roupas",
+                        "e) vestido com a parte flutuante para frente, por baixo das roupas"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "O colete deve ser vestido com a parte flutuante para frente e por cima das roupas para garantir sua eficácia."
+                },
+                {
+                    question: "O número de coletes a bordo deve atender:",
+                    options: [
+                        "a) a todos os passageiros adultos",
+                        "b) a todos os passageiros",
+                        "c) à quantidade de pessoas legalmente autorizadas a embarcar",
+                        "d) ao número de membros da tripulação",
+                        "e) à lotação estabelecida pelo estaleiro construtor"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Deve haver coletes suficientes para todas as pessoas autorizadas a embarcar, conforme a lotação da embarcação."
+                },
+                {
+                    question: "Os coletes salva-vidas classe III são exigidos nas embarcações de esporte e recreio:",
+                    options: [
+                        "a) apenas para as de interior de porto",
+                        "b) apenas para as de alto-mar",
+                        "c) para as de alto-mar e navegação costeira",
+                        "d) apenas para as de navegação costeira",
+                        "e) para qualquer tipo de navegação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os coletes classe III são aceitáveis apenas para navegação interior de porto."
+                },
+                {
+                    question: "Os coletes salva-vidas devem ser inspecionados:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Os coletes salva-vidas devem ser inspecionados semestralmente para verificar seu estado de conservação."
+                },
+                {
+                    question: "O extintor de incêndio portátil deve ser:",
+                    options: [
+                        "a) guardado em local de difícil acesso para evitar acidentes",
+                        "b) mantido em local de fácil acesso e pronto para uso imediato",
+                        "c) fixado permanentemente em um suporte",
+                        "d) mantido no compartimento do motor",
+                        "e) guardado em local seco e escuro"
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O extintor deve ser mantido em local de fácil acesso e pronto para uso imediato em caso de emergência."
+                },
+                {
+                    question: "O número mínimo de extintores em uma embarcação de recreio é determinado por:",
+                    options: [
+                        "a) o comprimento da embarcação",
+                        "b) o número de passageiros",
+                        "c) o tipo de motorização",
+                        "d) a capacidade de combustível",
+                        "e) o tipo de navegação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O número mínimo de extintores é determinado principalmente pelo comprimento da embarcação."
+                },
+                {
+                    question: "Os extintores de incêndio devem ser recarregados:",
+                    options: [
+                        "a) anualmente",
+                        "b) a cada dois anos",
+                        "c) quando o indicador de pressão estiver na zona vermelha",
+                        "d) após qualquer uso, mesmo que parcial",
+                        "e) todas as anteriores"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Os extintores devem ser recarregados anualmente, a cada dois anos conforme normas, quando o indicador estiver na zona vermelha ou após qualquer uso."
+                },
+                {
+                    question: "O tipo de extintor indicado para incêndios em motores é o:",
+                    options: [
+                        "a) de água",
+                        "b) de pó químico",
+                        "c) de CO2",
+                        "d) de espuma",
+                        "e) b ou c"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Para incêndios em motores, os extintores indicados são de pó químico ou CO2."
+                },
+                {
+                    question: "O tipo de extintor indicado para incêndios em equipamentos elétricos é o:",
+                    options: [
+                        "a) de água",
+                        "b) de pó químico",
+                        "c) de CO2",
+                        "d) de espuma",
+                        "e) b ou c"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Para incêndios em equipamentos elétricos, os extintores indicados são de pó químico ou CO2."
+                },
+                {
+                    question: "O tipo de extintor indicado para incêndios em líquidos inflamáveis é o:",
+                    options: [
+                        "a) de água",
+                        "b) de pó químico",
+                        "c) de CO2",
+                        "d) de espuma",
+                        "e) b, c ou d"
+                    ],
+                    correctAnswer: 4,
+                    explanation: "Para incêndios em líquidos inflamáveis, os extintores indicados são de pó químico, CO2 ou espuma."
+                },
+                {
+                    question: "A buzina ou apito deve ter alcance mínimo de:",
+                    options: [
+                        "a) 0,5 milha náutica",
+                        "b) 1 milha náutica",
+                        "c) 2 milhas náuticas",
+                        "d) 3 milhas náuticas",
+                        "e) 4 milhas náuticas"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A buzina ou apito deve ter alcance mínimo de 0,5 milha náutica."
+                },
+                {
+                    question: "O número de bóias circulares exigidas em uma embarcação de recreio é determinado por:",
+                    options: [
+                        "a) o comprimento da embarcação",
+                        "b) o número de passageiros",
+                        "c) o tipo de motorização",
+                        "d) a capacidade de combustível",
+                        "e) o tipo de navegação"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O número de bóias circulares é determinado principalmente pelo comprimento da embarcação."
+                },
+                {
+                    question: "As bóias circulares devem ser inspecionadas:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "As bóias circulares devem ser inspecionadas semestralmente para verificar seu estado de conservação."
+                },
+                {
+                    question: "O lanterna de sinalização noturna deve ter autonomia mínima de:",
+                    options: [
+                        "a) 2 horas",
+                        "b) 4 horas",
+                        "c) 6 horas",
+                        "d) 8 horas",
+                        "e) 10 horas"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A lanterna de sinalização noturna deve ter autonomia mínima de 6 horas."
+                },
+                {
+                    question: "O lanterna de sinalização noturna deve ser:",
+                    options: [
+                        "a) branca",
+                        "b) vermelha",
+                        "c) verde",
+                        "d) amarela",
+                        "e) azul"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A lanterna de sinalização noturna deve ser branca."
+                },
+                {
+                    question: "O kit de primeiros socorros deve conter:",
+                    options: [
+                        "a) apenas material para curativos",
+                        "b) apenas medicamentos básicos",
+                        "c) material para curativos e medicamentos básicos",
+                        "d) material para curativos, medicamentos básicos e manual de primeiros socorros",
+                        "e) material para curativos, medicamentos básicos, manual de primeiros socorros e lista de telefones de emergência"
+                    ],
+                    correctAnswer: 3,
+                    explanation: "O kit de primeiros socorros deve conter material para curativos, medicamentos básicos e manual de primeiros socorros."
+                },
+                {
+                    question: "O kit de primeiros socorros deve ser inspecionado:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O kit de primeiros socorros deve ser inspecionado mensalmente para verificar a validade dos medicamentos e o estado do material."
+                },
+                {
+                    question: "O rádio VHF portátil deve ter:",
+                    options: [
+                        "a) apenas o canal 16",
+                        "b) os canais 16 e 70",
+                        "c) os canais 16, 70 e pelo menos um canal de trabalho",
+                        "d) todos os canais disponíveis",
+                        "e) apenas canais de trabalho"
+                    ],
+                    correctAnswer: 2,
+                    explanation: "O rádio VHF portátil deve ter pelo menos os canais 16 (emergência), 70 (DSC) e um canal de trabalho."
+                },
+                {
+                    question: "O rádio VHF portátil deve ser testado:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O rádio VHF portátil deve ser testado mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "A buzina ou apito deve ser testada:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A buzina ou apito deve ser testada mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "Os coletes salva-vidas devem ser testados:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os coletes salva-vidas devem ser testados mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "Os extintores de incêndio devem ser testados:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os extintores de incêndio devem ser testados mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "As bóias circulares devem ser testadas:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "As bóias circulares devem ser testadas mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "A lanterna de sinalização noturna deve ser testada:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A lanterna de sinalização noturna deve ser testada mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "O kit de primeiros socorros deve ser testado:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O kit de primeiros socorros deve ser testado mensalmente para verificar seu funcionamento."
+                },
+                {
+                    question: "O rádio VHF portátil deve ser carregado:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O rádio VHF portátil deve ser carregado mensalmente para manter a bateria em boas condições."
+                },
+                {
+                    question: "A buzina ou apito deve ser limpa:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A buzina ou apito deve ser limpa mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "Os coletes salva-vidas devem ser secos:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os coletes salva-vidas devem ser secos mensalmente para evitar mofo e deterioração."
+                },
+                {
+                    question: "Os extintores de incêndio devem ser limpos:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os extintores de incêndio devem ser limpos mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "As bóias circulares devem ser limpas:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "As bóias circulares devem ser limpas mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "A lanterna de sinalização noturna deve ser limpa:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A lanterna de sinalização noturna deve ser limpa mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "O kit de primeiros socorros deve ser limpo:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O kit de primeiros socorros deve ser limpo mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "O rádio VHF portátil deve ser limpo:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O rádio VHF portátil deve ser limpo mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "A buzina ou apito deve ser lubrificada:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A buzina ou apito deve ser lubrificada mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "Os coletes salva-vidas devem ser lubrificados:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os coletes salva-vidas devem ser lubrificados mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "Os extintores de incêndio devem ser lubrificados:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os extintores de incêndio devem ser lubrificados mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "As bóias circulares devem ser lubrificadas:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "As bóias circulares devem ser lubrificadas mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "A lanterna de sinalização noturna deve ser lubrificada:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "A lanterna de sinalização noturna deve ser lubrificada mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "O kit de primeiros socorros deve ser lubrificado:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O kit de primeiros socorros deve ser lubrificado mensalmente para manter seu funcionamento adequado."
+                },
+                {
+                    question: "O rádio VHF portátil deve ser lubrificado:",
+                    options: [
+                        "a) mensalmente",
+                        "b) trimestralmente",
+                        "c) semestralmente",
+                        "d) anualmente",
+                        "e) a cada dois anos"
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O rádio VHF portátil deve ser lubrificado mensalmente para manter seu funcionamento adequado."
+                }
+            ]
+        };
+
+        // Para o simulado completo, misturar questões de todos os tópicos
+        if (topic === 'completo') {
+            allQuestions.completo = [
+                ...allQuestions.luzes.slice(0, 10),
+                ...allQuestions.balizamento.slice(0, 10),
+                ...allQuestions.manobras.slice(0, 10),
+                ...allQuestions.seguranca.slice(0, 10)
+            ];
+        }
+
+        // Variáveis de estado do simulado
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let userAnswers = [];
+        let questions = [];
+        let startTime;
+        let timerInterval;
+
+        // Elementos do DOM
+        const quizContainer = document.getElementById('quiz-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const finishBtn = document.getElementById('finish-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const resultsDiv = document.getElementById('results-container');
+        const currentQuestionSpan = document.getElementById('current-question');
+        const totalQuestionsSpan = document.getElementById('total-questions');
+        const progressBar = document.getElementById('progress-bar');
+        const timeSpan = document.getElementById('time');
+        const scoreSpan = document.getElementById('score');
+        const maxScoreSpan = document.getElementById('max-score');
+        const correctCountSpan = document.getElementById('correct-count');
+        const incorrectCountSpan = document.getElementById('incorrect-count');
+        const resultTopicSpan = document.getElementById('result-topic');
+
+        // Iniciar o simulado
+        function startQuiz() {
+            // Selecionar questões conforme o tópico
+            questions = [...allQuestions[topic]];
+            
+            // Embaralhar questões (exceto para simulados por tópico específico)
+            if (topic === 'completo') {
+                questions = shuffleArray(questions);
+            }
+            
+            questions = questions.slice(0, topicConfig[topic].count);
+            
+            userAnswers = new Array(questions.length).fill(null);
+            currentQuestionIndex = 0;
+            score = 0;
+            startTime = new Date();
+            
+            // Configurar interface
+            totalQuestionsSpan.textContent = questions.length;
+            resultTopicSpan.textContent = topicConfig[topic].title;
+            maxScoreSpan.textContent = questions.length;
+            
+            // Iniciar cronômetro
+            updateTimer();
+            timerInterval = setInterval(updateTimer, 1000);
+            
+            showQuestion();
+            updateNavigation();
+        }
+
+        // Embaralhar array
+        function shuffleArray(array) {
+            const newArray = [...array];
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Mostrar a questão atual
+        function showQuestion() {
+            const question = questions[currentQuestionIndex];
+            
+            quizContainer.innerHTML = `
+                <div class="question-card">
+                    <div class="topic-badge">${topicConfig[topic].title}</div>
+                    <div class="question-number">Questão ${currentQuestionIndex + 1}</div>
+                    <div class="question-text">${question.question}</div>
+                    <div class="options-container" id="options-container">
+                        ${question.options.map((option, index) => `
+                            <div class="option ${userAnswers[currentQuestionIndex] === index ? 'selected' : ''}" 
+                                 data-index="${index}">
+                                ${option}
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Atualizar progresso
+            currentQuestionSpan.textContent = currentQuestionIndex + 1;
+            progressBar.style.width = `${((currentQuestionIndex + 1) / questions.length) * 100}%`;
+            
+            // Adicionar event listeners às opções
+            document.querySelectorAll('.option').forEach(option => {
+                option.addEventListener('click', selectOption);
+            });
+        }
+
+        // Selecionar uma opção
+        function selectOption(e) {
+            const selectedOption = e.target;
+            const options = document.querySelectorAll('.option');
+            const selectedIndex = parseInt(selectedOption.getAttribute('data-index'));
+            
+            // Remover seleção anterior
+            options.forEach(option => {
+                option.classList.remove('selected');
+            });
+            
+            // Marcar opção selecionada
+            selectedOption.classList.add('selected');
+            userAnswers[currentQuestionIndex] = selectedIndex;
+            
+            // Verificar se todas as questões foram respondidas
+            const allAnswered = userAnswers.every(answer => answer !== null);
+            finishBtn.style.display = allAnswered ? 'block' : 'none';
+        }
+
+        // Navegação entre questões
+        function updateNavigation() {
+            prevBtn.disabled = currentQuestionIndex === 0;
+            nextBtn.disabled = currentQuestionIndex === questions.length - 1;
+        }
+
+        // Próxima questão
+        nextBtn.addEventListener('click', () => {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+                updateNavigation();
+            }
+        });
+
+        // Questão anterior
+        prevBtn.addEventListener('click', () => {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+                updateNavigation();
+            }
+        });
+
+        // Finalizar simulado
+        finishBtn.addEventListener('click', finishQuiz);
+
+        // Mostrar resultados
+        function finishQuiz() {
+            // Calcular pontuação
+            score = 0;
+            for (let i = 0; i < questions.length; i++) {
+                if (userAnswers[i] === questions[i].correctAnswer) {
+                    score++;
+                }
+            }
+            
+            // Parar cronômetro
+            clearInterval(timerInterval);
+            
+            // Mostrar resultados
+            scoreSpan.textContent = score;
+            correctCountSpan.textContent = score;
+            incorrectCountSpan.textContent = questions.length - score;
+            
+            // Esconder quiz e mostrar resultados
+            quizContainer.style.display = 'none';
+            document.querySelector('.navigation-buttons').style.display = 'none';
+            resultsDiv.classList.remove('hidden');
+        }
+
+        // Reiniciar simulado
+        restartBtn.addEventListener('click', () => {
+            quizContainer.style.display = 'block';
+            document.querySelector('.navigation-buttons').style.display = 'flex';
+            resultsDiv.classList.add('hidden');
+            startQuiz();
+        });
+
+        // Atualizar cronômetro
+        function updateTimer() {
+            const now = new Date();
+            const elapsed = Math.floor((now - startTime) / 1000);
+            const minutes = Math.floor(elapsed / 60).toString().padStart(2, '0');
+            const seconds = (elapsed % 60).toString().padStart(2, '0');
+            timeSpan.textContent = `${minutes}:${seconds}`;
+        }
+
+        // Iniciar o simulado quando a página carregar
+        window.addEventListener('load', startQuiz);
+    </script>
 </body>
 </html>

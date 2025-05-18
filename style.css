@@ -303,6 +303,67 @@ section {
   font-size: 1.2rem;
 }
 
+/* ===== SIMULADOS ===== */
+#simulados {
+  background-color: var(--primary-dark);
+  padding: 5rem 0;
+}
+
+.topicos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.topico-card {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-light);
+  transition: var(--transition);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.topico-card:hover {
+  transform: translateY(-5px);
+  background-color: rgba(255, 215, 0, 0.1);
+  box-shadow: var(--shadow);
+}
+
+.topico-card i {
+  font-size: 2.5rem;
+  color: var(--secondary-color);
+  margin-bottom: 1rem;
+}
+
+.topico-card h3 {
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+}
+
+.topico-card.destaque {
+  border: 2px solid var(--secondary-color);
+  background-color: rgba(90, 14, 153, 0.5);
+}
+
+.topico-card.destaque i {
+  color: #fff;
+}
+
+.topico-simulado {
+  color: var(--secondary-color);
+}
+
+.p-topico {
+  color: var(--secondary-color);
+}
+
 /* ===== CALENDÁRIO ===== */
 .tabela-container {
   overflow-x: auto;
@@ -542,92 +603,4 @@ footer {
 
 .fade-in {
   animation: fadeIn 0.8s ease forwards;
-}
-
-/* ===== MEDIA QUERIES ===== */
-@media (max-width: 992px) {
-  .hero h1 {
-    font-size: 2.8rem;
-  }
-  
-  .servicos-content,
-  .contato-content {
-    grid-template-columns: 1fr;
-  }
-  
-  .servicos-list {
-    grid-template-columns: 1fr;
-  }
-}
-
-@media (max-width: 768px) {
-  header {
-    padding: 1rem;
-  }
-  
-  .menu-toggle {
-    display: block;
-  }
-  
-  nav {
-    position: fixed;
-    top: 80px;
-    left: 0;
-    right: 0;
-    background-color: var(--primary-dark);
-    flex-direction: column;
-    align-items: center;
-    padding: 1rem 0;
-    gap: 1rem;
-    transform: translateY(-100%);
-    opacity: 0;
-    transition: var(--transition);
-  }
-  
-  nav.show {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-  
-  .hero p {
-    font-size: 1.2rem;
-  }
-  
-  section {
-    padding: 3rem 0;
-  }
-  
-  .btn-topo,
-  .whatsapp-float {
-    bottom: 1rem;
-    right: 1rem;
-  }
-  
-  .whatsapp-float {
-    bottom: 5rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .hero h1 {
-    font-size: 2rem;
-  }
-  
-  .section-title h2 {
-    font-size: 1.8rem;
-  }
-  
-  .footer-content {
-    grid-template-columns: 1fr;
-    text-align: center;
-  }
-  
-  .footer-links ul,
-  .social-icons {
-    justify-content: center;
-  }
 }
