@@ -38,8 +38,7 @@
 
   <main>
     <section class="hero" aria-label="Apresentação principal">
-      <div class="hero-content" data-aos="fade-up">
-      
+      <div class="hero-content" data-aos="fade-up"></div>
     </section>
 
     <section id="sobre" class="section-with-bg">
@@ -58,7 +57,7 @@
           <div class="curso-card">
             <i class="fas fa-ship"></i>
             <h3>Arrais Amador</h3>
-            <p>Habilitação para conduzir embarcações  nos limites da navegação interior.</p>
+            <p>Habilitação para conduzir embarcações nos limites da navegação interior.</p>
           </div>
           
           <div class="curso-card">
@@ -69,7 +68,8 @@
         </div>
       </div>
     </section>
-     <section id="simulados">
+
+    <section id="simulados">
       <div class="container">
         <h2 class="topico-simulado">Simulados por Tópico</h2>
         <p class="p-topico">Escolha um tópico para praticar:</p>
@@ -78,25 +78,25 @@
           <a href="simulado.html?topico=luzes" class="topico-card">
             <i class="fas fa-lightbulb"></i>
             <h3>Luzes e Sinais</h3>
-            <p>10 questões sobre luzes de navegação</p>
+            <p>40 questões sobre luzes de navegação</p>
           </a>
           
           <a href="simulado.html?topico=balizamento" class="topico-card">
             <i class="fas fa-ship"></i>
             <h3>Balizamento</h3>
-            <p>10 questões sobre boias e marcações</p>
+            <p>40 questões sobre boias e marcações</p>
           </a>
           
           <a href="simulado.html?topico=manobras" class="topico-card">
             <i class="fas fa-ship"></i>
             <h3>Manobras</h3>
-            <p>10 questões sobre regras de navegação</p>
+            <p>40 questões sobre regras de navegação</p>
           </a>
           
           <a href="simulado.html?topico=seguranca" class="topico-card">
             <i class="fas fa-life-ring"></i>
             <h3>Segurança</h3>
-            <p>10 questões sobre equipamentos e procedimentos</p>
+            <p>40 questões sobre equipamentos e procedimentos</p>
           </a>
           
           <a href="simulado.html?topico=completo" class="topico-card destaque">
@@ -108,47 +108,122 @@
       </div>
     </section>
 
-    <section id="galeria" class="section-with-bg">
+    <section id="galeria" class="gallery-section">
       <div class="container">
-        <h2 data-aos="fade-up">Galeria</h2>
-        <div class="media-grid">
-          <div class="videos" data-aos="fade-up" data-aos-delay="100">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/SEU_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+        <div class="section-header">
+          <h2>Galeria</h2>
+          <p class="section-subtitle"></p>
+        </div>
+
+        <div class="gallery-grid">
+          <div class="gallery-item" data-category="aulas">
+            <img src="./aulas01.jpeg" alt="Alunos em aula prática de navegação" loading="lazy">
+            <div class="gallery-overlay">
+              <p>Aula prática no rio</p>
+            </div>
           </div>
-          <div class="fotos" data-aos="fade-up" data-aos-delay="200">
-            <img src="./aulas01.jpeg" alt="Alunos em aula prática de navegação" loading="lazy" />
-            <img src="./aulas02.jpeg" alt="Instrutor ensinando técnicas de amarração" loading="lazy" />
-            <img src="./aulas03.jpeg" alt="Aula teórica sobre navegação" loading="lazy" />
-            <img src="./aulas04.jpeg" alt="Prática de primeiros socorros" loading="lazy" />
+          
+          <div class="gallery-item" data-category="aulas">
+            <img src="./aulas02.jpeg" alt="Instrutor ensinando técnicas de amarração" loading="lazy">
+            <div class="gallery-overlay">
+              <p>Técnicas de amarração</p>
+            </div>
           </div>
+          
+          <div class="gallery-item" data-category="aulas">
+            <img src="./aulas03.jpeg" alt="Aula teórica sobre navegação" loading="lazy">
+            <div class="gallery-overlay">
+              <p>Aula teórica</p>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-category="praticas">
+            <img src="./aulas04.jpeg" alt="Prática de primeiros socorros" loading="lazy">
+            <div class="gallery-overlay">
+              <p>Primeiros socorros</p>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-category="praticas">
+            <img src="./aulas05.jpeg" alt="Alunos em embarcação" loading="lazy">
+            <div class="gallery-overlay">
+              <p>Prática de navegação</p>
+            </div>
+          </div>
+          
+          <div class="gallery-item" data-category="eventos">
+            <img src="./aulas06.jpeg" alt="Formatura de alunos" loading="lazy">
+            <div class="gallery-overlay">
+              <p>Cerimônia de formatura</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="gallery-filters">
+          <button class="filter-btn active" data-filter="all">Todas</button>
+          <button class="filter-btn" data-filter="aulas">Aulas</button>
+          <button class="filter-btn" data-filter="praticas">Práticas</button>
+          <button class="filter-btn" data-filter="eventos">Eventos</button>
+        </div>
+      </div>
+
+      <div id="gallery-modal" class="modal">
+        <span class="close-modal">&times;</span>
+        <img class="modal-content" id="modal-image">
+        <div class="modal-caption"></div>
+        <a class="modal-prev">&#10094;</a>
+        <a class="modal-next">&#10095;</a>
+      </div>
+    </section>
+
+    <section id="youtube" class="youtube-section">
+      <div class="container">
+        <div class="section-header">
+          <h2><i class="fab fa-youtube"></i> <span class="titulo-youtube-video">Nosso Canal no Youtube</span></h2>
+          <p class="section-subtitle">Aprenda navegação com nossos conteúdos exclusivos</p>
+        </div>
+
+        <div class="video-carousel">
+          <div class="video-item active">
+            <iframe data-src="https://www.youtube.com/embed/p_Wf8wAoGKA?si=1wx0EfrVND3y0Xnm" 
+                    title="Aulas práticas de navegação" 
+                    allowfullscreen
+                    loading="lazy"></iframe>
+          </div>
+        </div>
+        
+        <div class="youtube-cta">
+          <a href="https://www.youtube.com/@ALPHAETN" class="youtube-button" target="_blank">
+            <i class="fab fa-youtube"></i> Inscreva-se no nosso Canal
+          </a>
         </div>
       </div>
     </section>
 
     <section id="servicos">
-  <div class="container">
-    <h2 data-aos="fade-up">Serviços</h2>
-    <div class="servicos-content" data-aos="fade-up" data-aos-delay="100">
-      <div class="servico-categoria">
-        <h3><i class="fas fa-ship"></i> Embarcações</h3>
-        <ul class="servicos-list">
-          <li><i class="fas fa-check-circle"></i> Inscrição e Renovação</li>
-          <li><i class="fas fa-check-circle"></i> Transferência de Propriedade/Jurisdição</li>
-          <li><i class="fas fa-check-circle"></i> Seguro Obrigatório (DPEM)</li>
-        </ul>
+      <div class="container">
+        <h2 data-aos="fade-up">Serviços</h2>
+        <div class="servicos-content" data-aos="fade-up" data-aos-delay="100">
+          <div class="servico-categoria">
+            <h3><i class="fas fa-ship"></i> Embarcações</h3>
+            <ul class="servicos-list">
+              <li><i class="fas fa-check-circle"></i> Inscrição e Renovação</li>
+              <li><i class="fas fa-check-circle"></i> Transferência de Propriedade/Jurisdição</li>
+              <li><i class="fas fa-check-circle"></i> Seguro Obrigatório (DPEM)</li>
+            </ul>
+          </div>
+          
+          <div class="servico-categoria">
+            <h3><i class="fas fa-id-card"></i> Arrais Amador e Motonauta</h3>
+            <ul class="servicos-list">
+              <li><i class="fas fa-check-circle"></i> Arrais Amador/Motonauta (Treinamento Náutico)</li>
+              <li><i class="fas fa-check-circle"></i> Prova aplicada pela Marinha</li>
+              <li><i class="fas fa-check-circle"></i> Renovação/2ª via</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      
-      <div class="servico-categoria">
-        <h3><i class="fas fa-id-card"></i> Arrais Amador e Motonauta</h3>
-        <ul class="servicos-list">
-          <li><i class="fas fa-check-circle"></i> Arrais Amador/Motonauta (Treinamento Náutico)</li>
-          <li><i class="fas fa-check-circle"></i> Prova aplicada pela Marinha</li>
-          <li><i class="fas fa-check-circle"></i> Renovação/2ª via</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
+    </section>
 
     <section id="calendario-provas" class="section-with-bg">
       <div class="container">
@@ -167,39 +242,39 @@
             <tbody>
               <tr>
                 <td>28/06/2025</td>
-                <td>Delegacia Fluvial - Presidente Epitácio SP</td>
+                <td>Panorama SP</td>
                 <td>Arrais-Amador</td>
-                <td>Até 14/06</td>
+                <td>Até 03/06</td>
               </tr>
               <tr>
                 <td>26/07/2025</td>
-                <td>Delegacia Fluvial - Presidente Epitácio SP</td>
-                <td>Motonauta</td>
-                <td>Até 12/07</td>
+                <td>Presidente Prudente SP</td>
+                <td>Arrias-Amador</td>
+                <td>Até 30/06</td>
               </tr>
               <tr>
                 <td>30/08/2025</td>
-                <td>Delegacia Fluvial - Presidente Epitácio SP</td>
-                <td>Capitão Amador</td>
-                <td>Até 16/08</td>
+                <td>Presidente Epitácio SP</td>
+                <td>Arrais-Amador</td>
+                <td>Até 01/08</td>
               </tr>
               <tr>
                 <td>27/09/2025</td>
-                <td>Delegacia Fluvial - Presidente Epitácio SP</td>
+                <td>Cândido Mota SP</td>
                 <td>Arrais-Amador</td>
-                <td>Até 13/09</td>
+                <td>Até 29/08</td>
               </tr>
               <tr>
                 <td>25/10/2025</td>
-                <td>Delegacia Fluvial - Presidente Epitácio SP</td>
+                <td>Rancharia SP</td>
                 <td>Arrais-Amador</td>
-                <td>Até 11/10</td>
+                <td>Até 27/09</td>
               </tr>
               <tr>
-                <td>29/11/2025</td>
-                <td>Delegacia Fluvial - Presidente Epitácio SP</td>
+                <td>22/11/2025</td>
+                <td>Adamantina SP</td>
                 <td>Arrais-Amador</td>
-                <td>Até 15/11</td>
+                <td>Até 24/10</td>
               </tr>
             </tbody>
           </table>
@@ -215,10 +290,8 @@
           <div class="contato-info">
             <p><i class="fas fa-phone-alt"></i> (18) 98126-3592</p>
             <p><i class="fas fa-envelope"></i> contato@alphacursosnauticos.com.br</p>
-            <p><i class="fas fa-map-marker-alt"></i> Presidente Epitácio - SP</p>
+            <p><i class="fas fa-map-marker-alt"></i> Rua Paraná, 2-84 - Centro - Presidente Epitácio - SP</p>
           </div>
-        
-          </a>
         </div>
       </div>
     </section>
@@ -228,7 +301,6 @@
     <div class="footer-content">
       <div class="footer-logo">
         <img src="alpha_logo_transparente.png" alt="Logo Alpha Cursos Náuticos" class="logo-footer" />
-       
       </div>
       <div class="footer-links">
         <h3>Links Rápidos</h3>
@@ -242,10 +314,10 @@
       <div class="footer-social">
         <h3>Redes Sociais</h3>
         <div class="social-icons">
-          <a href="https://www.instagram.com/seuperfil" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="https://www.instagram.com/alphaetn/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
           <a href="https://www.facebook.com/seupagina" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
           <a href="https://wa.me/+5518981263592" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://www.youtube.com/@seucanal" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+          <a href="https://www.youtube.com/@ALPHAETN" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
       </div>
     </div>
@@ -298,6 +370,148 @@
             behavior: 'smooth'
           });
         });
+      });
+    });
+
+    // JavaScript para o carrossel de vídeos
+    document.addEventListener('DOMContentLoaded', function() {
+      const carousel = document.querySelector('.video-carousel');
+      const items = document.querySelectorAll('.video-item');
+      const dots = document.querySelectorAll('.carousel-dot');
+      const prevBtn = document.querySelector('.prev');
+      const nextBtn = document.querySelector('.next');
+      let currentIndex = 0;
+      
+      // Função para carregar o iframe quando o slide se torna ativo
+      function loadActiveIframe() {
+        items.forEach((item, index) => {
+          const iframe = item.querySelector('iframe');
+          if (index === currentIndex) {
+            // Ativa o iframe atual
+            iframe.src = iframe.dataset.src || iframe.src;
+            item.style.display = 'block';
+          } else {
+            // Desativa os outros iframes
+            item.style.display = 'none';
+          }
+        });
+      }
+      
+      // Atualiza o carrossel
+      function updateCarousel() {
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        
+        // Atualiza dots ativos
+        dots.forEach((dot, index) => {
+          dot.classList.toggle('active', index === currentIndex);
+        });
+        
+        // Carrega o iframe ativo
+        loadActiveIframe();
+      }
+      
+      // Inicializa carregando o primeiro iframe
+      loadActiveIframe();
+      
+      // Navegação por dots
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', function() {
+          currentIndex = index;
+          updateCarousel();
+        });
+      });
+    });
+
+    // Filtros da galeria e Lightbox
+    document.addEventListener('DOMContentLoaded', function() {
+      // Filtros da galeria
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+          // Ativa o botão clicado
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          this.classList.add('active');
+          
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Filtra os itens
+          galleryItems.forEach(item => {
+            if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+      });
+      
+      // Lightbox
+      const modal = document.getElementById('gallery-modal');
+      const modalImg = document.getElementById('modal-image');
+      const captionText = document.querySelector('.modal-caption');
+      const closeModal = document.querySelector('.close-modal');
+      const prevBtn = document.querySelector('.modal-prev');
+      const nextBtn = document.querySelector('.modal-next');
+      
+      let currentIndex = 0;
+      const images = Array.from(document.querySelectorAll('.gallery-item img'));
+      
+      // Abre o lightbox
+      images.forEach((img, index) => {
+        img.addEventListener('click', function() {
+          currentIndex = index;
+          updateModal();
+          modal.style.display = 'block';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+      
+      // Fecha o lightbox
+      closeModal.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+      });
+      
+      // Navegação
+      prevBtn.addEventListener('click', showPrevImage);
+      nextBtn.addEventListener('click', showNextImage);
+      
+      // Teclado
+      document.addEventListener('keydown', function(e) {
+        if (modal.style.display === 'block') {
+          if (e.key === 'ArrowLeft') showPrevImage();
+          if (e.key === 'ArrowRight') showNextImage();
+          if (e.key === 'Escape') {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        }
+      });
+      
+      // Funções auxiliares
+      function updateModal() {
+        modalImg.src = images[currentIndex].src;
+        captionText.textContent = images[currentIndex].alt;
+      }
+      
+      function showPrevImage() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateModal();
+      }
+      
+      function showNextImage() {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateModal();
+      }
+      
+      // Fecha ao clicar fora da imagem
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        }
       });
     });
   </script>
