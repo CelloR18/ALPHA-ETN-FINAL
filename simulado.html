@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,13 +15,13 @@
             --dark: #343a40;
             --white: #ffffff;
         }
-        
+
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
         }
-        
+
         body {
             font-family: 'Open Sans', sans-serif;
             line-height: 1.6;
@@ -29,15 +30,15 @@
             padding: 0;
             margin: 0;
         }
-        
+
         .container {
             max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
             background: var(--white);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        
+
         header {
             background-color: var(--primary);
             color: var(--white);
@@ -45,13 +46,13 @@
             text-align: center;
             margin-bottom: 30px;
         }
-        
+
         header h1 {
             font-family: 'Anton', sans-serif;
             letter-spacing: 1px;
             font-weight: 400;
         }
-        
+
         .simulado-info {
             display: flex;
             justify-content: space-between;
@@ -59,7 +60,7 @@
             font-weight: bold;
             color: var(--secondary);
         }
-        
+
         .progress-container {
             width: 100%;
             background-color: #e9ecef;
@@ -67,39 +68,39 @@
             margin-bottom: 20px;
             height: 10px;
         }
-        
+
         .progress-bar {
             height: 100%;
             border-radius: 5px;
             background-color: var(--primary);
             transition: width 0.3s ease;
         }
-        
+
         .question-card {
             background-color: var(--white);
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             padding: 25px;
             margin-bottom: 25px;
         }
-        
+
         .question-number {
             font-weight: bold;
             color: var(--primary);
             margin-bottom: 10px;
             font-size: 1.1rem;
         }
-        
+
         .question-text {
             font-weight: 600;
             margin-bottom: 20px;
             font-size: 1.1rem;
         }
-        
+
         .options-container {
             margin-left: 10px;
         }
-        
+
         .option {
             margin-bottom: 12px;
             padding: 12px;
@@ -108,32 +109,32 @@
             transition: all 0.2s;
             border-left: 4px solid transparent;
         }
-        
+
         .option:hover {
             background-color: #f1f1f1;
         }
-        
+
         .option.selected {
             border-left: 4px solid var(--primary);
             background-color: #e7f1ff;
         }
-        
+
         .option.correct {
             border-left: 4px solid var(--success);
             background-color: #d4edda;
         }
-        
+
         .option.incorrect {
             border-left: 4px solid var(--danger);
             background-color: #f8d7da;
         }
-        
+
         .navigation-buttons {
             display: flex;
             justify-content: space-between;
             margin-top: 30px;
         }
-        
+
         button {
             padding: 10px 20px;
             border: none;
@@ -142,62 +143,62 @@
             font-weight: 600;
             transition: all 0.2s;
         }
-        
+
         .btn-primary {
             background-color: var(--primary);
             color: var(--white);
         }
-        
+
         .btn-primary:hover {
             background-color: #004494;
         }
-        
+
         .btn-secondary {
             background-color: var(--secondary);
             color: var(--white);
         }
-        
+
         .btn-secondary:hover {
             background-color: #5a6268;
         }
-        
+
         .btn-disabled {
             background-color: #cccccc;
             cursor: not-allowed;
         }
-        
+
         .results-container {
             text-align: center;
             padding: 30px;
             background-color: var(--white);
             border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             margin-bottom: 30px;
         }
-        
+
         .results-container h2 {
             color: var(--primary);
             margin-bottom: 20px;
         }
-        
+
         .score {
             font-size: 2rem;
             font-weight: bold;
             margin: 20px 0;
         }
-        
+
         .correct-answers {
             color: var(--success);
         }
-        
+
         .incorrect-answers {
             color: var(--danger);
         }
-        
+
         .restart-btn {
             margin-top: 20px;
         }
-        
+
         .topic-badge {
             display: inline-block;
             padding: 5px 10px;
@@ -207,21 +208,21 @@
             font-size: 0.8rem;
             margin-bottom: 15px;
         }
-        
+
         @media (max-width: 768px) {
             .container {
                 padding: 10px;
             }
-            
+
             .question-card {
                 padding: 15px;
             }
-            
+
             .navigation-buttons {
                 flex-direction: column;
                 gap: 10px;
             }
-            
+
             button {
                 width: 100%;
             }
@@ -285,6 +286,7 @@
             'balizamento': 'Balizamento',
             'manobras': 'Manobras',
             'seguranca': 'Segurança',
+            'primeiros-socorros': 'Primeiros Socorros',
             'completo': 'Simulado Completo'
         };
 
@@ -294,6 +296,7 @@
             'balizamento': { count: 40, title: 'Balizamento' },
             'manobras': { count: 40, title: 'Manobras' },
             'seguranca': { count: 40, title: 'Segurança' },
+            'primeiros-socorros': { count: 40, title: 'Primeiros Socorros' },
             'completo': { count: 40, title: 'Completo' }
         };
 
@@ -2322,19 +2325,465 @@
                     correctAnswer: 0,
                     explanation: "O rádio VHF portátil deve ser lubrificado mensalmente para manter seu funcionamento adequado."
                 }
+            ],
+            'primeiros-socorros': [
+
+                {
+                    question: "Os primeiros socorros são:",
+                    options: [
+                        "a) Medidas preventivas de acidentes.",
+                        "b) Medidas emergenciais de prestação de socorro, antes do encaminhamento médico.",
+                        "c) Tratamentos médicos nas emergências de bordo.",
+                        "d) Operações de emergências a vítimas em acidentes de trânsito."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Primeiros socorros são medidas emergenciais aplicadas a vítimas de acidentes ou mal súbito, até a chegada de atendimento médico especializado."
+                },
+                {
+                    question: "O fator primordial dos primeiros socorros é não deixar a vítima:",
+                    options: [
+                        "a) Perder a temperatura do corpo.",
+                        "b) Perder muito sangue.",
+                        "c) Entrar em estado de choque.",
+                        "d) Se movimentar."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "O principal objetivo é evitar que a vítima entre em estado de choque, que pode agravar seu estado e levar a complicações mais sérias."
+                },
+                {
+                    question: "Sinais vitais que devem ser observados em uma vítima inconsciente:",
+                    options: [
+                        "a) Respiração e batimentos cardíacos.",
+                        "b) Batimentos cardíacos e ferimentos.",
+                        "c) Cor da pele e respiração.",
+                        "d) Ferimentos e temperatura."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Os sinais vitais mais importantes a serem verificados são respiração e batimentos cardíacos, que indicam se a vítima precisa de reanimação."
+                },
+                {
+                    question: "Se uma vítima não estiver respirando, o procedimento correto é:",
+                    options: [
+                        "a) Massagem cardíaca externa.",
+                        "b) Respiração boca a boca.",
+                        "c) Verificar as pupilas.",
+                        "d) Aquecer o corpo."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "A respiração boca a boca é o método de primeiros socorros para restaurar a respiração em vítimas que não estão respirando."
+                },
+                {
+                    question: "Ao prestar primeiros socorros, a primeira ação deve ser:",
+                    options: [
+                        "a) Aplicar analgésico.",
+                        "b) Verificar batimentos cardíacos.",
+                        "c) Verificar se a vítima está respirando.",
+                        "d) Tratar queimaduras."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A primeira ação é sempre verificar se a vítima está respirando, pois isso determina a urgência e tipo de atendimento necessário."
+                },
+                {
+                    question: "Antes de iniciar a respiração boca a boca, deve-se:",
+                    options: [
+                        "a) Verificar o pulso.",
+                        "b) Verificar se há corpos estranhos na boca.",
+                        "c) Posicionar a vítima de lado.",
+                        "d) Aquecer a vítima."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "É essencial verificar e remover qualquer corpo estranho da boca para evitar obstrução das vias aéreas durante a respiração artificial."
+                },
+                {
+                    question: "Na respiração boca a boca, a cabeça da vítima deve estar:",
+                    options: [
+                        "a) Na posição lateral.",
+                        "b) Na posição normal.",
+                        "c) Voltada para trás.",
+                        "d) Voltada para baixo."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A cabeça deve estar inclinada para trás (extensão do pescoço) para abrir as vias aéreas e permitir a passagem do ar."
+                },
+                {
+                    question: "Frequência de sopros por minuto na respiração boca a boca:",
+                    options: [
+                        "a) 20 a 30.",
+                        "b) 15 a 20.",
+                        "c) 10 a 15.",
+                        "d) 5 a 10."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A frequência recomendada é de 10 a 15 sopros por minuto para adultos, simulando o ritmo respiratório normal."
+                },
+                {
+                    question: "Se não for possível insuflar ar pela boca, deve-se:",
+                    options: [
+                        "a) Forçar a entrada do ar.",
+                        "b) Insuflar pelo nariz.",
+                        "c) Realizar traqueostomia.",
+                        "d) Aguardar socorro médico."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Quando a boca está lesionada ou não pode ser usada, pode-se realizar a respiração boca-nariz, insuflando o ar pelas narinas."
+                },
+                {
+                    question: "Em caso de múltiplas vítimas, priorize:",
+                    options: [
+                        "a) Hemorragias.",
+                        "b) Parada respiratória.",
+                        "c) Fraturas.",
+                        "d) Queimaduras."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Vítimas com parada respiratória devem ser atendidas primeiro, pois estão em risco iminente de morte."
+                },
+                {
+                    question: "Se o coração da vítima não voltar a bater após respiração boca a boca:",
+                    options: [
+                        "a) Iniciar massagem cardíaca externa.",
+                        "b) Continuar a respiração.",
+                        "c) Aquecer a vítima.",
+                        "d) Dar líquidos."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Quando não há batimentos cardíacos, deve-se iniciar imediatamente a massagem cardíaca externa em conjunto com a respiração artificial."
+                },
+                {
+                    question: "Frequência ideal de compressões na massagem cardíaca:",
+                    options: [
+                        "a) 30/min.",
+                        "b) 60/min.",
+                        "c) Até 100/min.",
+                        "d) 90/min."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A frequência recomendada é de 100 a 120 compressões por minuto para massagem cardíaca em adultos."
+                },
+                {
+                    question: "Sintoma que acompanha parada cardíaca:",
+                    options: [
+                        "a) Palidez.",
+                        "b) Pupilas dilatadas.",
+                        "c) Rubor facial.",
+                        "d) Estado de choque."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Pupilas dilatadas e não reativas à luz são um sinal característico de parada cardíaca."
+                },
+                {
+                    question: "O que pode ser tentado em caso de parada cardíaca antes da massagem?",
+                    options: [
+                        "a) Respiração boca a boca.",
+                        "b) Aquecimento.",
+                        "c) Murro forte no peito.",
+                        "d) Compressão abdominal."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Um murro precordial (forte golpe com o punho no esterno) pode em alguns casos reverter uma parada cardíaca recente."
+                },
+                {
+                    question: "Após o coração voltar a bater, deve-se:",
+                    options: [
+                        "a) Continuar a respiração boca a boca.",
+                        "b) Parar todos os procedimentos.",
+                        "c) Dar alimentos.",
+                        "d) Aquecer a vítima."
+                    ],
+                    correctAnswer: 3,
+                    explanation: "Manter a vítima aquecida é essencial após reanimação, para evitar hipotermia e ajudar na recuperação."
+                },
+                {
+                    question: "Procedimento para parada cardíaca e respiratória simultâneas:",
+                    options: [
+                        "a) 1 massagem + 8 respirações.",
+                        "b) 30 massagens + 2 respirações.",
+                        "c) Apenas massagem.",
+                        "d) Apenas respiração."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O protocolo atual recomenda 30 compressões torácicas seguidas de 2 ventilações (respirações boca-a-boca)."
+                },
+                {
+                    question: "Dispositivo para imobilizar fraturas:",
+                    options: [
+                        "a) Torniquete.",
+                        "b) Tampão.",
+                        "c) Tala.",
+                        "d) Padiola."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Talas são dispositivos rígidos ou semi-rígidos usados para imobilizar fraturas e prevenir maiores danos."
+                },
+                {
+                    question: "Material para imobilizar fratura de antebraço:",
+                    options: [
+                        "a) Tábua ou jornal grosso.",
+                        "b) Pano flexível.",
+                        "c) Borracha sintética.",
+                        "d) Torniquete."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Materiais rígidos como tábuas ou jornais grossos enrolados podem servir de tala improvisada para fraturas de antebraço."
+                },
+                {
+                    question: "Posição do braço fraturado ao imobilizar:",
+                    options: [
+                        "a) Esticado.",
+                        "b) Na posição da fratura.",
+                        "c) Dobrado.",
+                        "d) Livre."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "A imobilização deve ser feita na posição em que a fratura se encontra, sem tentar realinhar o osso."
+                },
+                {
+                    question: "Posição da perna fraturada ao imobilizar:",
+                    options: [
+                        "a) Esticada.",
+                        "b) Dobrada.",
+                        "c) Livre.",
+                        "d) Retraída."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Fratura de perna deve ser imobilizada na posição esticada, usando talas longas que imobilizem a articulação acima e abaixo da fratura."
+                },
+                {
+                    question: "Em risco de incêndio, a vítima fraturada deve ser:",
+                    options: [
+                        "a) Imediatamente imobilizada.",
+                        "b) Removida do local primeiro.",
+                        "c) Tratada no local.",
+                        "d) Deixada até o socorro."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Em situação de risco iminente como incêndio, a prioridade é remover a vítima do perigo, mesmo sem imobilização adequada."
+                },
+                {
+                    question: "Primeiro socorro em choque elétrico:",
+                    options: [
+                        "a) Tocar a vítima.",
+                        "b) Usar metal para afastá-la.",
+                        "c) Desligar a fonte ou usar material não condutor.",
+                        "d) Jogar água."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "A primeira ação é interromper o contato com a fonte elétrica, desligando-a ou usando objeto não condutor (madeira, borracha) para afastar a vítima."
+                },
+                {
+                    question: "Cor da pele em intoxicação por gases:",
+                    options: [
+                        "a) Amarelada.",
+                        "b) Azulada.",
+                        "c) Avermelhada.",
+                        "d) Esbranquiçada."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Intoxicação por monóxido de carbono ou outros gases pode causar cianose (coloração azulada da pele) por falta de oxigenação."
+                },
+                {
+                    question: "Tratamento para pequenas queimaduras:",
+                    options: [
+                        "a) Furar bolhas.",
+                        "b) Lavar com água e não romper bolhas.",
+                        "c) Aplicar álcool.",
+                        "d) Cobrir com pano seco."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Pequenas queimaduras devem ser lavadas com água corrente fria e as bolhas não devem ser rompidas para evitar infecções."
+                },
+                {
+                    question: "O que NÃO fazer em grandes queimaduras:",
+                    options: [
+                        "a) Cobrir com pano limpo.",
+                        "b) Dar líquidos.",
+                        "c) Remover a roupa grudada.",
+                        "d) Lavar com água."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Em grandes queimaduras, não se deve remover roupas grudadas na pele queimada, pois pode causar maior dano tecidual."
+                },
+                {
+                    question: "Sintoma de queimadura de 1º grau:",
+                    options: [
+                        "a) Pele avermelhada.",
+                        "b) Bolhas.",
+                        "c) Necrose.",
+                        "d) Indolor."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Queimadura de primeiro grau apresenta apenas vermelhidão, dor local e inchaço discreto, sem formação de bolhas."
+                },
+                {
+                    question: "Sintoma de queimadura de 2º grau:",
+                    options: [
+                        "a) Pele destruída.",
+                        "b) Bolhas.",
+                        "c) Indolor.",
+                        "d) Vermelhidão."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Queimadura de segundo grau apresenta formação de bolhas (flictenas), dor intensa e vermelhidão."
+                },
+                {
+                    question: "Sintoma de queimadura de 3º grau:",
+                    options: [
+                        "a) Bolhas.",
+                        "b) Pele destruída.",
+                        "c) Vermelhidão.",
+                        "d) Superfície macia."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Queimadura de terceiro grau destrói todas as camadas da pele, podendo atingir músculos e ossos, e muitas vezes é indolor devido à destruição das terminações nervosas."
+                },
+                {
+                    question: "Hemorragia é:",
+                    options: [
+                        "a) Grande perda de sangue.",
+                        "b) Desmaio temporário.",
+                        "c) Ruptura muscular.",
+                        "d) Bolhas na pele."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "Hemorragia é a perda de sangue dos vasos sanguíneos, que pode ser externa ou interna."
+                },
+                {
+                    question: "Método eficaz para conter hemorragia superficial:",
+                    options: [
+                        "a) Torniquete.",
+                        "b) Pressão no local.",
+                        "c) Curativo com gaze.",
+                        "d) Elevar o membro."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Aplicar pressão direta sobre o ferimento é o método mais eficaz para estancar hemorragias superficiais."
+                },
+                {
+                    question: "Cuidados com torniquete:",
+                    options: [
+                        "a) Nunca desapertar.",
+                        "b) Folgar a cada 20 minutos.",
+                        "c) Cobrir com pano.",
+                        "d) Apertar continuamente."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O torniquete deve ser folgado brevemente a cada 15-20 minutos para permitir alguma circulação e evitar necrose do membro."
+                },
+                {
+                    question: "Como aplicar torniquete:",
+                    options: [
+                        "a) Com pano largo e madeira para torção.",
+                        "b) Com tiras de pano apertadas.",
+                        "c) Com metal.",
+                        "d) Com borracha."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O torniquete ideal é feito com pano largo (para não cortar a pele) e um objeto rígido como madeira para torção e ajuste da pressão."
+                },
+                {
+                    question: "Hipotermia ocorre abaixo de:",
+                    options: [
+                        "a) 37°C.",
+                        "b) 36°C.",
+                        "c) 35°C.",
+                        "d) 34°C."
+                    ],
+                    correctAnswer: 2,
+                    explanation: "Hipotermia é definida como temperatura corporal central abaixo de 35°C, quando o corpo perde calor mais rápido do que consegue produzir."
+                },
+                {
+                    question: "Insolação é causada por:",
+                    options: [
+                        "a) Frio intenso.",
+                        "b) Exposição prolongada ao sol.",
+                        "c) Vento forte.",
+                        "d) Umidade."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "Insolação ocorre por exposição excessiva ao sol/calor, levando a desidratação e falência dos mecanismos de regulação térmica do corpo."
+                },
+                {
+                    question: "Tratamento para insolação:",
+                    options: [
+                        "a) Dar café.",
+                        "b) Refrescar o corpo com compressas.",
+                        "c) Aquecer com cobertores.",
+                        "d) Manter sentado."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O tratamento consiste em resfriar o corpo com compressas frias, hidratação e repouso em local fresco e ventilado."
+                },
+                {
+                    question: "Sinal de resgate ao avistar náufrago à noite:",
+                    options: [
+                        "a) Foguete luminoso vermelho com paraquedas.",
+                        "b) Luz verde.",
+                        "c) Apito.",
+                        "d) Sino."
+                    ],
+                    correctAnswer: 0,
+                    explanation: "O foguete luminoso vermelho com paraquedas é o sinal pirotécnico internacional para indicar posição de náufrago à noite."
+                },
+                {
+                    question: "Posição HELP para náufrago em água fria:",
+                    options: [
+                        "a) Braços abertos.",
+                        "b) Pernas dobradas e braços junto ao corpo.",
+                        "c) Nadar vigorosamente.",
+                        "d) Flutuar de costas."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "A posição HELP (Heat Escape Lessening Posture) consiste em manter pernas dobradas e braços junto ao corpo para reduzir perda de calor em água fria."
+                },
+                {
+                    question: "Tempo de sobrevivência em água fria depende principalmente de:",
+                    options: [
+                        "a) Tipo de roupa.",
+                        "b) Temperatura da água e tempo de exposição.",
+                        "c) Estado do mar.",
+                        "d) Vento."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O tempo de sobrevivência está diretamente relacionado à temperatura da água e ao tempo de exposição - quanto mais fria a água, menor o tempo de sobrevivência."
+                },
+                {
+                    question: "Tratamento para congelamento:",
+                    options: [
+                        "a) Esfregar a área.",
+                        "b) Aquecer gradativamente.",
+                        "c) Aplicar álcool.",
+                        "d) Mergulhar em água quente."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "O aquecimento deve ser gradual (usando água morna, não quente) para evitar danos aos tecidos. Nunca esfregar a área congelada."
+                },
+                {
+                    question: "Para evitar desidratação com escassez de água:",
+                    options: [
+                        "a) Beber urina.",
+                        "b) Reduzir sudorese e evitar esforço.",
+                        "c) Comer peixes crus.",
+                        "d) Expor-se ao vento."
+                    ],
+                    correctAnswer: 1,
+                    explanation: "A melhor estratégia é reduzir atividades físicas e sudorese, procurar sombra e racionar a água disponível."
+                },
             ]
-        };
+            }
+
 
         // Para o simulado completo, misturar questões de todos os tópicos
-        if (topic === 'completo') {
+         if (topic === 'completo') {
             allQuestions.completo = [
                 ...allQuestions.luzes.slice(0, 10),
                 ...allQuestions.balizamento.slice(0, 10),
                 ...allQuestions.manobras.slice(0, 10),
-                ...allQuestions.seguranca.slice(0, 10)
+                ...allQuestions.seguranca.slice(0, 10),
+                ...allQuestions['primeiros-socorros'].slice(0, 10)
             ];
         }
 
+        // (Manter todas as funções JavaScript originais abaixo)
         // Variáveis de estado do simulado
         let currentQuestionIndex = 0;
         let score = 0;
