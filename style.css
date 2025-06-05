@@ -1532,7 +1532,7 @@ footer {
 /* Versão Mobile - Substitui pela logo */
 @media (max-width: 767px) {
   .hero {
-    background: linear-gradient(rgba(90, 14, 153, 0.2), rgba(90, 14, 153, 0.2)), url('./alpha_logo_transparente.png') no-repeat center center;
+    background: linear-gradient(rgba(90, 14, 153, 0.2), rgba(90, 14, 153, 0.2)), url('./logo-alpha-etn-novo.jpeg') no-repeat center center;
     background-size: contain;
     background-color: var(--primary-color); /* Fundo sólido como fallback */
   }
