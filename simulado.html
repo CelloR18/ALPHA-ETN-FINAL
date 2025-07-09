@@ -227,6 +227,15 @@
                 width: 100%;
             }
         }
+        .option.correct {
+    border-left: 4px solid var(--success);
+    background-color: #d4edda;
+}
+
+.option.incorrect {
+    border-left: 4px solid var(--danger);
+    background-color: #f8d7da;
+}
     </style>
 </head>
 <body>
@@ -2879,26 +2888,35 @@
             });
         }
 
-        // Selecionar uma opção
-        function selectOption(e) {
-            const selectedOption = e.target;
-            const options = document.querySelectorAll('.option');
-            const selectedIndex = parseInt(selectedOption.getAttribute('data-index'));
-            
-            // Remover seleção anterior
-            options.forEach(option => {
-                option.classList.remove('selected');
-            });
-            
-            // Marcar opção selecionada
-            selectedOption.classList.add('selected');
-            userAnswers[currentQuestionIndex] = selectedIndex;
-            
-            // Verificar se todas as questões foram respondidas
-            const allAnswered = userAnswers.every(answer => answer !== null);
-            finishBtn.style.display = allAnswered ? 'block' : 'none';
+       // Selecionar uma opção
+    function selectOption(e) {
+        const selectedOption = e.target;
+        const options = document.querySelectorAll('.option');
+        const selectedIndex = parseInt(selectedOption.getAttribute('data-index'));
+        const question = questions[currentQuestionIndex];
+        
+        // Remover classes de seleção/resposta
+        options.forEach(option => {
+            option.classList.remove('selected', 'correct', 'incorrect');
+        });
+        
+        // Marcar opção selecionada
+        selectedOption.classList.add('selected');
+        userAnswers[currentQuestionIndex] = selectedIndex;
+        
+        // Verificar se a resposta está correta
+        if (selectedIndex === question.correctAnswer) {
+            selectedOption.classList.add('correct');
+        } else {
+            selectedOption.classList.add('incorrect');
+            // Mostrar a resposta correta
+            options[question.correctAnswer].classList.add('correct');
         }
-
+        
+        // Verificar se todas as questões foram respondidas
+        const allAnswered = userAnswers.every(answer => answer !== null);
+        finishBtn.style.display = allAnswered ? 'block' : 'none';
+    }
         // Navegação entre questões
         function updateNavigation() {
             prevBtn.disabled = currentQuestionIndex === 0;

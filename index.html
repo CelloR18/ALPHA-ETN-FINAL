@@ -14,336 +14,1021 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
   <!-- CSS Customizado -->
-  <link rel="stylesheet" href="./style.css">
+  <link rel="stylesheet" href="./style-organizado.css">
   
   <!-- Favicon -->
   <link rel="icon" href="alpha_logo_transparente.png" type="image/png">
 </head>
 <body>
-  <header>
-    <img src="alpha_logo_transparente.png" alt="Logo Alpha Cursos Náuticos" class="logo" />
+  <header class="glass-header">
+  <div class="header-container">
+    <div class="logo-container">
+      <img src="alpha_logo_transparente.png" alt="Logo Alpha Cursos Náuticos" class="logo" />
+      <span class="logo-text">ALPHA CURSOS NÁUTICOS</span>
+    </div>
+    
     <button id="menu-toggle" class="menu-toggle" aria-label="Abrir menu" aria-expanded="false">
-      <i class="fas fa-bars"></i>
+      <div class="hamburger">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
     </button>
+    
     <nav id="menu" role="navigation" aria-label="Menu principal">
-      <a href="#sobre">Sobre</a>
-      <a href="#cursos">Cursos</a>
-      <a href="#galeria">Galeria</a>
-      <a href="#servicos">Serviços</a>
-      <a href="#calendario-provas">Calendário</a>
-      <a href="simulado.html" target="_blank">Fazer Simulado</a>
-      <a href="#contato">Contato</a>
+      <div class="nav-links">
+        <a href="#sobre" class="nav-link"><i class="fas fa-anchor"></i> Sobre</a>
+        <a href="#cursos" class="nav-link"><i class="fas fa-ship"></i> Cursos</a>
+        <a href="#galeria" class="nav-link"><i class="fas fa-images"></i> Galeria</a>
+        <a href="#servicos" class="nav-link"><i class="fas fa-concierge-bell"></i> Serviços</a>
+        <a href="#calendario-provas" class="nav-link"><i class="fas fa-calendar-alt"></i> Calendário</a>
+        <a href="simulado.html" target="_blank" class="nav-link cta-link"><i class="fas fa-pencil-alt"></i> Simulado</a>
+      </div>
     </nav>
-  </header>
+  </div>
+</header>
 
   <main>
     <section class="hero" aria-label="Apresentação principal">
       <div class="hero-content" data-aos="fade-up"></div>
     </section>
 
-    <section id="sobre" class="section-with-bg">
-      <div class="container">
-        <h2 data-aos="fade-up">Sobre a Alpha</h2>
-        <p data-aos="fade-up" data-aos-delay="100">
-          A Alpha Cursos Náuticos é referência na formação de condutores de embarcações, com reconhecimento pela Marinha do Brasil. Nossa missão é proporcionar educação náutica de qualidade com instrutores experientes e metodologia prática.
-        </p>
-      </div>
-    </section>
+    
 
-    <section id="cursos">
-      <div class="container">
-        <h2 data-aos="fade-up">Nossos Cursos</h2>
-        <div class="cursos-grid" data-aos="fade-up" data-aos-delay="100">
-          <div class="curso-card">
-            <i class="fas fa-ship"></i>
-            <h3>Arrais Amador</h3>
-            <p>Habilitação para conduzir embarcações nos limites da navegação interior.</p>
+ <section id="cursos" class="premium-courses-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Nossos Cursos Náuticos</span>
+      <h2 class="section-title">Cursos <span class="highlight">Reconhecidos</span></h2>
+      <div class="divider"></div>
+      
+    </div>
+    
+    <div class="courses-grid" data-aos="fade-up" data-aos-delay="100">
+      <!-- Curso Arrais Amador -->
+      <div class="course-card">
+        <div class="course-badge">Mais Procurado</div>
+        <div class="course-icon">
+          <i class="fas fa-ship"></i>
+        </div>
+        <h3 class="course-title">Arrais Amador</h3>
+        <p class="course-description">apto para conduzir embarcações nos limites da navegação
+interior, cujas áreas são definida nas NPCP/NPCF, exceto moto aquática.
+</p>
+        
+        <div class="course-details">
+          <div class="detail-item">
+            <i class="fas fa-clock"></i>
+            <span>6 horas (teóricas e práticas)</span>
+          </div>
+          <div class="detail-item">
+            <i class="fas fa-certificate"></i>
+            <span>Certificado válido em todo Brasil</span>
           </div>
           
-          <div class="curso-card">
-            <i class="fas fa-bolt"></i>
-            <h3>Motonauta</h3>
-            <p>Especializado em motos aquáticas.</p>
+        </div>
+        
+        <a href="#contato" class="course-button">Saiba Mais</a>
+      </div>
+      
+      <!-- Curso Motonauta -->
+      <div class="course-card featured">
+        <div class="course-icon">
+          <i class="fas fa-water"></i>
+        </div>
+        <h3 class="course-title">Motonauta</h3>
+        <p class="course-description">apto para conduzir moto aquática nos limites da navegação interior,
+cujas áreas são definida nas NPCP/NPCF</p>
+        
+        <div class="course-details">
+          <div class="detail-item">
+            <i class="fas fa-clock"></i>
+            <span>3 horas (teóricas e práticas)</span>
           </div>
+          <div class="detail-item">
+            <i class="fas fa-certificate"></i>
+            <span>Certificado válido em todo Brasil</span>
+          </div>
+          
+        </div>
+        
+        <a href="#contato" class="course-button">Saiba Mais</a>
+      </div>
+    </div>
+    
+    <div class="course-benefits" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="benefits-title">Vantagens dos Nossos Cursos</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-user-tie"></i>
+          </div>
+          <h4>Instrutores Qualificados</h4>
+          <p>Profissionais experientes e certificados pela Marinha</p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-ship"></i>
+          </div>
+          <h4>Aulas Práticas Reais</h4>
+          <p>Experiência de navegação em embarcações adequadas</p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <h4>Material Didático</h4>
+          <p>Livros atualizados e simulados exclusivos</p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-calendar-check"></i>
+          </div>
+          <h4>Flexibilidade</h4>
+          <p>Turmas em diversos horários para sua conveniência</p>
         </div>
       </div>
-    </section>
-
-    <section id="simulados">
-  <div class="container">
-    <h2 class="topico-simulado">Simulados por Tópico</h2>
-    <p class="p-topico">Escolha um tópico para praticar:</p>
-    
-    <div class="topicos-grid">
-      <a href="simulado.html?topico=luzes" class="topico-card">
-        <i class="fas fa-lightbulb"></i>
-        <h3>Luzes e Sinais</h3>
-        <p>40 questões sobre luzes de navegação</p>
-      </a>
-      
-      <a href="simulado.html?topico=balizamento" class="topico-card">
-        <i class="fas fa-ship"></i>
-        <h3>Balizamento</h3>
-        <p>40 questões sobre boias e marcações</p>
-      </a>
-      
-      <a href="simulado.html?topico=manobras" class="topico-card">
-        <i class="fas fa-ship"></i>
-        <h3>Manobras</h3>
-        <p>40 questões sobre regras de navegação</p>
-      </a>
-      
-      <a href="simulado.html?topico=seguranca" class="topico-card">
-        <i class="fas fa-life-ring"></i>
-        <h3>Segurança</h3>
-        <p>40 questões sobre equipamentos e procedimentos</p>
-      </a>
-      
-      <a href="simulado.html?topico=primeiros-socorros" class="topico-card">
-        <i class="fas fa-first-aid"></i>
-        <h3>Primeiros Socorros</h3>
-        <p>40 questões sobre primeiros socorros</p>
-      </a>
-      
-      <a href="simulado.html?topico=completo" class="topico-card destaque">
-        <i class="fas fa-star"></i>
-        <h3>Simulado Completo</h3>
-        <p>Todos os tópicos (40 questões)</p>
-      </a>
     </div>
   </div>
 </section>
 
-    <section id="galeria" class="gallery-section">
-      <div class="container">
-        <div class="section-header">
-          <h2>Galeria</h2>
-          <p class="section-subtitle"></p>
+    <section id="simulados" class="premium-simulados-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Prepare-se para o exame</span>
+      <h2 class="section-title"><span class="highlight">Simulados</span> <span class="highlight">Náuticos</span></h2>
+      <div class="divider"></div>
+      <p class="section-description">Pratique com nossos simulados por tópico ou faça o simulado completo para testar seus conhecimentos</p>
+    </div>
+    
+    <div class="simulados-grid" data-aos="fade-up" data-aos-delay="100">
+      <!-- Simulado Luzes -->
+      <div class="simulado-card">
+        <div class="simulado-icon">
+          <i class="fas fa-lightbulb"></i>
         </div>
+        <h3 class="simulado-title">Luzes e Sinais</h3>
+        <p class="simulado-description">40 questões sobre luzes de navegação e sinais sonoros</p>
+        
+        <div class="simulado-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>40 questões</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>30 minutos</span>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" data-percentage="75"></div>
+          
+        </div>
+        
+        <a href="simulado.html?topico=luzes" class="simulado-button">
+          <i class="fas fa-play"></i> Iniciar Simulado
+        </a>
+      </div>
+      
+      <!-- Simulado Balizamento -->
+      <div class="simulado-card">
+        <div class="simulado-icon">
+          <i class="fas fa-ship"></i>
+        </div>
+        <h3 class="simulado-title">Balizamento</h3>
+        <p class="simulado-description">40 questões sobre boias, marcações e sinalização náutica</p>
+        
+        <div class="simulado-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>40 questões</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>30 minutos</span>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" data-percentage="68"></div>
+        
+        </div>
+        
+        <a href="simulado.html?topico=balizamento" class="simulado-button">
+          <i class="fas fa-play"></i> Iniciar Simulado
+        </a>
+      </div>
+      
+      <!-- Simulado Manobras -->
+      <div class="simulado-card">
+        <div class="simulado-icon">
+          <i class="fas fa-anchor"></i>
+        </div>
+        <h3 class="simulado-title">Manobras</h3>
+        <p class="simulado-description">40 questões sobre regras de navegação e manobras</p>
+        
+        <div class="simulado-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>40 questões</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>30 minutos</span>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" data-percentage="72"></div>
+          
+        </div>
+        
+        <a href="simulado.html?topico=manobras" class="simulado-button">
+          <i class="fas fa-play"></i> Iniciar Simulado
+        </a>
+      </div>
+      
+      <!-- Simulado Segurança -->
+      <div class="simulado-card">
+        <div class="simulado-icon">
+          <i class="fas fa-life-ring"></i>
+        </div>
+        <h3 class="simulado-title">Segurança</h3>
+        <p class="simulado-description">40 questões sobre equipamentos e procedimentos de segurança</p>
+        
+        <div class="simulado-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>40 questões</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>30 minutos</span>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" data-percentage="80"></div>
+     
+        </div>
+        
+        <a href="simulado.html?topico=seguranca" class="simulado-button">
+          <i class="fas fa-play"></i> Iniciar Simulado
+        </a>
+      </div>
+      
+      <!-- Simulado Primeiros Socorros -->
+      <div class="simulado-card">
+        <div class="simulado-icon">
+          <i class="fas fa-first-aid"></i>
+        </div>
+        <h3 class="simulado-title">Primeiros Socorros</h3>
+        <p class="simulado-description">40 questões sobre procedimentos de emergência médica</p>
+        
+        <div class="simulado-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>40 questões</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>30 minutos</span>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" data-percentage="65"></div>
+     
+        </div>
+        
+        <a href="simulado.html?topico=primeiros-socorros" class="simulado-button">
+          <i class="fas fa-play"></i> Iniciar Simulado
+        </a>
+      </div>
+      
+      <!-- Simulado Completo -->
+      <div class="simulado-card featured">
+        <div class="simulado-badge">Completo</div>
+        <div class="simulado-icon">
+          <i class="fas fa-star"></i>
+        </div>
+        <h3 class="simulado-title">Simulado Completo</h3>
+        <p class="simulado-description">Todas as áreas do exame náutico em um único teste</p>
+        
+        <div class="simulado-stats">
+          <div class="stat-item">
+            <i class="fas fa-question-circle"></i>
+            <span>40 questões</span>
+          </div>
+          <div class="stat-item">
+            <i class="fas fa-clock"></i>
+            <span>60 minutos</span>
+          </div>
+        </div>
+        
+        <div class="progress-container">
+          <div class="progress-bar" data-percentage="70"></div>
+         
+        </div>
+        
+        <a href="simulado.html?topico=completo" class="simulado-button">
+          <i class="fas fa-play"></i> Iniciar Simulado
+        </a>
+      </div>
+    </div>
+    
+    <div class="simulado-info" data-aos="fade-up" data-aos-delay="200">
+      <div class="info-card">
+        <i class="fas fa-trophy"></i>
+        <h4>Resultados em Tempo Real</h4>
+        <p>Veja seu desempenho imediatamente após concluir cada simulado</p>
+      </div>
+      
+      <div class="info-card">
+        <i class="fas fa-chart-line"></i>
+        <h4>Estatísticas Detalhadas</h4>
+        <p>Acompanhe seu progresso e identifique pontos de melhoria</p>
+      </div>
+      
+    
+      
+      <div class="info-card">
+        <i class="fas fa-mobile-alt"></i>
+        <h4>Totalmente Responsivo</h4>
+        <p>Faça os simulados em qualquer dispositivo, a qualquer hora</p>
+      </div>
+    </div>
+  </div>
+</section>
+   <section id="galeria" class="premium-gallery-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Nossos Momentos</span>
+      <h2 class="section-title">Galeria <span class="highlight">da Alpha</span></h2>
+      <div class="divider"></div>
+    </div>
 
-        <div class="gallery-grid">
-          <div class="gallery-item" data-category="aulas">
-            <img src="./aulas11.jpeg" alt="Alunos em aula" loading="lazy">
-            <div class="gallery-overlay">
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="aulas">
-            <img src="./aulas06.jpeg" alt="Alunos em aula" loading="lazy">
-            <div class="gallery-overlay">
-              
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="aulas">
-            <img src="./aulas08.jpeg" alt="Alunos em aula" loading="lazy">
-            <div class="gallery-overlay">
-             
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="praticas">
-            <img src="./pratica01.jpeg" alt="Aulas praticas" loading="lazy">
-            <div class="gallery-overlay">
-              
-            </div>
-          </div>
-          
-          <div class="gallery-item" data-category="praticas">
-            <img src="./pratica02.jpeg" alt="Aulas praticas" loading="lazy">
-            <div class="gallery-overlay">
-              
-            </div>
+    <div class="gallery-filters" data-aos="fade-up" data-aos-delay="100">
+      <button class="filter-btn active" data-filter="all">Todas</button>
+      <button class="filter-btn" data-filter="aulas">Aulas Teóricas</button>
+      <button class="filter-btn" data-filter="praticas">Aulas Práticas</button>
+    </div>
 
+    <div class="premium-gallery-grid" data-aos="fade-up" data-aos-delay="200">
+      <!-- Item 1 -->
+      <div class="gallery-item" data-category="aulas">
+        <div class="gallery-image-container">
+          <img src="./aulas11.jpeg" alt="Alunos em aula teórica" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h3>Aulas Teóricas</h3>
+              <p>Ambiente de aprendizado com instrutores qualificados</p>
+              <button class="view-button">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Item 2 -->
+      <div class="gallery-item" data-category="aulas">
+        <div class="gallery-image-container">
+          <img src="./aulas06.jpeg" alt="Alunos em aula teórica" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h3>Aulas Teóricas</h3>
+              <p>Material didático completo e atualizado</p>
+              <button class="view-button">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Item 3 -->
+      <div class="gallery-item" data-category="aulas">
+        <div class="gallery-image-container">
+          <img src="./aulas08.jpeg" alt="Alunos em aula teórica" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h3>Aulas Teóricas</h3>
+              <p>Simulados e preparação para provas</p>
+              <button class="view-button">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Item 4 -->
+      <div class="gallery-item" data-category="praticas">
+        <div class="gallery-image-container">
+          <img src="./pratica01.jpeg" alt="Aulas práticas de navegação" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h3>Aulas Práticas</h3>
+              <p>Experiência real de navegação</p>
+              <button class="view-button">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Item 5 -->
+      <div class="gallery-item" data-category="praticas">
+        <div class="gallery-image-container">
+          <img src="./pratica02.jpeg" alt="Aulas práticas de navegação" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h3>Aulas Práticas</h3>
+              <p>Manobras e técnicas de pilotagem</p>
+              <button class="view-button">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Item 6 -->
+      <div class="gallery-item" data-category="praticas">
+        <div class="gallery-image-container">
+          <img src="./pratica04.jpeg" alt="Aulas práticas de navegação" loading="lazy">
+          <div class="gallery-overlay">
+            <div class="overlay-content">
+              <h3>Aulas Práticas</h3>
+              <p>Instrução personalizada em embarcações</p>
+              <button class="view-button">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="gallery-cta" data-aos="fade-up" data-aos-delay="300">
+      <p>Quer fazer parte desta experiência?</p>
+      <a href="https://wa.me/+5518981263592" class="cta-button">Entre em contato</a>
+    </div>
+  </div>
+
+  <!-- Lightbox Modal -->
+  <div id="gallery-modal" class="modal">
+    <span class="close-modal">&times;</span>
+    <div class="modal-content">
+      <img id="modal-image" src="" alt="">
+      <div class="modal-caption"></div>
+      <div class="modal-nav">
+        <button class="modal-prev"><i class="fas fa-chevron-left"></i></button>
+        <button class="modal-next"><i class="fas fa-chevron-right"></i></button>
+      </div>
+    </div>
+  </div>
+<!-- Substitua a seção YouTube existente por este código -->
+<section id="youtube" class="premium-youtube-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Conteúdo Exclusivo</span>
+      <h2 class="section-title"> <span class="highlight">YouTube Alpha Cursos Náuticos </span></h2>
+      <div class="divider"></div>
+      <p class="section-description">Aprenda navegação com nossos vídeos exclusivos e tutoriais práticos</p>
+    </div>
+
+    <div class="youtube-content" data-aos="fade-up" data-aos-delay="100">
+      <div class="video-featured">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/p_Wf8wAoGKA?si=1wx0EfrVND3y0Xnm" 
+                  title="Aulas práticas de navegação" 
+                  allowfullscreen
+                  loading="lazy"></iframe>
+        </div>
+        <div class="video-info">
+          <h3 class="video-title">Aula de Conhecimentos iniciais</h3>
+          <p class="video-description">Veja nossa aula par Iniciantes.</p>
+          <div class="video-stats">
             
-             </div>
-          
-          <div class="gallery-item" data-category="praticas">
-            <img src="./pratica04.jpeg" alt="Aulas praticas" loading="lazy">
-            <div class="gallery-overlay">
-              
-            </div>
           </div>
-          
-          <div class="gallery-item" data-category="eventos">
-           <video src="./videoaula01.mp4"
-           controls
-           controlsLists="nodownload"
-           autoplay
-           muted></video>
-        
-            <div class="gallery-overlay">
-              
-            </div>
-          </div>
-        </div>
-
-        <div class="gallery-filters">
-          <button class="filter-btn active" data-filter="all">Todas</button>
-          <button class="filter-btn" data-filter="aulas">Aulas</button>
-          <button class="filter-btn" data-filter="praticas">Práticas</button>
-          <button class="filter-btn" data-filter="eventos">Eventos</button>
         </div>
       </div>
 
-      <div id="gallery-modal" class="modal">
-        <span class="close-modal">&times;</span>
-        <img class="modal-content" id="modal-image">
-        <div class="modal-caption"></div>
-        <a class="modal-prev">&#10094;</a>
-        <a class="modal-next">&#10095;</a>
-      </div>
-    </section>
+      <div class="video-playlist">
+        <h3 class="playlist-title">Videos Recomendados</h3>
+        <div class="playlist-grid">
+          <a href="https://www.youtube.com/embed/oLuzAuAiKww?si=zOPQOsGT2Ha7FzFE" class="playlist-card" target="_blank">
+            <div class="playlist-thumbnail">
+              <img src="./alphaETN.jpeg" alt="Dicas para Iniciantes" loading="lazy">
+              <div class="playlist-overlay">
+                <i class="fas fa-play"></i>
+                <span>RLESTA</span>
+              </div>
+            </div>
+            <h4>Aula RLESTA</h4>
+          </a>
 
-    <section id="youtube" class="youtube-section">
-      <div class="container">
-        <div class="section-header">
-          <h2><i class="fab fa-youtube"></i> <span class="titulo-youtube-video">Nosso Canal no Youtube</span></h2>
-          <p class="section-subtitle">Aprenda navegação com nossos conteúdos exclusivos</p>
-        </div>
+          <a href="https://www.youtube.com/embed/c0Zj63fuTDo?si=DBDS-aH718Zfbrga" class="playlist-card" target="_blank">
+            <div class="playlist-thumbnail">
+              <img src="./alphaETN.jpeg" alt="Preparação para Provas" loading="lazy">
+              <div class="playlist-overlay">
+                <i class="fas fa-play"></i>
+                <span>NORMAM</span>
+              </div>
+            </div>
+            <h4>NORMAM/DPC</h4>
+          </a>
 
-        <div class="video-carousel">
-          <div class="video-item active">
-            <iframe data-src="https://www.youtube.com/embed/p_Wf8wAoGKA?si=1wx0EfrVND3y0Xnm" 
-                    title="Aulas práticas de navegação" 
-                    allowfullscreen
-                    loading="lazy"></iframe>
-          </div>
-        </div>
-        
-        <div class="youtube-cta">
-          <a href="https://www.youtube.com/@ALPHAETN" class="youtube-button" target="_blank">
-            <i class="fab fa-youtube"></i> Inscreva-se no nosso Canal
+          <a href="https://www.youtube.com/embed/KlRBcUbkf8A?si=VyoMY_EtyFp1j8NZ" class="playlist-card" target="_blank">
+            <div class="playlist-thumbnail">
+              <img src="./alphaETN.jpeg" alt="Aulas Práticas" loading="lazy">
+              <div class="playlist-overlay">
+                <i class="fas fa-play"></i>
+                <span>Marinharia</span>
+              </div>
+            </div>
+            <h4>Marinharia</h4>
           </a>
         </div>
       </div>
-    </section>
+    </div>
 
-    <section id="servicos">
-      <div class="container">
-        <h2 data-aos="fade-up">Serviços</h2>
-        <div class="servicos-content" data-aos="fade-up" data-aos-delay="100">
-          <div class="servico-categoria">
-            <h3><i class="fas fa-ship"></i> Embarcações</h3>
-            <ul class="servicos-list">
-              <li><i class="fas fa-check-circle"></i> Inscrição e Renovação</li>
-              <li><i class="fas fa-check-circle"></i> Transferência de Propriedade/Jurisdição</li>
-              <li><i class="fas fa-check-circle"></i> Seguro Obrigatório (DPEM)</li>
-            </ul>
-          </div>
-          
-          <div class="servico-categoria">
-            <h3><i class="fas fa-id-card"></i> Arrais Amador e Motonauta</h3>
-            <ul class="servicos-list">
-              <li><i class="fas fa-check-circle"></i> Arrais Amador/Motonauta (Treinamento Náutico)</li>
-              <li><i class="fas fa-check-circle"></i> Prova aplicada pela Marinha</li>
-              <li><i class="fas fa-check-circle"></i> Renovação/2ª via</li>
-            </ul>
-          </div>
-        </div>
+    <div class="youtube-cta" data-aos="fade-up" data-aos-delay="200">
+      <div class="cta-content">
+        <h3>Quer mais conteúdo náutico?</h3>
+        <p>Inscreva-se no nosso canal para receber novos vídeos toda semana</p>
+        <a href="https://www.youtube.com/@ALPHAETN" class="youtube-button" target="_blank">
+          <i class="fab fa-youtube"></i> Inscrever-se no YouTube
+        
+        </a>
       </div>
-    </section>
+    </div>
+  </div>
+  <!-- Adicione esta seção após a seção de YouTube e antes da seção de Serviços -->
+<section id="navseg" class="premium-navseg-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Ferramenta Oficial</span>
+      <h2 class="section-title">Aplicativo <span class="highlight">NavSeg</span></h2>
+      <div class="divider"></div>
+      <p class="section-description">O aplicativo oficial da Marinha do Brasil para navegantes</p>
+    </div>
 
-    <section id="calendario-provas" class="section-with-bg">
-      <div class="container">
-        <h2 data-aos="fade-up">Calendário de Provas - 2025</h2>
-        <p data-aos="fade-up" data-aos-delay="100">Consulte abaixo as datas, locais e categorias das provas náuticas oficiais organizadas pela Marinha do Brasil.</p>
-        <div class="tabela-container" data-aos="fade-up" data-aos-delay="200">
-          <table class="tabela-provas">
-            <thead>
-              <tr>
-                <th class="titulo-tabela">Data</th>
-                <th class="titulo-tabela">Local</th>
-                <th class="titulo-tabela">Tipo de Prova</th>
-                <th class="titulo-tabela">Inscrições</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>28/06/2025</td>
-                <td>Panorama SP</td>
-                <td>Arrais-Amador</td>
-                <td>Até 26/05</td>
-              </tr>
-              <tr>
-                <td>26/07/2025</td>
-                <td>Presidente Prudente SP</td>
-                <td>Arrias-Amador</td>
-                <td>Até 23/06</td>
-              </tr>
-              <tr>
-                <td>30/08/2025</td>
-                <td>Presidente Epitácio SP</td>
-                <td>Arrais-Amador</td>
-                <td>Até 30/07</td>
-              </tr>
-              <tr>
-                <td>27/09/2025</td>
-                <td>Cândido Mota SP</td>
-                <td>Arrais-Amador</td>
-                <td>Até 18/08</td>
-              </tr>
-              <tr>
-                <td>25/10/2025</td>
-                <td>Rancharia SP</td>
-                <td>Arrais-Amador</td>
-                <td>Até 22/09</td>
-              </tr>
-              <tr>
-                <td>22/11/2025</td>
-                <td>Adamantina SP</td>
-                <td>Arrais-Amador</td>
-                <td>Até 17/10</td>
-              </tr>
-            </tbody>
-          </table>
+    <div class="navseg-content" data-aos="fade-up" data-aos-delay="100">
+      <div class="navseg-grid">
+        <div class="navseg-card">
+          <div class="navseg-icon">
+            <i class="fas fa-mobile-alt"></i>
+          </div>
+          <h3 class="navseg-title">O Que É?</h3>
+          <p class="navseg-description"> Ele permite que o comandante da embarcação informe seu plano de viagem, facilitando o acompanhamento pelas autoridades marítimas e outras entidades.</p>
         </div>
-      </div>
-    </section>
 
-    <section id="contato">
-      <div class="container">
-        <h2 data-aos="fade-up">Contato</h2>
-        <div class="contato-content" data-aos="fade-up" data-aos-delay="100">
-          <p>Entre em contato para mais informações sobre nossos cursos e serviços:</p>
-          <div class="contato-info">
-            <p><i class="fas fa-phone-alt"></i> (18) 98126-3592</p>
-            <p><i class="fas fa-envelope"></i>alphaetn@hotmail.com</p>
-            <p><i class="fas fa-map-marker-alt"></i> Rua Paraná, 2-84 - Centro - Presidente Epitácio - SP</p>
+        <div class="navseg-card">
+          <div class="navseg-icon">
+            <i class="fas fa-check-circle"></i>
+          </div>
+          <h3 class="navseg-title">Vantagens</h3>
+          <ul class="navseg-features">
+            <li><i class="fas fa-check"></i> Acompanhamento da embarcação</li>
+            <li><i class="fas fa-check"></i> Comunicação de chegada</li>
+            <li><i class="fas fa-check"></i> Segurança</li>
+            <li><i class="fas fa-check"></i> Atualizações em tempo real</li>
+          </ul>
+        </div>
+
+        <div class="navseg-card">
+          <div class="navseg-icon">
+            <i class="fas fa-download"></i>
+          </div>
+          <h3 class="navseg-title">Disponibilidade</h3>
+          <p class="navseg-description">Disponível gratuitamente para Android e iOS, com todas as funcionalidades necessárias para navegantes profissionais e amadores.</p>
+          <div class="download-buttons">
+            <a href="https://play.google.com/store/apps/details?id=br.mar.mb.navseg" class="download-btn" target="_blank">
+              <i class="fab fa-google-play"></i> Google Play
+            </a>
+            <a href="https://apps.apple.com/br/app/navseg/id1495328478" class="download-btn" target="_blank">
+              <i class="fab fa-apple"></i> App Store
+            </a>
           </div>
         </div>
       </div>
-    </section>
+
+      <div class="navseg-image" data-aos="fade-left" data-aos-delay="200">
+        <img src="./navseg.jpg" alt="Aplicativo NavSeg em smartphones" loading="lazy">
+        <div class="navseg-badge">
+          <i class="fas fa-star"></i>
+          <span>Recomendado pela Marinha</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="navseg-features-container" data-aos="fade-up" data-aos-delay="300">
+      <h3 class="features-title">Principais Funcionalidades</h3>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-file-alt"></i>
+          </div>
+          <h4>Documentos</h4>
+          <p>Tenha acesso à sua documentação náutica digitalizada</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-bell"></i>
+          </div>
+          <h4>Alertas</h4>
+          <p>Receba avisos sobre condições de navegação</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-book"></i>
+          </div>
+          <h4>Regulamentos</h4>
+          <p>Consulte as normas da Marinha a qualquer momento</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-map-marked-alt"></i>
+          </div>
+          <h4>Navegação</h4>
+          <p>Informações sobre rotas e áreas de navegação</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="servicos" class="premium-services-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Nossas Soluções</span>
+      <h2 class="section-title">Serviços <span class="highlight">Náuticos</span></h2>
+      <div class="divider"></div>
+      
+    </div>
+    
+    <div class="services-grid" data-aos="fade-up" data-aos-delay="100">
+      <!-- Serviços para Embarcações -->
+      <div class="service-card">
+        <div class="service-icon">
+          <i class="fas fa-ship"></i>
+        </div>
+        <h3 class="service-title">Embarcações</h3>
+        <div class="service-features">
+          <div class="feature-item">
+            <i class="fas fa-check-circle feature-check"></i>
+            <span class="service-item">Inscrição e Renovação</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-check-circle feature-check"></i>
+            <span class="service-item">Transferência de Propriedade/Jurisdição</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-check-circle feature-check"></i>
+            <span class="service-item">Seguro Obrigatório (DPEM)</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="#contato" class="service-button">
+            <i class="fas fa-arrow-right"></i> Saiba Mais
+          </a>
+        </div>
+      </div>
+      
+      <!-- Serviços para Habilitações -->
+      <div class="service-card featured">
+        <div class="service-badge">Mais Procurado</div>
+        <div class="service-icon">
+          <i class="fas fa-id-card"></i>
+        </div>
+        <h3 class="service-title">Arrais Amador e Motonauta</h3>
+        <div class="service-features">
+          <div class="feature-item">
+            <i class="fas fa-check-circle feature-check"></i>
+            <span class="service-item">Arrais Amador/Motonauta (Treinamento Náutico)</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-check-circle feature-check"></i>
+            <span class="service-item">Prova aplicada pela Marinha</span>
+          </div>
+          <div class="feature-item">
+            <i class="fas fa-check-circle feature-check"></i>
+            <span class="service-item">Renovação/2ª via</span>
+          </div>
+        </div>
+        <div class="service-footer">
+          <a href="#contato" class="service-button">
+            <i class="fas fa-arrow-right"></i> Saiba Mais
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <div class="service-benefits" data-aos="fade-up" data-aos-delay="200">
+      <h3 class="benefits-title">Por que escolher nossos serviços?</h3>
+      <div class="benefits-grid">
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <h4>Agilidade</h4>
+          <p>Processos otimizados para máxima eficiência</p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-certificate"></i>
+          </div>
+          <h4>Segurança</h4>
+          <p>Documentação regularizada conforme as normas</p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <h4>Suporte</h4>
+          <p>Atendimento personalizado em todas as etapas</p>
+        </div>
+        
+        <div class="benefit-item">
+          <div class="benefit-icon">
+            <i class="fas fa-shield-alt"></i>
+          </div>
+          <h4>Garantia</h4>
+          <p>Serviços com reconhecimento da Marinha</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+   <section id="calendario-provas" class="premium-calendar-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Datas Importantes</span>
+      <h2 class="section-title">Calendário de Provas 2025</span></h2>
+      <div class="divider"></div>
+      <p class="section-description">Confira as datas oficiais das provas náuticas organizadas pela Marinha do Brasil</p>
+    </div>
+
+    <div class="calendar-container" data-aos="fade-up" data-aos-delay="100">
+      <div class="calendar-tabs">
+        <button class="tab-button active" data-month="all">Todas</button>
+        
+       
+        <button class="tab-button" data-month="08">Agosto</button>
+        <button class="tab-button" data-month="09">Setembro</button>
+        <button class="tab-button" data-month="10">Outubro</button>
+        <button class="tab-button" data-month="11">Novembro</button>
+      </div>
+
+      <div class="calendar-grid">
+
+        <!-- Evento 3 -->
+        <div class="event-card" data-month="08">
+          <div class="event-date">
+            <div class="event-day">30</div>
+            <div class="event-month">Ago</div>
+          </div>
+          <div class="event-details">
+            <h3 class="event-title">Prova de Arrais Amador</h3>
+            <div class="event-meta">
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Presidente Epitácio - SP</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Inscrições até 30/07</span>
+              </div>
+            </div>
+            <a href="https://wa.me/5518981263592" class="event-button">Inscreva-se</a>
+          </div>
+        </div>
+
+        <!-- Evento 4 -->
+        <div class="event-card" data-month="09">
+          <div class="event-date">
+            <div class="event-day">27</div>
+            <div class="event-month">Set</div>
+          </div>
+          <div class="event-details">
+            <h3 class="event-title">Prova de Arrais Amador</h3>
+            <div class="event-meta">
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Cândido Mota - SP</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Inscrições até 18/08</span>
+              </div>
+            </div>
+            <a href="https://wa.me/5518981263592" class="event-button">Inscreva-se</a>
+          </div>
+        </div>
+
+        <!-- Evento 5 -->
+        <div class="event-card" data-month="10">
+          <div class="event-date">
+            <div class="event-day">25</div>
+            <div class="event-month">Out</div>
+          </div>
+          <div class="event-details">
+            <h3 class="event-title">Prova de Arrais Amador</h3>
+            <div class="event-meta">
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Rancharia - SP</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Inscrições até 22/09</span>
+              </div>
+            </div>
+            <a href="https://wa.me/5518981263592" class="event-button">Inscreva-se</a>
+          </div>
+        </div>
+
+        <!-- Evento 6 -->
+        <div class="event-card" data-month="11">
+          <div class="event-date">
+            <div class="event-day">22</div>
+            <div class="event-month">Nov</div>
+          </div>
+          <div class="event-details">
+            <h3 class="event-title">Prova de Arrais Amador</h3>
+            <div class="event-meta">
+              <div class="meta-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>Adamantina - SP</span>
+              </div>
+              <div class="meta-item">
+                <i class="fas fa-clock"></i>
+                <span>Inscrições até 17/10</span>
+              </div>
+            </div>
+            <a href="https://wa.me/5518981263592" class="event-button">Inscreva-se</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="calendar-cta" data-aos="fade-up" data-aos-delay="200">
+      <div class="cta-content">
+        <h3>Precisa de ajuda com sua inscrição?</h3>
+        <p>Nossa equipe está pronta para te auxiliar em todo o processo</p>
+        <a href="https://wa.me/+5518981263592" class="cta-button">
+          <i class="fab fa-whatsapp"></i> Fale conosco
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <section id="contato" class="premium-contact-section">
+  <div class="container">
+    <div class="section-header" data-aos="fade-up">
+      <span class="section-subtitle">Fale Conosco</span>
+      <h2 class="section-title">Entre em <span class="highlight">Contato</span></h2>
+      <div class="divider"></div>
+      <p class="section-description">Estamos prontos para responder suas dúvidas e agendar seu curso</p>
+    </div>
+
+    <div class="contact-container" data-aos="fade-up" data-aos-delay="100">
+      <div class="contact-info">
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-phone-alt"></i>
+          </div>
+          <div class="info-content">
+            <h4>Telefone</h4>
+            <a href="tel:+5518981263592">(18) 98126-3592</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-content">
+            <h4>Email</h4>
+            <a href="mailto:alphaetn@hotmail.com">alphaetn@hotmail.com</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-content">
+            <h4>Endereço</h4>
+            <p>Rua Paraná, 2-84 - Centro<br>Presidente Epitácio - SP</p>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-clock"></i>
+          </div>
+          <div class="info-content">
+            <h4>Horário de Atendimento</h4>
+            <p>Segunda a Sexta: 08h às 18h<br>Sábado: 08h às 12h</p>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+  </div>
+</section>
   </main>
 
-  <footer>
-    <div class="footer-content">
-      <div class="footer-logo">
-        <img src="alpha_logo_transparente.png" alt="Logo Alpha Cursos Náuticos" class="logo-footer" />
+  <footer class="premium-footer">
+  <div class="footer-wave">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="var(--primary-color)"></path>
+      <path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" opacity=".5" fill="var(--primary-color)"></path>
+      <path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="var(--primary-color)"></path>
+    </svg>
+  </div>
+
+  <div class="footer-content">
+    <div class="footer-main">
+      <div class="footer-brand">
+        <img src="alpha_logo_transparente.png" alt="Alpha Cursos Náuticos" class="footer-logo">
+        <h3>ALPHA CURSOS NÁUTICOS</h3>
+        <p>Educação náutica de qualidade com certificação reconhecida pela Marinha do Brasil.</p>
       </div>
+
       <div class="footer-links">
-        <h3>Links Rápidos</h3>
-        <ul>
-          <li><a href="#sobre">Sobre</a></li>
-          <li><a href="#cursos">Cursos</a></li>
-          <li><a href="#servicos">Serviços</a></li>
-          <li><a href="#contato">Contato</a></li>
-        </ul>
+        <div class="links-column">
+          <h4>Cursos</h4>
+          <ul>
+            <li><a href="#cursos">Arrais Amador</a></li>
+            <li><a href="#cursos">Motonauta</a></li>
+          </ul>
+        </div>
+
+        <div class="links-column">
+          <h4>Serviços</h4>
+          <ul>
+            <li><a href="#servicos">Documentação</a></li>
+            <li><a href="#servicos">Habilitações</a></li>
+          </ul>
+        </div>
+
+        <div class="links-column">
+          <h4>Institucional</h4>
+          <ul>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#calendario-provas">Calendário</a></li>
+          </ul>
+        </div>
       </div>
-      <div class="footer-social">
-        <h3>Redes Sociais</h3>
-        <div class="social-icons">
-          <a href="https://www.instagram.com/alphaetn/" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.facebook.com/seupagina" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-          <a href="https://wa.me/+5518981263592" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-          <a href="https://www.youtube.com/@ALPHAETN" target="_blank" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+
+      <div class="footer-newsletter">
+        
+        <div class="footer-social">
+          <a href="https://wa.me/+5518981263592" class="social-icon" target="_blank" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
+          <a href="https://www.instagram.com/alphaetn/" class="social-icon" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          
+          <a href="https://www.youtube.com/@ALPHAETN" class="social-icon" target="_blank" aria-label="YouTube">
+            <i class="fab fa-youtube"></i>
+            <br>
+          </a>
         </div>
       </div>
     </div>
-    <div class="footer-bottom">
-      <p>&copy; 2025 Alpha Cursos Náuticos. Todos os direitos reservados.</p>
+
+   
+      
+      <div class="copyright">
+        <br>
+        <p>&copy; 2025 Alpha Cursos Náuticos. Todos os direitos reservados.</p>
+        <div class="legal-links">
+          <a href="#">Política de Privacidade</a>
+          <a href="#">Termos de Uso</a>
+        </div>
+      </div>
     </div>
-  </footer>
+  </div>
+</footer>
 
   <a href="#" class="btn-topo" aria-label="Voltar ao topo"><i class="fas fa-arrow-up"></i></a>
 
@@ -534,5 +1219,224 @@
       });
     });
   </script>
+  
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const statNumbers = document.querySelectorAll('.stat-number');
+  
+  const animateNumbers = () => {
+    statNumbers.forEach(stat => {
+      const target = parseInt(stat.getAttribute('data-count'));
+      const duration = 2000;
+      const start = 0;
+      const increment = target / (duration / 16);
+      let current = start;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        stat.textContent = Math.floor(current);
+        
+        if (current >= target) {
+          stat.textContent = target;
+          clearInterval(timer);
+        }
+      }, 16);
+      
+      stat.classList.add('animated');
+    });
+  };
+  
+  // Ativa quando a seção estiver visível
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateNumbers();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  observer.observe(document.querySelector('.stats-container'));
+});
+</script>
+<script>
+  // Animação das barras de progresso
+document.addEventListener('DOMContentLoaded', function() {
+  const progressBars = document.querySelectorAll('.progress-bar');
+  
+  const animateProgressBars = () => {
+    progressBars.forEach(bar => {
+      const percentage = bar.getAttribute('data-percentage');
+      bar.querySelector('::after').style.width = `${percentage}%`;
+      bar.classList.add('animated');
+    });
+  };
+  
+  // Ativa quando a seção estiver visível
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateProgressBars();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  
+  observer.observe(document.querySelector('.premium-simulados-section'));
+  
+});
+</script>
+<script>
+// Galeria Premium - Lightbox
+document.addEventListener('DOMContentLoaded', function() {
+  const galleryItems = document.querySelectorAll('.gallery-item');
+  const modal = document.getElementById('gallery-modal');
+  const modalImg = document.getElementById('modal-image');
+  const captionText = document.querySelector('.modal-caption');
+  const closeModal = document.querySelector('.close-modal');
+  const prevBtn = document.querySelector('.modal-prev');
+  const nextBtn = document.querySelector('.modal-next');
+  const viewButtons = document.querySelectorAll('.view-button');
+  
+  let currentIndex = 0;
+  const images = Array.from(document.querySelectorAll('.gallery-image-container img'));
+  
+  // Abre o lightbox
+  function openModal(index) {
+    currentIndex = index;
+    updateModal();
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 10);
+  }
+  
+  // Atualiza o modal com a imagem atual
+  function updateModal() {
+    const img = images[currentIndex];
+    modalImg.src = img.src;
+    modalImg.alt = img.alt;
+    captionText.textContent = img.alt;
+  }
+  
+  // Fecha o lightbox
+  function closeLightbox() {
+    modal.classList.remove('show');
+    setTimeout(() => {
+      modal.style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }, 300);
+  }
+  
+  // Mostra imagem anterior
+  function showPrevImage() {
+    currentIndex = (currentIndex - 1 + images.length) % images.length;
+    updateModal();
+  }
+  
+  // Mostra próxima imagem
+  function showNextImage() {
+    currentIndex = (currentIndex + 1) % images.length;
+    updateModal();
+  }
+  
+  // Event listeners para os itens da galeria
+  galleryItems.forEach((item, index) => {
+    item.addEventListener('click', (e) => {
+      if (!e.target.classList.contains('view-button')) {
+        openModal(index);
+      }
+    });
+  });
+  
+  // Event listeners para os botões de visualização
+  viewButtons.forEach((button, index) => {
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal(index);
+    });
+  });
+  
+  // Event listeners para controles do modal
+  closeModal.addEventListener('click', closeLightbox);
+  prevBtn.addEventListener('click', showPrevImage);
+  nextBtn.addEventListener('click', showNextImage);
+  
+  // Teclado
+  document.addEventListener('keydown', function(e) {
+    if (modal.style.display === 'block') {
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowLeft') showPrevImage();
+      if (e.key === 'ArrowRight') showNextImage();
+    }
+  });
+  
+  // Fecha ao clicar fora da imagem
+  modal.addEventListener('click', function(e) {
+    if (e.target === modal) {
+      closeLightbox();
+    }
+  });
+  
+  // Filtros da galeria
+  const filterButtons = document.querySelectorAll('.filter-btn');
+  
+  filterButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Ativa o botão clicado
+      filterButtons.forEach(btn => btn.classList.remove('active'));
+      this.classList.add('active');
+      
+      const filterValue = this.getAttribute('data-filter');
+      
+      // Filtra os itens
+      galleryItems.forEach(item => {
+        if (filterValue === 'all' || item.getAttribute('data-category') === filterValue) {
+          item.style.display = 'block';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+});
+// Filtro de calendário por mês
+document.addEventListener('DOMContentLoaded', function() {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const eventCards = document.querySelectorAll('.event-card');
+  
+  tabButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      // Remove a classe active de todos os botões
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      // Adiciona a classe active ao botão clicado
+      this.classList.add('active');
+      
+      const monthFilter = this.getAttribute('data-month');
+      
+      // Filtra os eventos
+      eventCards.forEach(card => {
+        if (monthFilter === 'all' || card.getAttribute('data-month') === monthFilter) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+  
+  // Animação para destacar eventos próximos
+  const today = new Date();
+  const currentMonth = today.getMonth() + 1; // Janeiro é 0
+  
+  eventCards.forEach(card => {
+    const eventMonth = parseInt(card.getAttribute('data-month'));
+    if (eventMonth === currentMonth) {
+      card.classList.add('upcoming-event');
+    }
+  });
+});
+</script>
 </body>
 </html>
