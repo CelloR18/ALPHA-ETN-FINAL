@@ -4368,7 +4368,9 @@ footer {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
   overflow: hidden;
+  background:var(--primary-color);
 }
+
 
 .premium-navseg-section::before {
   content: '';
@@ -4660,6 +4662,9 @@ footer {
   color: var(--text-dark);
   line-height: 1.6;
   margin-bottom: 0;
+}
+.tittle-navseg2{
+  color:  var(--secondary-color);
 }
 
 /* Responsividade */
