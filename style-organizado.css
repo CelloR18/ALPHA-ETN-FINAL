@@ -2059,6 +2059,7 @@ footer {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
   overflow: hidden;
+  background: var(--primary-dark);
 }
 
 .premium-courses-section::before {
@@ -2383,6 +2384,7 @@ footer {
   background: url('wave-pattern.png') repeat;
   opacity: 0.03;
   z-index: 0;
+ 
 }
 
 .simulados-grid {
@@ -2649,6 +2651,7 @@ footer {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
   overflow: hidden;
+  background: var(--primary-dark);
 }
 
 .premium-gallery-section::before {
@@ -2776,7 +2779,7 @@ footer {
   padding: 0.7rem 1.5rem;
   border: none;
   background: rgba(90, 14, 153, 0.1);
-  color: var(--primary-dark);
+  color: white  ;
   border-radius: 50px;
   cursor: pointer;
   transition: all 0.3s ease;
@@ -2786,7 +2789,7 @@ footer {
 }
 
 .filter-btn.active, .filter-btn:hover {
-  background: var(--primary-color);
+  background: var(--secondary-color);
   color: white;
 }
 
@@ -3345,6 +3348,7 @@ footer {
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
   overflow: hidden;
+  background: var(--primary-dark);
 }
 
 .premium-services-section::before {
@@ -3357,6 +3361,7 @@ footer {
   background: url('wave-pattern-light.png') repeat;
   opacity: 0.03;
   z-index: 0;
+   
 }
 
 .services-grid {
