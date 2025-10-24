@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado Sobrevivência e Segurança no Meio Marinho - Interativo Passo a Passo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .question-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: opacity 0.4s ease;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .options button:hover:not(:disabled) {
+        background-color: #e0f0ff;
+    }
+    .options button.correct {
+        background-color: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .options button.wrong {
+        background-color: #F44336;
+        color: white;
+        border-color: #F44336;
+    }
+    .options button:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+    #nextBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #2196F3;
+        color: white;
+        cursor: pointer;
+        display: none;
+        transition: background-color 0.3s ease;
+    }
+    #nextBtn:hover {
+        background-color: #0b7dda;
+    }
+    #resultado {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Simulado Sobrevivência e Segurança no Meio Marinho</h1>
+
+<div id="quiz-container" class="question-container"></div>
+<button id="nextBtn">Próxima</button>
+<div id="resultado"></div>
+
+<script>
+const questions = [
+    {
+        question: "Qual é o órgão responsável pela homologação das estações de manutenção de equipamentos de salvatagem?",
+        options: [
+            "a Organização Marítima Internacional.",
+            "o Comando do Distrito Naval.",
+            "as Capitanias, Delegacias e Agências.",
+            "o próprio fabricante, seguindo normas do INMETRO.",
+            "a Autoridade Marítima (Diretoria de Portos e Costas)."
+        ],
+        answer: 4
+    },
+    {
+        question: "A supervisão das atividades de busca e salvamento na área marítima sob a responsabilidade do Brasil cabe:",
+        options: [
+            "à Diretoria de Portos e Costas.",
+            "ao Salvamar Brasil.",
+            "ao Corpo de Bombeiros.",
+            "à Diretoria de Hidrografia e Navegação.",
+            "à Marinha do Brasil."
+        ],
+        answer: 1
+    },
+    {
+        question: "O colete salva-vidas deve ser:",
+        options: [
+            "vestido com a parte flutuante para as costas, após retirar as roupas.",
+            "conduzido pelo náufrago, na mão.",
+            "jogado na água, para o náufrago se apoiar.",
+            "vestido com a parte flutuante para frente, por cima das roupas.",
+            "guardado em local seco até o momento do uso."
+        ],
+        answer: 3
+    },
+    {
+        question: "O número de coletes a bordo deve atender:",
+        options: [
+            "a todos os passageiros adultos.",
+            "a todos os passageiros.",
+            "à quantidade de pessoas legalmente autorizadas a embarcar.",
+            "ao número de membros da tripulação.",
+            "apenas às crianças e idosos."
+        ],
+        answer: 2
+    },
+    {
+        question: "O colete salva-vidas deve ficar:",
+        options: [
+            "amarrado à embarcação, em local bem fechado, para protegê-lo da ação do tempo.",
+            "no convés principal, solto, para ser utilizado em caso de emergência.",
+            "num paiol da embarcação ou no compartimento de acomodações.",
+            "em local de fácil acesso e, nunca, amarrado à embarcação.",
+            "distribuído entre os passageiros durante toda a viagem."
+        ],
+        answer: 3
+    },
+    {
+        question: "Os coletes salva-vidas classe III são exigidos nas embarcações de esporte e recreio:",
+        options: [
+            "apenas para as de interior de porto.",
+            "apenas para as de alto-mar.",
+            "para as de alto-mar e navegação costeira.",
+            "para qualquer tipo de navegação.",
+            "apenas para embarcações comerciais."
+        ],
+        answer: 0
+    },
+    {
+        question: "A melhor maneira de saltar na água, utilizando o colete salva-vidas, é com:",
+        options: [
+            "as pernas abertas, a mão direita no nariz e a mão esquerda no ombro.",
+            "os pés juntos e a perna dobrada.",
+            "as pernas esticadas e os pés juntos.",
+            "a mão direita no nariz e os pés separados.",
+            "os braços cruzados sobre o peito."
+        ],
+        answer: 2
+    },
+    {
+        question: "Não se deve utilizar o colete salva-vidas, nas situações abaixo, exceto:",
+        options: [
+            "como encosto.",
+            "para fazer demonstração.",
+            "como travesseiro.",
+            "como brinquedo.",
+            "em exercícios de abandono de navio."
+        ],
+        answer: 1
+    },
+    {
+        question: "Como o navegante deve fazer para saber a quantidade correta de coletes a bordo?",
+        options: [
+            "consultar o Agente da Autoridade Marítima.",
+            "consultar a DPC.",
+            "consultar a NF emitida pelo construtor.",
+            "consultar o Título de Inscrição da Embarcação (TIE) e ver a lotação.",
+            "consultar o manual do proprietário."
+        ],
+        answer: 3
+    },
+    {
+        question: "Para que serve o colete salva-vidas, que deverá ser guardado a bordo, em quantidade exigida?",
+        options: [
+            "para ser vestido, no caso de abandono da embarcação, para que o náufrago flutue com ele.",
+            "para ser vestido, no caso de incêndio a bordo, como roupa de proteção.",
+            "para ser utilizado, como material de controle de avarias, no caso de acidentes com o casco da embarcação.",
+            "para ser utilizado, como meio de flutuação, quando o passageiro desejar pular na água, para nadar um pouco.",
+            "apenas para atender às exigências legais durante vistorias."
+        ],
+        answer: 0
+    },
+    {
+        question: "Em relação ao colete salva-vidas, qual o procedimento correto antes de iniciar a navegação?",
+        options: [
+            "Verificar se há a bordo coletes suficientes para todos que estão embarcados.",
+            "Fazer demonstração.",
+            "Verificar a data de aquisição.",
+            "Obrigar que todos usem o colete.",
+            "Guardar todos em local seguro e trancado."
+        ],
+        answer: 0
+    },
+    {
+        question: "No que concerne ao uso do colete salva-vidas, é conveniente adotar qual procedimento antes de navegar?",
+        options: [
+            "verificar se os coletes estão bem amarrados na embarcação.",
+            "contar quantas pessoas estão na embarcação.",
+            "demonstrar como utilizar o colete.",
+            "contar quantas crianças e adultos estão na embarcação.",
+            "distribuir os coletes apenas para quem não sabe nadar."
+        ],
+        answer: 2
+    },
+    {
+        question: "A bóia circular deve ser presa:",
+        options: [
+            "no convés principal.",
+            "num armário da cabine de comando.",
+            "em local de fácil retirada.",
+            "na proa e na popa da embarcação.",
+            "no interior da cabine para protegê-la do sol."
+        ],
+        answer: 2
+    },
+    {
+        question: "O que deve ser amarrado na bóia circular, para facilitar o resgate de alguém, que caiu na água?",
+        options: [
+            "um cabo flutuante com alça de mão.",
+            "uma retinida com pinha na ponta.",
+            "um foguete pirotécnico.",
+            "uma caixa de primeiros socorros.",
+            "uma âncora pequena."
+        ],
+        answer: 0
+    },
+    {
+        question: "Para as embarcações de esporte e recreio de navegação costeira, com mais de 12 metros de comprimento, qual dotação de material é exigida?",
+        options: [
+            "duas bóias circulares, uma com retinida e a outra com dispositivo de iluminação automática.",
+            "uma bóia circular com retinida.",
+            "duas bóias circulares comuns e uma caixa de primeiros socorros.",
+            "duas bóias circulares com retinida e dispositivo de iluminação automática.",
+            "apenas coletes salva-vidas são obrigatórios."
+        ],
+        answer: 3
+    },
+    {
+        question: "As embarcações de esporte e recreio com comprimento inferior a 12 metros, efetuando navegação interior, deverão dispor a bordo de quantas bóias circulares?",
+        options: [
+            "zero.",
+            "uma.",
+            "duas.",
+            "três.",
+            "quatro."
+        ],
+        answer: 1
+    },
+    {
+        question: "São equipamentos de salvatagem exigidos em embarcações de esporte e recreio, exceto:",
+        options: [
+            "balsa salva-vidas.",
+            "colete salva-vidas.",
+            "bóia circular.",
+            "colete salva-vidas inflável.",
+            "baleeira."
+        ],
+        answer: 4
+    },
+    {
+        question: "Qual dos equipamentos de salvatagem abaixo fica em um casulo fechado, e se infla com um dispositivo especial, para ser utilizado pelos náufragos?",
+        options: [
+            "bóia circular.",
+            "colete salva-vidas.",
+            "balsa.",
+            "bote rígido.",
+            "bóia de sinalização."
+        ],
+        answer: 2
+    },
+    {
+        question: "O cabo, que prende a balsa inflável à embarcação, só deve ser cortado quando:",
+        options: [
+            "já estiverem todos embarcados na balsa.",
+            "a embarcação estiver afundando.",
+            "a balsa estiver pronta para navegar.",
+            "o comandante da embarcação determinar.",
+            "a balsa estiver completamente inflada."
+        ],
+        answer: 0
+    },
+    {
+        question: "O cabo, que prende a balsa rígida à embarcação, só deve ser cortado quando:",
+        options: [
+            "a balsa estiver furada.",
+            "a embarcação estiver afundando.",
+            "for efetuada a vistoria na balsa e autorizada sua colocação na água.",
+            "já estiverem todos embarcados na balsa.",
+            "a balsa estiver completamente equipada."
+        ],
+        answer: 3
+    }
+];
+
+let score = 0;
+let currentIndex = 0;
+
+const quizContainer = document.getElementById("quiz-container");
+const nextBtn = document.getElementById("nextBtn");
+const resultadoDiv = document.getElementById("resultado");
+
+function showQuestion(index) {
+    quizContainer.style.opacity = 0;
+    setTimeout(() => {
+        const q = questions[index];
+        quizContainer.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options"></div>`;
+        const optionsDiv = quizContainer.querySelector(".options");
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.addEventListener("click", () => selectAnswer(btn, i, q.answer));
+            optionsDiv.appendChild(btn);
+        });
+        quizContainer.style.opacity = 1;
+        nextBtn.style.display = "none";
+    }, 200);
+}
+
+function selectAnswer(button, selected, correct) {
+    const buttons = quizContainer.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        button.classList.add("correct");
+        score++;
+    } else {
+        button.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+    } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        resultadoDiv.textContent = `Você acertou ${score} de ${questions.length} questões.`;
+    }
+});
+
+// Inicializa o quiz
+showQuestion(currentIndex);
+</script>
+
+</body>
+</html>

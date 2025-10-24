@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado Balizamento - Interativo Passo a Passo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .question-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: opacity 0.4s ease;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .options button:hover:not(:disabled) {
+        background-color: #e0f0ff;
+    }
+    .options button.correct {
+        background-color: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .options button.wrong {
+        background-color: #F44336;
+        color: white;
+        border-color: #F44336;
+    }
+    .options button:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+    #nextBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #2196F3;
+        color: white;
+        cursor: pointer;
+        display: none;
+        transition: background-color 0.3s ease;
+    }
+    #nextBtn:hover {
+        background-color: #0b7dda;
+    }
+    #resultado {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Simulado Balizamento</h1>
+
+<div id="quiz-container" class="question-container"></div>
+<button id="nextBtn">Próxima</button>
+<div id="resultado"></div>
+
+<script>
+const questions = [
+    {
+        question: "O órgão responsável pela implementação e alteração do balizamento é a (o):",
+        options: [
+            "Diretoria de Portos e Costas (DPC).",
+            "Diretoria de Hidrografia e Navegação (DHN).",
+            "Capitania dos Portos.",
+            "Distrito Naval.",
+            "Marinha do Brasil."
+        ],
+        answer: 1
+    },
+    {
+        question: "De quem é a competência de fiscalizar e executar a atividade de sinalização náutica e portanto, a quem se deve recorrer, caso seja detectado qualquer dano na mesma?",
+        options: [
+            "Diretoria de Hidrografia e Navegação.",
+            "Diretoria de Portos e Costas.",
+            "Tribunal Marítimo.",
+            "Capitania dos Portos.",
+            "Autoridade Portuária."
+        ],
+        answer: 3
+    },
+    {
+        question: "A identificação dos sinais de balizamento durante o dia é feita por:",
+        options: [
+            "somente forma e cor.",
+            "marca de tope, cor e tamanho.",
+            "marca de tope, forma e cor.",
+            "somente marca de tope e cor.",
+            "forma, cor e número."
+        ],
+        answer: 2
+    },
+    {
+        question: "A identificação dos sinais de balizamento, à noite, é feita por:",
+        options: [
+            "cores das luzes e número de repetições.",
+            "número de repetições e brilho.",
+            "marca de tope, forma e cor.",
+            "ritmo de apresentação e cores das luzes.",
+            "somente cor da luz."
+        ],
+        answer: 3
+    },
+    {
+        question: "Quais os formatos das bóias laterais de canal?",
+        options: [
+            "retangular e cúbico.",
+            "esférico e cúbico.",
+            "cilíndrico, pilar, charuto ou cônico.",
+            "quadrangular e esférico.",
+            "triangular e retangular."
+        ],
+        answer: 2
+    },
+    {
+        question: "As bóias do balizamento podem ser:",
+        options: [
+            "cegas ou luminosas.",
+            "azuis e brancas.",
+            "esféricas.",
+            "sem marca de tope.",
+            "apenas luminosas."
+        ],
+        answer: 0
+    },
+    {
+        question: "A bóia cega:",
+        options: [
+            "emite luzes brancas.",
+            "emite luzes amarelas.",
+            "emite luzes intermitentes.",
+            "emite luzes encarnadas.",
+            "não emite luzes."
+        ],
+        answer: 4
+    },
+    {
+        question: "A numeração do balizamento de canal segue a:",
+        options: [
+            "ordem crescente, a partir da entrada do canal.",
+            "numeração decrescente, a partir da entrada do canal.",
+            "ordem determinada pela administração do porto.",
+            "ordem crescente, a partir da saída do canal.",
+            "ordem alfabética."
+        ],
+        answer: 0
+    },
+    {
+        question: "O sinal lateral de canal que fica a bombordo de quem entra no porto, tem a cor:",
+        options: [
+            "branca.",
+            "encarnada.",
+            "verde.",
+            "preta e encarnada.",
+            "preta."
+        ],
+        answer: 2
+    },
+    {
+        question: "Para o navegante que vem do mar, o sinal lateral de boreste é indicado por uma luz de cor:",
+        options: [
+            "branca.",
+            "verde.",
+            "amarela.",
+            "encarnada.",
+            "azul."
+        ],
+        answer: 3
+    },
+    {
+        question: "A bóia de bombordo emite luz, à noite, de cor:",
+        options: [
+            "encarnada.",
+            "verde.",
+            "branca.",
+            "azul.",
+            "amarela."
+        ],
+        answer: 0
+    },
+    {
+        question: "O balizamento de canal preferencial tem as cores:",
+        options: [
+            "verde e amarela.",
+            "preta e amarela.",
+            "verde e encarnada.",
+            "branca e preta.",
+            "vermelha e branca."
+        ],
+        answer: 2
+    },
+    {
+        question: "À noite, a cor da luz emitida pelo balizamento de canal preferencial a boreste é:",
+        options: [
+            "amarela.",
+            "encarnada.",
+            "branca.",
+            "verde.",
+            "azul."
+        ],
+        answer: 3
+    },
+    {
+        question: "À noite, a cor da luz emitida pelo balizamento de canal preferencial a bombordo é:",
+        options: [
+            "amarela.",
+            "encarnada.",
+            "verde.",
+            "branca.",
+            "vermelha."
+        ],
+        answer: 1
+    },
+    {
+        question: "Quando uma embarcação vem se aproximando de uma bifurcação de canal e se depara com um balizamento de duas cores, e sendo que foi verificado que a maior profundidade estava no canal a seu boreste, quais seriam as duas cores vistas pelo navegante?",
+        options: [
+            "encarnada, com uma faixa horizontal verde.",
+            "preta e encarnada.",
+            "preta e amarela.",
+            "verde, com uma faixa horizontal encarnada.",
+            "amarela e vermelha."
+        ],
+        answer: 3
+    },
+    {
+        question: "O balizamento que indica águas seguras possui as cores:",
+        options: [
+            "preta e encarnada.",
+            "branca e preta.",
+            "encarnada e amarela.",
+            "verde e encarnada.",
+            "branca e encarnada."
+        ],
+        answer: 4
+    },
+    {
+        question: "O balizamento que indica perigo isolado possui as cores:",
+        options: [
+            "branca e encarnada.",
+            "preta e encarnada.",
+            "verde e encarnada.",
+            "branca e preta.",
+            "vermelha e amarela."
+        ],
+        answer: 1
+    },
+    {
+        question: "O balizamento, cujos sinais náuticos são chamados Sinais Cardinais, que indicam quais quadrantes que, a partir deles temos águas seguras, tem as cores:",
+        options: [
+            "branca e encarnada.",
+            "preta e encarnada.",
+            "preta e amarela.",
+            "encarnada e amarela.",
+            "verde e amarela."
+        ],
+        answer: 2
+    },
+    {
+        question: "O sinal de perigo isolado serve para indicar a existência de:",
+        options: [
+            "perigo isolado ilimitado.",
+            "pedra submersa.",
+            "perigo isolado de tamanho limitado, cercado por águas navegáveis.",
+            "perigo isolado não mencionado na carta náutica.",
+            "qualquer tipo de obstáculo."
+        ],
+        answer: 2
+    },
+    {
+        question: "Qual é o único caso em que utilizamos um balizamento dobrado, com dois sinais iguais?",
+        options: [
+            "novo perigo já registrado na carta náutica.",
+            "uma pedra grande que obstrui o canal.",
+            "um casco soçobrado há 10 anos.",
+            "perigo isolado não registrado na carta náutica.",
+            "em todos os casos de perigo."
+        ],
+        answer: 3
+    }
+];
+
+let score = 0;
+let currentIndex = 0;
+
+const quizContainer = document.getElementById("quiz-container");
+const nextBtn = document.getElementById("nextBtn");
+const resultadoDiv = document.getElementById("resultado");
+
+function showQuestion(index) {
+    quizContainer.style.opacity = 0;
+    setTimeout(() => {
+        const q = questions[index];
+        quizContainer.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options"></div>`;
+        const optionsDiv = quizContainer.querySelector(".options");
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.addEventListener("click", () => selectAnswer(btn, i, q.answer));
+            optionsDiv.appendChild(btn);
+        });
+        quizContainer.style.opacity = 1;
+        nextBtn.style.display = "none";
+    }, 200);
+}
+
+function selectAnswer(button, selected, correct) {
+    const buttons = quizContainer.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        button.classList.add("correct");
+        score++;
+    } else {
+        button.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+    } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        resultadoDiv.textContent = `Você acertou ${score} de ${questions.length} questões.`;
+    }
+});
+
+// Inicializa o quiz
+showQuestion(currentIndex);
+</script>
+
+</body>
+</html>

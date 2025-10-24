@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado RIPEAM - Interativo Passo a Passo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .question-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: opacity 0.4s ease;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .options button:hover:not(:disabled) {
+        background-color: #e0f0ff;
+    }
+    .options button.correct {
+        background-color: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .options button.wrong {
+        background-color: #F44336;
+        color: white;
+        border-color: #F44336;
+    }
+    .options button:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+    #nextBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #2196F3;
+        color: white;
+        cursor: pointer;
+        display: none;
+        transition: background-color 0.3s ease;
+    }
+    #nextBtn:hover {
+        background-color: #0b7dda;
+    }
+    #resultado {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Simulado R-LESTA e NORMAM</h1>
+
+<div id="quiz-container" class="question-container"></div>
+<button id="nextBtn">Próxima</button>
+<div id="resultado"></div>
+
+<script>
+const questions = [
+    {
+        question: "O R-LESTA é um regulamento que tem qual finalidade principal?",
+        options: [
+            "estabelecer princípios gerais para o tráfego aquaviário e para a segurança da navegação, nas águas sob jurisdição nacional.",
+            "estabelecer os limites de navegação, grupos profissionais, as multas e punições, bem como, os tipos de navegação.",
+            "estabelecer as classes de navegação, as funções da polícia naval e os grupos profissionais e suas atribuições.",
+            "estabelecer princípios gerais para o tráfego aquaviário e para a segurança da navegação, nas águas internacionais.",
+            "regular apenas as embarcações de grande porte em águas nacionais."
+        ],
+        answer: 0
+    },
+    {
+        question: "É uma atitude passível de apreensão ou suspensão em até 120 dias da carteira de habilitação do amador:",
+        options: [
+            "utilizar a embarcação em local proibido.",
+            "conduzir a embarcação, sem habilitação no bolso.",
+            "não portar o documento da embarcação.",
+            "utilizar a embarcação para a prática de crime.",
+            "navegar em dias de feriado nacional."
+        ],
+        answer: 3
+    },
+    {
+        question: "É uma atitude passível de apreensão ou suspensão em até 120 dias da carteira de habilitação do amador:",
+        options: [
+            "utilizar a embarcação, sem cumprir o limite máximo de lotação de pessoas.",
+            "utilizar a embarcação para transporte comercial de passageiros ou carga.",
+            "reincidir em faltas previstas no R-LESTA.",
+            "navegar em águas sem autorização da Capitania dos Portos.",
+            "conduzir embarcação sem colete salva-vidas."
+        ],
+        answer: 1
+    },
+    {
+        question: "Conduzir embarcação em estado de embriaguez alcoólica ou após uso de substância entorpecente ou tóxica, quando não constituir crime previsto em lei, acarreta a suspensão do certificado de habilitação:",
+        options: [
+            "em até noventa dias.",
+            "em até trinta dias.",
+            "em até cento e vinte dias.",
+            "em até sessenta dias.",
+            "em até quinze dias."
+        ],
+        answer: 2
+    },
+    {
+        question: "É uma atitude passível de apreensão ou suspensão em até 120 dias da carteira de habilitação do amador:",
+        options: [
+            "conduzir uma embarcação sob efeito de substância de qualquer natureza.",
+            "navegar em águas restritas.",
+            "exceder o limite de velocidade permitida no porto.",
+            "entregar a condução da embarcação à pessoa não habilitada.",
+            "não possuir extintor de incêndio em condições de uso."
+        ],
+        answer: 3
+    },
+    {
+        question: "O amador terá sua habilitação cancelada quando:",
+        options: [
+            "for encontrado conduzindo embarcação, sem a carteira de habilitação.",
+            "for encontrado conduzindo embarcação, já tendo sido apreendida sua carteira de habilitação.",
+            "for multado por qualquer infração.",
+            "for encontrado pela polícia naval conduzindo embarcação embriagado.",
+            "for pego navegando em área de banhistas."
+        ],
+        answer: 1
+    },
+    {
+        question: "O amador terá sua habilitação cancelada quando:",
+        options: [
+            "utilizar a embarcação para a prática do crime, já tendo sido apanhado pelo patrulheiro naval, conduzindo anteriormente carga a bordo.",
+            "reincidir em navegação, em área proibida.",
+            "cometer mais de uma infração sujeita à multa.",
+            "conduzir a embarcação, sem a devida habilitação.",
+            "não pagar multa de trânsito aquaviário."
+        ],
+        answer: 0
+    },
+    {
+        question: "É passível de ocorrer a apreensão da embarcação e suspensão da habilitação em até cento e vinte dias, quando:",
+        options: [
+            "estiver trafegando em área de banhistas.",
+            "trafegar em áreas de segurança.",
+            "trafegar sem as luzes e marcas, previstas no RIPEAM.",
+            "utilizar a embarcação de esporte e recreio comercialmente.",
+            "não possuir documento de identificação pessoal."
+        ],
+        answer: 3
+    },
+    {
+        question: "Qual das infrações abaixo é passível da mais alta penalidade (multa do Grupo G) prevista no R-LESTA?",
+        options: [
+            "entregar a embarcação para pessoa não habilitada.",
+            "trafegar em área reservada a banhistas.",
+            "não portar a carteira de habilitação de amador.",
+            "conduzir embarcação com excesso de passageiros ou carga.",
+            "não registrar a embarcação na autoridade marítima."
+        ],
+        answer: 3
+    },
+    {
+        question: "Dentre as atividades abaixo, qual não deve ser praticada pelo amador?",
+        options: [
+            "reboque de banana boat.",
+            "pesca profissional.",
+            "reboque de esqui aquático.",
+            "apoio de maratona aquática.",
+            "passeio turístico familiar."
+        ],
+        answer: 1
+    },
+    {
+        question: "É considerado agravante às infrações da lei de segurança do tráfego aquaviário:",
+        options: [
+            "jogar lixo no mar.",
+            "deixar faltar combustível.",
+            "reincidir em infração.",
+            "deixar de inscrever a embarcação no prazo de 15 dias.",
+            "não usar colete salva-vidas."
+        ],
+        answer: 2
+    },
+    {
+        question: "Para efeito de gradação das penalidades previstas no R-LESTA, a reincidência é a repetição de uma mesma infração em um período igual ou inferior a:",
+        options: [
+            "seis meses.",
+            "quatro meses.",
+            "nove meses.",
+            "doze meses.",
+            "três meses."
+        ],
+        answer: 3
+    },
+    {
+        question: "Lavrado o Auto de Infração, o infrator disporá de quantos dias para apresentar sua defesa?",
+        options: [
+            "5 dias úteis.",
+            "10 dias corridos.",
+            "15 dias úteis.",
+            "30 dias corridos.",
+            "20 dias úteis."
+        ],
+        answer: 2
+    },
+    {
+        question: "A Autoridade Marítima sustará o andamento de qualquer documento ou ato administrativo de quem estiver em débito decorrente de infração até:",
+        options: [
+            "90 dias.",
+            "12 meses.",
+            "30 dias.",
+            "sua quitação.",
+            "60 dias."
+        ],
+        answer: 3
+    },
+    {
+        question: "De acordo com o R-LESTA, é a navegação realizada entre portos brasileiros e estrangeiros:",
+        options: [
+            "cabotagem.",
+            "apoio marítimo.",
+            "interior.",
+            "longo curso.",
+            "internacional."
+        ],
+        answer: 3
+    },
+    {
+        question: "Segundo o R-LESTA, a navegação realizada entre portos ou pontos do território brasileiro utilizando a via marítima ou esta e as vias navegáveis interiores é a de:",
+        options: [
+            "cabotagem.",
+            "longo curso.",
+            "ortodrômica.",
+            "loxôdromica.",
+            "costeira."
+        ],
+        answer: 0
+    },
+    {
+        question: "A penalidade de suspensão do certificado de habilitação estabelecida para as infrações previstas no R-LESTA poderá ser aplicada:",
+        options: [
+            "a qualquer aquaviário brasileiro.",
+            "somente ao aquaviário ou amador embarcado e ao prático.",
+            "a todos os amadores e aquaviários cadastrados nas Capitanias dos Portos.",
+            "a todo o pessoal embarcado.",
+            "apenas aos amadores."
+        ],
+        answer: 1
+    },
+    {
+        question: "São deveres do Comandante, exceto:",
+        options: [
+            "cumprir e fazer cumprir as leis em vigor e o que determinar a NORMAM.",
+            "manter a derrota determinada e os portos de escala da embarcação.",
+            "inspecionar sua embarcação, pelo menos uma vez por dia, para verificar condições anormais.",
+            "comunicar os acidente e fatos da navegação ocorridos com sua embarcação.",
+            "contratar tripulação sem verificar habilitação."
+        ],
+        answer: 2
+    },
+    {
+        question: "Qual o tripulante responsável pela operação e manutenção da embarcação?",
+        options: [
+            "armador.",
+            "comandante.",
+            "amador.",
+            "proprietário.",
+            "timoneiro."
+        ],
+        answer: 1
+    },
+    {
+        question: "No exercício de suas funções, o Comandante pode, a fim de manter a segurança da embarcação, das pessoas e da carga:",
+        options: [
+            "abandonar a embarcação.",
+            "multar qualquer pessoa que esteja a bordo, seja tripulante ou passageiro.",
+            "encalhar a embarcação.",
+            "ordenar o desembarque de qualquer pessoa.",
+            "alterar o destino da embarcação sem autorização."
+        ],
+        answer: 3
+    }
+];
+
+let score = 0;
+let currentIndex = 0;
+
+const quizContainer = document.getElementById("quiz-container");
+const nextBtn = document.getElementById("nextBtn");
+const resultadoDiv = document.getElementById("resultado");
+
+function showQuestion(index) {
+    quizContainer.style.opacity = 0;
+    setTimeout(() => {
+        const q = questions[index];
+        quizContainer.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options"></div>`;
+        const optionsDiv = quizContainer.querySelector(".options");
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.addEventListener("click", () => selectAnswer(btn, i, q.answer));
+            optionsDiv.appendChild(btn);
+        });
+        quizContainer.style.opacity = 1;
+        nextBtn.style.display = "none";
+    }, 200);
+}
+
+function selectAnswer(button, selected, correct) {
+    const buttons = quizContainer.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        button.classList.add("correct");
+        score++;
+    } else {
+        button.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+    } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        resultadoDiv.textContent = `Você acertou ${score} de ${questions.length} questões.`;
+    }
+});
+
+// Inicializa o quiz
+showQuestion(currentIndex);
+</script>
+
+</body>
+</html>

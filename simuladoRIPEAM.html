@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado RIPEAM - Interativo Passo a Passo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .question-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: opacity 0.4s ease;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .options button:hover:not(:disabled) {
+        background-color: #e0f0ff;
+    }
+    .options button.correct {
+        background-color: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .options button.wrong {
+        background-color: #F44336;
+        color: white;
+        border-color: #F44336;
+    }
+    .options button:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+    #nextBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #2196F3;
+        color: white;
+        cursor: pointer;
+        display: none;
+        transition: background-color 0.3s ease;
+    }
+    #nextBtn:hover {
+        background-color: #0b7dda;
+    }
+    #resultado {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Simulado RIPEAM</h1>
+
+<div id="quiz-container" class="question-container"></div>
+<button id="nextBtn">Próxima</button>
+<div id="resultado"></div>
+
+<script>
+const questions = [
+    {
+        question: "Qual a finalidade do RIPEAM?", 
+        options: [
+            "regulamentar as manobras, luzes de navegação e de condições especiais, em águas de jurisdição nacional.",
+            "evitar o abalroamento no mar, utilizando-se regras internacionais de navegação, luzes e marcas e ainda sinais sonoros.",
+            "evitar o abalroamento em águas nacionais através de regras de governo e navegação, luzes marcas e sinais sonoros.",
+            "evitar a colisão em mar aberto, em águas internacionais, através de regras de governo, luzes, marcas e sinais sonoros.",
+            "estabelecer regras de tráfego para embarcações em portos e terminais."
+        ], 
+        answer: 1
+    },
+    {
+        question: "Qual o significado da sigla RIPEAM?", 
+        options: [
+            "Regulamento para o tráfego marítimo.",
+            "Regulamento para o tráfego aquaviário.",
+            "Regulamento para o tráfego fluvial.",
+            "Regulamento Internacional para Evitar Abalroamento no Mar.",
+            "Regulamento Internacional de Práticas de Embarcações em Alto Mar."
+        ], 
+        answer: 3
+    },
+    {
+        question: "Toda manobra deverá ser feita de que forma?", 
+        options: [
+            "franca e positiva, feita com ampla antecedência, demonstrando à outra embarcação que houve alteração de movimento.",
+            "gradual e com pouca alteração de velocidade, para se evitar confusão no acampamento da outra embarcação.",
+            "brusca e com variações constantes de velocidade, para que a outra embarcação perceba a alteração do rumo.",
+            "lenta e com pequenos ângulos de leme, para que não haja confusão na interpretação dos movimentos pela outra embarcação.",
+            "rápida e com mudanças bruscas de direção para alertar outras embarcações."
+        ], 
+        answer: 0
+    },
+    {
+        question: "Uma embarcação no visual da minha, para existir, com certeza, o risco de colisão, deverá apresentar a seguinte situação:", 
+        options: [
+            "marcação variando e distância aumentando.",
+            "marcação variando e distância diminuindo.",
+            "marcação constante e distância aumentando.",
+            "marcação constante e distância diminuindo.",
+            "marcação constante e distância constante."
+        ], 
+        answer: 3
+    },
+    {
+        question: "Uma embarcação alcançando a outra tem preferência de passagem, ou não, e como deve se proceder tal manobra?", 
+        options: [
+            "não, a que está com menor velocidade, a frente da outra, deverá manobrar para dar passagem a que está alcançando.",
+            "sim, a que está com menor velocidade, a frente da outra, deverá manobrar para dar passagem a que está alcançando.",
+            "não, a que está com maior velocidade, alcançadora, deverá manobrar para passar pela outra, à frente.",
+            "sim, a que está com maior velocidade, alcançadora, deverá manobrar para passar pela outra, à frente.",
+            "não, ambas devem manter rumo e velocidade até que a situação se resolva."
+        ], 
+        answer: 1
+    },
+    {
+        question: "O que vem a ser velocidade de segurança e o que devemos fazer quando cruzamos com outras embarcações atracadas ou fundeadas ou mesmo localidades às margens dos rios e canais?", 
+        options: [
+            "é a velocidade máxima permitida em uma determinada região de tráfego; devemos manter a velocidade para evitar variações da corrente de esteira da embarcação.",
+            "é a velocidade que possibilita uma ação apropriada e eficaz de evitar uma colisão e de parar a embarcação a uma distância segura; devemos diminuir a velocidade.",
+            "é a velocidade mínima para parar a embarcação; devemos diminuir a velocidade.",
+            "é a velocidade ideal de cruzeiro da embarcação para condições que exijam maiores cuidados na navegação, como em baixa visibilidade; devemos diminuir a velocidade.",
+            "é a velocidade que permite navegar com economia de combustível; devemos aumentar a velocidade."
+        ], 
+        answer: 1
+    },
+    {
+        question: "Na situação de 'roda a roda', ou seja, ___, as embarcações deverão manobrar de que forma:", 
+        options: [
+            "proa com proa, as duas guinam para boreste.",
+            "rumos cruzados, as duas guinam para boreste.",
+            "rumos cruzados, as duas guinam para os bordos opostos.",
+            "proa com proa, as duas guinam para os bordos opostos.",
+            "proa com proa, as duas guinam para bombordo."
+        ], 
+        answer: 0
+    },
+    {
+        question: "Na situação de rumos cruzados, quem tem preferência de passagem?", 
+        options: [
+            "nenhumas delas, as duas guinam para os bordos opostos.",
+            "a que está com maior velocidade.",
+            "a que avistar a outra pelo seu bombordo, isto é, a que vê a luz verde.",
+            "a que tem maior tonelagem, ou seja, maior porte (tamanho).",
+            "a que está a favor da corrente."
+        ], 
+        answer: 2
+    },
+    {
+        question: "Um veleiro e uma lancha vinham navegando em rumos cruzados, tendo preferência de passagem, o veleiro não manobrou e esperou que a lancha guinasse, enquanto se aproximava rapidamente dela. Houve uma colisão das duas embarcações. Podemos concluir que:", 
+        options: [
+            "o veleiro estava certo, portanto, não teve culpa nenhuma no acidente, cabendo total responsabilidade à lancha.",
+            "a lancha estava errada, portanto, deveria ter manobrado com antecedência, porém o veleiro deve se manter longe de outras embarcações a motor, o que dificultou a análise da culpa.",
+            "as duas deveriam ter guinado para os bordos opostos conforme manda a regra, independente da preferência de passagem em função do tipo de operação ou de embarcação.",
+            "apesar de a lancha ter errado por não manobrar, para evitar o acidente, o veleiro não pode ser isentado de culpa, pois a embarcação que tem preferência deverá manobrar para evitar a colisão, caso a outra, obrigada a manobrar, não o faça.",
+            "o veleiro deveria ter aumentado a velocidade para passar rapidamente pela frente da lancha."
+        ], 
+        answer: 3
+    },
+    {
+        question: "Num canal ou rio estreito, a embarcação maior tem em relação à embarcação miúda:", 
+        options: [
+            "preferência.",
+            "que manobrar.",
+            "deixar o boreste livre para a outra.",
+            "manter seu rumo e velocidade independente da situação da outra.",
+            "solicitar passagem por meio de sinais sonoros."
+        ], 
+        answer: 0
+    },
+    {
+        question: "Numa situação de risco de abalroamento, como é chamada a embarcação que não tem obrigação de manobrar?", 
+        options: [
+            "sem preferência.",
+            "obrigada a manobrar.",
+            "alcançada.",
+            "manobradora.",
+            "privilegiada."
+        ], 
+        answer: 2
+    },
+    {
+        question: "Quando ocorre uma situação de risco de abalroamento e verifica-se que uma das embarcações tem preferência, qual deverá ser a atitude a ser tomada pela embarcação preferenciada?", 
+        options: [
+            "guina para boreste para evitar a colisão.",
+            "mantêm seu rumo e diminui a velocidade.",
+            "guina para bombordo para evitar a colisão.",
+            "mantêm seu rumo e velocidade.",
+            "para completamente as máquinas."
+        ], 
+        answer: 3
+    },
+    {
+        question: "Uma embarcação sem governo tem preferência em relação à:", 
+        options: [
+            "uma embarcação à vela.",
+            "uma embarcação com capacidade de manobra restrita.",
+            "uma embarcação a motor.",
+            "uma embarcação engajada na pesca.",
+            "todas as embarcações citadas."
+        ], 
+        answer: 4
+    },
+    {
+        question: "No rio onde duas embarcações de esporte e recreio navegam em rumos opostos como deverá ser a manobra e quem tem preferência?", 
+        options: [
+            "a que vem a favor da corrente deverá posicionar no meio do rio e a outra na sua margem direita, sendo que a que vem a favor da corrente tem preferência.",
+            "a que vem contra a corrente deverá se posicionar no meio do rio e a outra na sua margem direita, sendo que a que vem contra a corrente tem preferência.",
+            "a que vem a favor da corrente deverá se posicionar no meio do rio e a outra na sua margem de boreste, sendo que a que vem a favor da corrente tem preferência.",
+            "a que vem contra a corrente deverá se posicionar na margem de bombordo mais próxima, e a outra no meio do rio, não havendo preferência de manobra entre elas.",
+            "ambas devem navegar pelo centro do rio, mantendo-se à direita."
+        ], 
+        answer: 2
+    },
+    {
+        question: "A forma mais correta de cruzar com outra embarcação vindo em sentido contrário é:", 
+        options: [
+            "boreste com boreste.",
+            "boreste com bombordo.",
+            "cortando a sua proa.",
+            "tanto faz.",
+            "bombordo com bombordo."
+        ], 
+        answer: 4
+    },
+    {
+        question: "Em canais estreitos, como as embarcações devem navegar?", 
+        options: [
+            "pela margem mais próxima a seu bombordo e sempre manobrar para boreste quando verificar o risco de colisão.",
+            "pela margem mais próxima a seu boreste e sempre manobrar para boreste quando verificar o risco de colisão.",
+            "pela margem mais próxima a seu bombordo e sempre manobrar para bombordo quando verificar risco de colisão.",
+            "pela margem mais próxima a seu boreste e sempre manobrar para bombordo quando verificar risco de colisão.",
+            "pelo centro do canal, mantendo velocidade reduzida."
+        ], 
+        answer: 1
+    },
+    {
+        question: "Uma embarcação de esporte e recreio deverá evitar cruzar uma via de tráfego, tanto quanto possível, porém, se for necessário tal manobra, deverá fazer:", 
+        options: [
+            "sempre com a proa voltada para a sinalização de boreste.",
+            "sempre em baixa velocidade e apitando.",
+            "de forma a cruzar perpendicularmente a via de tráfego.",
+            "sempre fazendo alterações constantes de direção.",
+            "apenas durante o dia e com boa visibilidade."
+        ], 
+        answer: 2
+    },
+    {
+        question: "Os sinais sonoros que podem ser emitidos por apitos, buzinas ou ainda sinos, são utilizados:", 
+        options: [
+            "na situação de manobra, advertência e risco de colisão.",
+            "na situação de manobra, risco de colisão e em canais estreitos.",
+            "na situação de manobra, advertência e em baixa visibilidade.",
+            "na situação de manobra, baixa visibilidade e novo perigo.",
+            "apenas em situações de emergência."
+        ], 
+        answer: 2
+    },
+    {
+        question: "O apito curto tem duração de:", 
+        options: [
+            "2 segundos.",
+            "4 a 6 segundos.",
+            "1 minuto.",
+            "aproximadamente 1 segundo.",
+            "3 a 5 segundos."
+        ], 
+        answer: 3
+    },
+    {
+        question: "O apito longo tem duração de:", 
+        options: [
+            "2 segundos.",
+            "4 a 6 segundos.",
+            "1 minuto.",
+            "aproximadamente 1 segundo.",
+            "7 a 10 segundos."
+        ], 
+        answer: 1
+    }
+];
+
+let score = 0;
+let currentIndex = 0;
+
+const quizContainer = document.getElementById("quiz-container");
+const nextBtn = document.getElementById("nextBtn");
+const resultadoDiv = document.getElementById("resultado");
+
+function showQuestion(index) {
+    quizContainer.style.opacity = 0;
+    setTimeout(() => {
+        const q = questions[index];
+        quizContainer.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options"></div>`;
+        const optionsDiv = quizContainer.querySelector(".options");
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.addEventListener("click", () => selectAnswer(btn, i, q.answer));
+            optionsDiv.appendChild(btn);
+        });
+        quizContainer.style.opacity = 1;
+        nextBtn.style.display = "none";
+    }, 200);
+}
+
+function selectAnswer(button, selected, correct) {
+    const buttons = quizContainer.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        button.classList.add("correct");
+        score++;
+    } else {
+        button.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+    } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        resultadoDiv.textContent = `Você acertou ${score} de ${questions.length} questões.`;
+    }
+});
+
+// Inicializa o quiz
+showQuestion(currentIndex);
+</script>
+
+</body>
+</html>

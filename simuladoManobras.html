@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado Manobras com Embarcações - Interativo Passo a Passo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .question-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: opacity 0.4s ease;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .options button:hover:not(:disabled) {
+        background-color: #e0f0ff;
+    }
+    .options button.correct {
+        background-color: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .options button.wrong {
+        background-color: #F44336;
+        color: white;
+        border-color: #F44336;
+    }
+    .options button:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+    #nextBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #2196F3;
+        color: white;
+        cursor: pointer;
+        display: none;
+        transition: background-color 0.3s ease;
+    }
+    #nextBtn:hover {
+        background-color: #0b7dda;
+    }
+    #resultado {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Simulado Manobras com Embarcações</h1>
+
+<div id="quiz-container" class="question-container"></div>
+<button id="nextBtn">Próxima</button>
+<div id="resultado"></div>
+
+<script>
+const questions = [
+    {
+        question: "São partes de uma embarcação:",
+        options: [
+            "proa, popa, boca, quilha, bordos e convés.",
+            "través, calado e borda-livre.",
+            "a vante, à ré e meia-nau.",
+            "boreste, bombordo e trim.",
+            "quilha, leme e hélice."
+        ],
+        answer: 0
+    },
+    {
+        question: "Qual das correlações abaixo está totalmente correta?",
+        options: [
+            "boreste - lado direito da embarcação, bombordo - lado esquerdo da embarcação, a vante - fica na frente, à ré - fica atrás.",
+            "boreste - lado esquerdo da embarcação, bombordo - lado direito da embarcação, a vante - fica na frente, à ré - fica atrás.",
+            "través - ao lado da embarcação, a vante - parte da frente da embarcação, à ré - parte de trás da embarcação.",
+            "través - bordos da embarcação, boreste - lado direito da embarcação, bombordo - lado esquerdo da embarcação.",
+            "a vante - popa, à ré - proa, boreste - esquerdo, bombordo - direito."
+        ],
+        answer: 0
+    },
+    {
+        question: "A distância vertical da superfície da água até o pavimento principal de um navio, medida em qualquer parte da embarcação chama-se:",
+        options: [
+            "obras mortas.",
+            "calado.",
+            "obras vivas.",
+            "borda livre.",
+            "franco-bordo."
+        ],
+        answer: 3
+    },
+    {
+        question: "São partes do leme:",
+        options: [
+            "cabeça, corpo e dobradiças.",
+            "madre, cana e porta.",
+            "corpo, anete e cepo.",
+            "cabeça, anete e haste.",
+            "pá, eixo e suporte."
+        ],
+        answer: 1
+    },
+    {
+        question: "Com relação ao hélice, podemos dizer que é uma:",
+        options: [
+            "estrutura metálica, que possui pás e serve para movimentar a embarcação através de seu próprio giro, acoplado através de um eixo longitudinal a um motor.",
+            "estrutura metálica, que possui pás e serve para impulsionar a embarcação, através de seu eixo longitudinal.",
+            "estrutura metálica, que possui pás laterais, que formam uma cavitação longitudinal, que impulsiona o leme para movimentar a embarcação.",
+            "estrutura metálica, capaz de girar no seu eixo, e movimentar a embarcação no sentido dos bordos, para atracá-la ou desatracá-la.",
+            "estrutura fixa que direciona o fluxo de água para movimentar a embarcação."
+        ],
+        answer: 0
+    },
+    {
+        question: "É um fator que não altera as condições de manobra da embarcação:",
+        options: [
+            "tipo de leme.",
+            "condições do vento.",
+            "temperatura da água.",
+            "número de propulsores.",
+            "condições de corrente."
+        ],
+        answer: 2
+    },
+    {
+        question: "O que são espias e para que servem?",
+        options: [
+            "são cabos de amarração usados na faina de atracar uma embarcação.",
+            "são cabos de fibra vegetal ou sintética, que servem para prender a embarcação a uma bóia ou a outra embarcação.",
+            "são cabos de aço ou ferro, que servem para fundear a embarcação.",
+            "são retinidas, que servem para conduzir os cabos de amarração.",
+            "são cabos de segurança usados em situações de emergência."
+        ],
+        answer: 0
+    },
+    {
+        question: "Os cabos principais de amarração de uma embarcação são chamados de:",
+        options: [
+            "lançantes, espringues e traveses.",
+            "lançantes de proa e de popa e traveses.",
+            "espringues de proa e de popa e retinidas.",
+            "lançantes, espringues e retinidas.",
+            "traveses, retinidas e amarras."
+        ],
+        answer: 0
+    },
+    {
+        question: "Qual é a espia que serve para amarrar a embarcação, saindo perpendicularmente ao cais?",
+        options: [
+            "lançante de proa.",
+            "espringue de popa.",
+            "través.",
+            "retinida.",
+            "amarra de centro."
+        ],
+        answer: 2
+    },
+    {
+        question: "Qual é a espia que serve para amarrar a embarcação, não deixando que caia para vante?",
+        options: [
+            "lançante de proa.",
+            "lançante de popa.",
+            "retinida.",
+            "espringue de popa.",
+            "través de proa."
+        ],
+        answer: 1
+    },
+    {
+        question: "Para atracar deve-se, em regra geral, manobrar da seguinte forma:",
+        options: [
+            "aproximar do cais, num ângulo de 90º, de modo a passar um cabo de proa, logo que possa, colocando o leme para o bordo do cais, para deslocar a popa para este.",
+            "aproximar do cais, num angulo de 45º, de modo a passar um cabo de proa logo que possa, colocando o leme para o bordo oposto ao do cais, para deslocar a popa para este.",
+            "aproximar do cais, num ângulo de 90º, de modo a passar um cabo de proa logo que possa, colocando o leme para o bordo oposto ao do cais, para deslocar a popa para este.",
+            "aproximar do cais, em qualquer ângulo, desde que, sem seguimento, guinando-se a popa para o cais e passando o cabo de ré.",
+            "aproximar paralelamente ao cais com velocidade reduzida."
+        ],
+        answer: 1
+    },
+    {
+        question: "Numa atracação de uma embarcação de dois hélices, deve-se aproximar do cais com:",
+        options: [
+            "um ângulo de 45º sobre o cais, com seguimento.",
+            "um ângulo de 90º sobre o cais, com seguimento reduzido.",
+            "um ângulo de 10º a 20º, sem seguimento.",
+            "um ângulo de 45º, com seguimento reduzido.",
+            "um ângulo de 10º a 20º, com seguimento reduzido."
+        ],
+        answer: 4
+    },
+    {
+        question: "Havendo corrente no local que vai atracar uma lancha, devemos aproveitar seu efeito e:",
+        options: [
+            "atracar a favor da corrente, para aproveitar seu efeito de encostar a embarcação ao cais.",
+            "atracar com um cabo dizendo para vante e outro dizendo para ré.",
+            "atracar contra a corrente, passando um cabo dizendo para vante e outro para ré.",
+            "esperar a corrente cessar, para evitar seu efeito, que é prejudicial a manobra de atracação.",
+            "atracar perpendicularmente à corrente."
+        ],
+        answer: 2
+    },
+    {
+        question: "Numa atracação, com vento ou corrente perpendicular ao cais, com aproximação a barlavento, deve-se aproximar com a embarcação:",
+        options: [
+            "paralela ao cais, com muito seguimento.",
+            "paralela ao cais, com pouco seguimento.",
+            "com ângulo de 90º com o cais.",
+            "com muito seguimento e pouca inclinação ao cais.",
+            "com ângulo de 45º e velocidade moderada."
+        ],
+        answer: 1
+    },
+    {
+        question: "Numa atracação, com vento ou corrente perpendicular ao cais, com aproximação a sotavento, deve-se aproximar com a embarcação:",
+        options: [
+            "paralela ao cais, com muito seguimento.",
+            "paralela ao cais, com pouco seguimento.",
+            "com um ângulo aproximado de 45º com o cais.",
+            "com um ângulo de 90º com o cais.",
+            "contra o vento ou corrente."
+        ],
+        answer: 2
+    },
+    {
+        question: "Numa atracação com vento ou corrente paralelos ao cais, deverei aproximar com o navio:",
+        options: [
+            "a favor do que predominar e paralelo ao cais.",
+            "sempre contrário ao vento ou corrente, com ângulo agudo ao cais.",
+            "com ângulo agudo ao cais e pouco seguimento.",
+            "a favor da corrente ou vento e com pouco seguimento.",
+            "perpendicular ao cais independente das condições."
+        ],
+        answer: 1
+    },
+    {
+        question: "Para desatracar a embarcação devemos:",
+        options: [
+            "largar os cabos de vante e abrir a proa dando máquina adiante, para folgar os cabos de ré.",
+            "largar os cabos de ré, procurando manobrar para abrir a popa e, com o motor dando atrás, aproveitar o efeito do leme para afastar a popa e então largar os cabos de vante.",
+            "largar os cabos de ré, procurando utilizar os cabos de vante para abrir a popa com máquina adiante toda a força.",
+            "largar todos os cabos e dar máquina adiante toda a força, para sair rapidamente do cais.",
+            "largar primeiro os cabos centrais e depois as extremidades."
+        ],
+        answer: 1
+    },
+    {
+        question: "Com corrente de proa minha desatracação se processa:",
+        options: [
+            "folgando primeiro os cabos de vante mantendo os de ré apertados.",
+            "folgando primeiro os cabos de ré e mantendo os de vante apertados.",
+            "folgando todos os cabos e largando a embarcação ao efeito da corrente.",
+            "espera-se o efeito da corrente cessar, para iniciar a manobra de desatracação.",
+            "folgando apenas os cabos laterais."
+        ],
+        answer: 0
+    },
+    {
+        question: "Para se largar do cais, sem vento e sem corrente, deverei:",
+        options: [
+            "largar todas as espias do cais e dar máquina adiante devagar.",
+            "com leme a meio e máquina devagar à ré, largar todas as espias exceto a de vante.",
+            "largar todas as espias e dar atrás com a máquina, com leme a meio.",
+            "com leme contrário ao cais e máquina devagar adiante, largar todas as espias, exceto a de ré, que esteja dizendo para vante.",
+            "largar todas as espias simultaneamente e acelerar rapidamente."
+        ],
+        answer: 3
+    },
+    {
+        question: "Para se largar de um cais, com vento e corrente pela proa, deverei:",
+        options: [
+            "largar todas as espias, exceto a que diz para vante, na popa, mantendo o leme contrário ao cais.",
+            "largar todas as espias e manter o leme a meio.",
+            "largar todas as espias, exceto a que diz para vante, na proa, mantendo o leme a meio.",
+            "largar todas as espias, exceto a que diz para ré, na popa, mantendo o leme contrário ao cais.",
+            "largar todas as espias e usar apenas o motor para manobrar."
+        ],
+        answer: 0
+    }
+];
+
+let score = 0;
+let currentIndex = 0;
+
+const quizContainer = document.getElementById("quiz-container");
+const nextBtn = document.getElementById("nextBtn");
+const resultadoDiv = document.getElementById("resultado");
+
+function showQuestion(index) {
+    quizContainer.style.opacity = 0;
+    setTimeout(() => {
+        const q = questions[index];
+        quizContainer.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options"></div>`;
+        const optionsDiv = quizContainer.querySelector(".options");
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.addEventListener("click", () => selectAnswer(btn, i, q.answer));
+            optionsDiv.appendChild(btn);
+        });
+        quizContainer.style.opacity = 1;
+        nextBtn.style.display = "none";
+    }, 200);
+}
+
+function selectAnswer(button, selected, correct) {
+    const buttons = quizContainer.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        button.classList.add("correct");
+        score++;
+    } else {
+        button.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+    } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        resultadoDiv.textContent = `Você acertou ${score} de ${questions.length} questões.`;
+    }
+});
+
+// Inicializa o quiz
+showQuestion(currentIndex);
+</script>
+
+</body>
+</html>

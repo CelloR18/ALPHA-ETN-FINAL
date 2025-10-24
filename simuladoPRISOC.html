@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado Primeiros Socorros - Interativo Passo a Passo</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+        color: #333;
+    }
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    .question-container {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 25px;
+        margin: 0 auto;
+        max-width: 700px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        transition: opacity 0.4s ease;
+    }
+    .options button {
+        display: block;
+        margin: 10px 0;
+        padding: 12px 15px;
+        width: 100%;
+        text-align: left;
+        cursor: pointer;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        background-color: #fefefe;
+        font-size: 16px;
+        transition: all 0.3s ease;
+    }
+    .options button:hover:not(:disabled) {
+        background-color: #e0f0ff;
+    }
+    .options button.correct {
+        background-color: #4CAF50;
+        color: white;
+        border-color: #4CAF50;
+    }
+    .options button.wrong {
+        background-color: #F44336;
+        color: white;
+        border-color: #F44336;
+    }
+    .options button:disabled {
+        cursor: not-allowed;
+        opacity: 0.85;
+    }
+    #nextBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #2196F3;
+        color: white;
+        cursor: pointer;
+        display: none;
+        transition: background-color 0.3s ease;
+    }
+    #nextBtn:hover {
+        background-color: #0b7dda;
+    }
+    #resultado {
+        margin-top: 40px;
+        font-size: 22px;
+        font-weight: bold;
+        text-align: center;
+        padding: 15px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+</style>
+</head>
+<body>
+
+<h1>Simulado Primeiros Socorros</h1>
+
+<div id="quiz-container" class="question-container"></div>
+<button id="nextBtn">Próxima</button>
+<div id="resultado"></div>
+
+<script>
+const questions = [
+    {
+        question: "Os primeiros socorros são:",
+        options: [
+            "medidas preventivas de acidentes.",
+            "medidas emergenciais de prestação de socorro, antes do encaminhamento médico.",
+            "tratamentos médicos nas emergências de bordo.",
+            "medidas básicas de prestação de socorro.",
+            "procedimentos realizados apenas por profissionais de saúde."
+        ],
+        answer: 1
+    },
+    {
+        question: "O fator primordial dos primeiros socorros é não deixar a vítima:",
+        options: [
+            "perder a temperatura do corpo e mantê-la agasalhada.",
+            "perder muito sangue e a consciência.",
+            "sofrer intermação.",
+            "entrar em estado de choque.",
+            "se mover sem assistência."
+        ],
+        answer: 3
+    },
+    {
+        question: "Quais são os sinais vitais que devem ser observados em uma vítima acidentada e inconsciente?",
+        options: [
+            "respiração e batimentos cardíacos.",
+            "batimentos cardíacos e ferimentos.",
+            "respiração e cor da pele.",
+            "batimentos cardíacos e cor da pele.",
+            "temperatura corporal e pressão arterial."
+        ],
+        answer: 0
+    },
+    {
+        question: "Quando por ocasião de um acidente a bordo, o acidentado não estiver respirando, devo proceder:",
+        options: [
+            "uma massagem cardíaca externa.",
+            "uma respiração boca a boca.",
+            "uma verificação nas meninas dos olhos.",
+            "um aquecimento no corpo.",
+            "a administração de oxigênio."
+        ],
+        answer: 1
+    },
+    {
+        question: "Ao prestar os primeiros socorros em uma vítima gravemente acidentada em um navio, o que deve ser feito em primeiro lugar:",
+        options: [
+            "aplicar um analgésico.",
+            "verificar os batimentos cardíacos.",
+            "verificar se possui queimaduras.",
+            "verificar se a vítima está respirando.",
+            "verificar se há sangramento visível."
+        ],
+        answer: 3
+    },
+    {
+        question: "Para se realizar a respiração boca a boca, eu devo proceder antes, que verificação?",
+        options: [
+            "se a vítima está com pulso fraco.",
+            "se a vítima está com o coração batendo.",
+            "se a vítima está em uma posição adequada para iniciar a respiração artificial.",
+            "se existem corpos estranhos na sua boca.",
+            "se a vítima está consciente."
+        ],
+        answer: 3
+    },
+    {
+        question: "Na respiração boca a boca, eu sempre devo:",
+        options: [
+            "deixar a cabeça da vítima na posição lateral.",
+            "deixar a cabeça da vítima na posição normal.",
+            "deixar a cabeça da vítima voltada para trás.",
+            "deixar a cabeça da vítima voltada para frente.",
+            "deixar a cabeça da vítima inclinada para o lado."
+        ],
+        answer: 2
+    },
+    {
+        question: "Qual a frequência de sopros por minuto, numa respiração boca a boca?",
+        options: [
+            "20 a 30.",
+            "15 a 20.",
+            "5 a 10.",
+            "10 a 15.",
+            "30 a 40."
+        ],
+        answer: 3
+    },
+    {
+        question: "Numa respiração boca a boca, quando não conseguimos insuflar ar pela boca, devemos:",
+        options: [
+            "fazer a traqueostomia.",
+            "forçar a entrada do ar pela boca.",
+            "insuflar o ar pelo nariz.",
+            "pressionar o peito do acidentado.",
+            "interromper o procedimento."
+        ],
+        answer: 2
+    },
+    {
+        question: "Em caso de um acidente com várias vítimas a bordo, em razão da urgência, qual vítima deve ser atendida primeiro?",
+        options: [
+            "com hemorragia.",
+            "com a perna quebrada.",
+            "com parada respiratória.",
+            "com queimaduras.",
+            "com fraturas expostas."
+        ],
+        answer: 2
+    },
+    {
+        question: "Caso seja verificado que, após ter feito a respiração boca a boca, o coração da vítima ainda não está batendo, o procedimento correto será:",
+        options: [
+            "continuar a respiração até ela respirar sozinha.",
+            "fazer massagem cardíaca externa.",
+            "aquecer a vítima.",
+            "esperar alguns segundos e verificar novamente.",
+            "administrar medicamentos cardíacos."
+        ],
+        answer: 1
+    },
+    {
+        question: "Caso o coração da vítima de um acidente a bordo, não esteja batendo, eu devo iniciar:",
+        options: [
+            "massagem cardíaca externa.",
+            "a respiração boca a boca.",
+            "a traqueostomia.",
+            "o aquecimento do corpo.",
+            "a desfibrilação manual."
+        ],
+        answer: 0
+    },
+    {
+        question: "Qual a frequência ideal de compressão e descompressão do peito, na massagem cardíaca?",
+        options: [
+            "30 vezes por minuto.",
+            "60 vezes por minuto.",
+            "60 vezes por segundo.",
+            "Até 100 vezes por minuto.",
+            "120 vezes por minuto."
+        ],
+        answer: 3
+    },
+    {
+        question: "Qual é o outro sintoma que acompanha a parada cardíaca?",
+        options: [
+            "palidez.",
+            "abaixamento rápido da temperatura do corpo.",
+            "menina dos olhos dilatada.",
+            "ruborização da face.",
+            "sudorese excessiva."
+        ],
+        answer: 2
+    },
+    {
+        question: "O que se deve ser tentado no caso de parada cardíaca, e que às vezes funciona, de imediato?",
+        options: [
+            "respiracão boca a boca.",
+            "massagem nos punhos.",
+            "aquecimento do corpo.",
+            "murro forte no peito.",
+            "compressão abdominal."
+        ],
+        answer: 3
+    },
+    {
+        question: "Após a massagem cardíaca ter feito o coração voltar a bater, o que deve ser feito é:",
+        options: [
+            "continuar com a respiração boca a boca.",
+            "usar toalhas molhadas para diminuir a temperatura corporal.",
+            "continuar uma massagem com menos intensidade.",
+            "aquecer a vítima imediatamente.",
+            "administrar líquidos por via oral."
+        ],
+        answer: 0
+    },
+    {
+        question: "Quando houver, ao mesmo tempo, parada respiratória e parada cardíaca, como se deve proceder?",
+        options: [
+            "realizar movimentos intercalados, 1 massagem cardíaca e 8 respirações boca a boca.",
+            "realizar movimentos intercalados, 15 massagens cardíacas e 2 respirações boca a boca.",
+            "só realizar massagem cardíaca, após a vítima voltar a respirar.",
+            "realizar movimentos intercalados, 30 massagens cardíacas e 2 respirações boca a boca.",
+            "realizar apenas respiração boca a boca até a vítima recuperar os batimentos."
+        ],
+        answer: 3
+    },
+    {
+        question: "Qual o nome do dispositivo utilizado para imobilizar ossos quebrados?",
+        options: [
+            "material isolante.",
+            "torniquete.",
+            "tampão.",
+            "padiola.",
+            "tala."
+        ],
+        answer: 4
+    },
+    {
+        question: "No caso de fratura do antebraço, podemos imobilizá-lo com:",
+        options: [
+            "tábua, papelão ou jornal grosso.",
+            "material flexível.",
+            "material de borracha sintética.",
+            "tiras de pano amarradas no pescoço.",
+            "qualquer material rígido disponível."
+        ],
+        answer: 0
+    },
+    {
+        question: "Para imobilizar o braço, eu devo deixá-lo:",
+        options: [
+            "esticado.",
+            "na posição que quebrou.",
+            "dobrado.",
+            "o mais confortável possível.",
+            "totalmente solto."
+        ],
+        answer: 2
+    }
+];
+
+let score = 0;
+let currentIndex = 0;
+
+const quizContainer = document.getElementById("quiz-container");
+const nextBtn = document.getElementById("nextBtn");
+const resultadoDiv = document.getElementById("resultado");
+
+function showQuestion(index) {
+    quizContainer.style.opacity = 0;
+    setTimeout(() => {
+        const q = questions[index];
+        quizContainer.innerHTML = `<h3>${index + 1}. ${q.question}</h3><div class="options"></div>`;
+        const optionsDiv = quizContainer.querySelector(".options");
+        q.options.forEach((opt, i) => {
+            const btn = document.createElement("button");
+            btn.textContent = opt;
+            btn.addEventListener("click", () => selectAnswer(btn, i, q.answer));
+            optionsDiv.appendChild(btn);
+        });
+        quizContainer.style.opacity = 1;
+        nextBtn.style.display = "none";
+    }, 200);
+}
+
+function selectAnswer(button, selected, correct) {
+    const buttons = quizContainer.querySelectorAll("button");
+    buttons.forEach(b => b.disabled = true);
+
+    if (selected === correct) {
+        button.classList.add("correct");
+        score++;
+    } else {
+        button.classList.add("wrong");
+        buttons[correct].classList.add("correct");
+    }
+    nextBtn.style.display = "block";
+}
+
+nextBtn.addEventListener("click", () => {
+    currentIndex++;
+    if (currentIndex < questions.length) {
+        showQuestion(currentIndex);
+    } else {
+        quizContainer.style.display = "none";
+        nextBtn.style.display = "none";
+        resultadoDiv.textContent = `Você acertou ${score} de ${questions.length} questões.`;
+    }
+});
+
+// Inicializa o quiz
+showQuestion(currentIndex);
+</script>
+
+</body>
+</html>
