@@ -2366,6 +2366,7 @@ footer {
   }
 }
 /* ===== SEÇÃO DE SIMULADOS PREMIUM ===== */
+
 .premium-simulados-section {
   padding: 6rem 0;
   background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
@@ -4947,5 +4948,122 @@ footer {
 @media (min-width: 992px) {
   .calendario-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+}
+/* ===== SEÇÃO DE SIMULADOS PREMIUM (CORREÇÃO) ===== */
+.premium-simulados-section {
+  padding: 6rem 0;
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+  color: var(--text-light);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-simulados-section .section-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.premium-simulados-section .section-subtitle {
+  display: block;
+  font-size: 1.1rem;
+  color: var(--secondary-color);
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.premium-simulados-section .section-title {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  
+}
+
+.premium-simulados-section .section-description {
+  max-width: 700px;
+  margin: 0 auto;
+  opacity: 0.9;
+}
+
+.simulados-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.simulado-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 2rem 1.5rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-decoration: none;
+  display: block;
+  color: var(--text-dark);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  backdrop-filter: blur(5px);
+}
+
+.simulado-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  border-color: var(--secondary-color);
+  background: white;
+}
+
+.simulado-card i {
+  font-size: 3rem;
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.simulado-card:hover i {
+  color: var(--secondary-color);
+  transform: scale(1.1);
+}
+
+.simulado-card h3 {
+  font-size: 1.5rem;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+  font-family: 'Anton', sans-serif;
+}
+
+.simulado-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 0;
+  color: #555;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .simulados-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .simulado-card {
+    padding: 1.5rem;
+  }
+  
+  .simulado-card i {
+    font-size: 2.5rem;
+  }
+  
+  .simulado-card h3 {
+    font-size: 1.3rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .premium-simulados-section {
+    padding: 3rem 0;
+  }
+  
+  .premium-simulados-section .section-title {
+    font-size: 1.8rem;
   }
 }
