@@ -5,80 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulado Manobras com Embarcações - Interativo Passo a Passo</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        padding: 20px;
-        color: #333;
-    }
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .question-container {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 25px;
-        margin: 0 auto;
-        max-width: 700px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        transition: opacity 0.4s ease;
-    }
-    .options button {
-        display: block;
-        margin: 10px 0;
-        padding: 12px 15px;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        background-color: #fefefe;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-    .options button:hover:not(:disabled) {
-        background-color: #e0f0ff;
-    }
-    .options button.correct {
-        background-color: #4CAF50;
-        color: white;
-        border-color: #4CAF50;
-    }
-    .options button.wrong {
-        background-color: #F44336;
-        color: white;
-        border-color: #F44336;
-    }
-    .options button:disabled {
-        cursor: not-allowed;
-        opacity: 0.85;
-    }
-    #nextBtn {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: none;
-        background-color: #2196F3;
-        color: white;
-        cursor: pointer;
-        display: none;
-        transition: background-color 0.3s ease;
-    }
-    #nextBtn:hover {
-        background-color: #0b7dda;
-    }
-    #resultado {
-        margin-top: 40px;
-        font-size: 22px;
-        font-weight: bold;
-        text-align: center;
-        padding: 15px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: 20px;
+    color: #fff;
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+/* CARD PRINCIPAL */
+.question-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 750px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* PERGUNTA */
+#question {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* BOTÕES */
+.options button {
+    display: block;
+    margin: 10px 0;
+    padding: 14px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.25s ease;
+}
+
+/* HOVER */
+.options button:hover:not(:disabled) {
+    background: #2196F3;
+    transform: scale(1.02);
+}
+
+/* CORRETO */
+.correct {
+    background: #4CAF50 !important;
+    color: #fff;
+    box-shadow: 0 0 10px #4CAF50;
+}
+
+/* ERRADO */
+.wrong {
+    background: #F44336 !important;
+    color: #fff;
+    box-shadow: 0 0 10px #F44336;
+}
+
+/* BOTÃO PRÓXIMA */
+#nextBtn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #2196F3, #00c6ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#nextBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,198,255,0.6);
+}
+
+/* RESULTADO */
+#resultado {
+    margin-top: 40px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
 </style>
 </head>
 <body>
@@ -311,6 +340,107 @@ const questions = [
         ],
         answer: 0
     }
+    ,
+{
+question: "Para se largar de um cais, com vento e corrente pela popa, deverei:",
+options: ["largar todas as espias, exceto a que diz para vante, na popa, mantendo o leme contrário ao cais.", "largar todas as espias e manter o leme a boreste.", "largar todas as espias, exceto a que diz para ré, na proa, mantendo o leme na direção do cais.", "largar todas as espias, exceto a que diz para vante, na proa, mantendo o leme na direção do cais.", "largar todas as espias e manter o leme a bombordo."],
+answer: 0
+},
+{
+question: "Quando numa embarcação de dois hélices, um deles dá atrás e outro adiante, com a mesma rotação, essa embarcação:",
+options: ["tende a seguir em linha reta para vante.", "tende girar a proa para o mesmo bordo do hélice que dá atrás.", "tende a girar a proa para bordo contrário ao do hélice que dá atrás.", "tende a girar a proa para o mesmo bordo do hélice que dá adiante.", "tende a seguir em linha reta para ré."],
+answer: 2
+},
+{
+question: "Num barco parado, se dermos máquina adiante a toda força e, se o sentido da rotação do hélice for no sentido dos ponteiros do relógio, vai acontecer:",
+options: ["proa vai para boreste.", "não haverá alteração no rumo.", "proa vai para bombordo.", "haverá uma inversão no rumo.", "inicialmente a proa vai para boreste e depois para bombordo."],
+answer: 2
+},
+{
+question: "A que se deve o movimento de uma embarcação a motor, para vante ou para ré?",
+options: ["pela aceleração do motor.", "pela ação dos ventos sobre o pano.", "pelo giro do hélice.", "pela ação das corrente marinhas sobre o casco.", "pelo giro do leme."],
+answer: 2
+},
+{
+question: "Uma embarcação em deslocamento para vante, com rotação direita, pode-se afirmar que a água será jogada para:",
+options: ["frente.", "boreste e bombordo.", "trás.", "frente e para trás.", "as alhetas."],
+answer: 2
+},
+{
+question: "Uma embarcação com um hélice, com rotação direita, com leme a meio, com seguimento e hélice em marcha ré a proa guinará para:",
+options: ["bombordo.", "boreste rapidamente.", "boreste muito lentamente.", "boreste lentamente.", "bombordo rapidamente."],
+answer: 0
+},
+{
+question: "Uma embarcação com um hélice, com rotação direita, com leme a boreste, com seguimento e hélice em marcha à ré, a proa guinará para:",
+options: ["bombordo.", "primeiro boreste e depois bombordo lentamente.", "boreste lentamente.", "boreste rapidamente.", "bombordo lentamente."],
+answer: 1
+},
+{
+question: "Uma embarcação com um hélice dando máquinas adiante, com rotação no sentido horário, com leme a boreste, com seguimento para ré, a proa guinará para:",
+options: ["bombordo lentamente.", "boreste lentamente.", "boreste com mais facilidade.", "bombordo com mais facilidade.", "bombordo."],
+answer: 3
+},
+{
+question: "Quando a embarcação está dando máquinas a ré, com certeza a embarcação se deslocará para ré. Se num dado momento o timão for girado para bombordo, o leme e a popa irão para:",
+options: ["boreste.", "vante.", "través.", "bombordo.", "barlavento."],
+answer: 3
+},
+{
+question: "Com relação ao comportamento e atuação do leme de uma embarcação, é correto afirmar:",
+options: ["o ângulo do leme não interfere na velocidade da guinada.", "quanto menor o ângulo do leme, mais rápida será a guinada.", "quanto maior o ângulo do leme, mais devagar será a guinada.", "quanto maior o ângulo do leme, mais rápida será a guinada.", "quanto menor o ângulo do leme, maior será a inclinação (banda)."],
+answer: 3
+},
+{
+question: "O que são amarras?",
+options: ["elos que servem para prender a âncora ao anete.", "elos ou cabo que serve para prender a âncora ao porão da amarra.", "elos ou cabo que serve para prender a âncora ao escovém da embarcação.", "elos ou cabo que serve para prender a âncora a antepara da embarcação.", "elos ou cabo que serve para prender a âncora ao paiol da amarra ou ao convés da embarcação."],
+answer: 4
+},
+{
+question: "A âncora mais comum, a bordo das embarcações de esporte e recreio, é a:",
+options: ["fateixa.", "busca-vida.", "almirantado.", "danforth.", "bruce."],
+answer: 3
+},
+{
+question: "As âncoras são peças metálicas capazes de:",
+options: ["prender no fundo, para permitir que a embarcação garre.", "fundear nos fundeadouros de boa tença.", "prender no fundo, a fim de evitar que a embarcação se mantenha estabilizada.", "fundear nos fundeadouros com vento forte ou correnteza, para evitar que a embarcação garre.", "prender no fundo, para permitir que a embarcação se mantenha fundeada, ou seja, sem se deslocar da posição."],
+answer: 4
+},
+{
+question: "Sobre a âncora Danforth, pode-se afirmar que tem grande poder de unhar, em função de:",
+options: ["apresentar menor custo de mercado.", "ser feita de aço galvanizado.", "ser importada de outro país.", "ser ideal para embarcação a vela.", "possuir os braços móveis e peso reduzido."],
+answer: 4
+},
+{
+question: "Para que utilizamos a bóia de arinque?",
+options: ["para indicar o local exato onde a âncora ficou presa no fundo.", "para amarrar a embarcação num local próximo à marina.", "para evitar que a embarcação garre.", "para determinar o local onde podemos fundear com segurança.", "para indicar o local onde fica a bóia de poita."],
+answer: 0
+},
+{
+question: "Qual das condições abaixo não é necessário para se caracterizar um bom fundeadouro?",
+options: ["ser abrigado de ventos, correntes e ondas.", "ter uma profundidade adequada ao fundeio.", "ter um fundo de boa tença.", "ter um espaço limitado para não se fundear fora da área permitida.", "ter um fundo de boa qualidade."],
+answer: 3
+},
+{
+question: "Embarcações a motor ou a vela poderão se aproximar da linha de base para fundear, desde que não haja nenhum dispositivo em contrário. Nesse caso como deve ser feita a manobra, levando em consideração a segurança dos banhistas:",
+options: ["paralela a linha de base com velocidade igual ou inferior a 5 nós.", "perpendicular a linha de base com velocidade igual ou inferior a 3 nós.", "paralela a linha de base com velocidade igual ou inferior a 3 nós.", "perpendicular a linha de base com velocidade igual ou inferior a 6 nós.", "em qualquer direção, com velocidade igual ou inferior a 3 nós."],
+answer: 1
+},
+{
+question: "Havendo corrente de maré no local de atracação, devemos aproveitar seu efeito e:",
+options: ["nunca devemos atracar contra a corrente.", "atracar com um cabo dizendo para vante e outro dizendo para ré.", "atracar a favor da corrente, para aproveitar seu efeito de encostar a embarcação ao cais.", "esperar a corrente cessar para evitar seu efeito, que é prejudicial a manobra de atracação.", "atracar contra a corrente, passando um cabo dizendo (apontando) para vante e outro para ré."],
+answer: 4
+},
+{
+question: "As fainas de fundear ou suspender devem ser feitas sempre observando o quê?",
+options: ["as condições de vento, corrente e maré, procurando afilar-se ao que predominar mais.", "as condições de vento e corrente, procurando dar máquina atrás antes de largar a âncora e parando, após ter prendido no fundo.", "as condições da água, sempre verificando o tipo de tença e a profundidade local, para poder saber quantas âncoras largar.", "as condições do tempo, para verificar o local de fundeio.", "temperatura da água e velocidade do vento."],
+answer: 0
+},
+{
+question: "Para fundear devemos:",
+options: ["parar a máquina e largar a âncora.", "largar a âncora com seguimento avante.", "inverter a máquina e quando estiver caindo à ré, largar a âncora.", "quando a embarcação estiver com seguimento, largar a âncora e dar máquina devagar adiante.", "parar a máquina e quando estiver com pouco seguimento, largar a âncora."],
+answer: 2
+}
 ];
 
 let score = 0;
