@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Alpha Náutica | Simulados Premium</title>
+  
+  <!-- Google Fonts + Ícones -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  
+  <!-- Manifest e PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#5a0e99" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="Simulados Náuticos" />
+  <link rel="apple-touch-icon" href="icons/icon-192x192.png" />
+  
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #5a0e99;
+      --primary-dark: #3a0a5f;
+      --secondary: #FFD700;
+      --secondary-dark: #e6c300;
+      --dark: #000d1a;
+      --light: #f8f9fa;
+      --gray: #cccccc;
+      --shadow-sm: 0 4px 12px rgba(0,0,0,0.2);
+      --shadow-lg: 0 20px 35px -10px rgba(0,0,0,0.4);
+      --radius: 1.25rem;
+    }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: linear-gradient(145deg, var(--dark) 0%, #0a0f1a 100%);
+      color: #fff;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    h1, h2, h3, .badge, .card-title {
+      font-family: 'Anton', sans-serif;
+      letter-spacing: 0.08em;
+    }
+
+    /* GLASS HEADER */
+    .premium-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(18px);
+      background: rgba(0, 13, 26, 0.75);
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      padding: 0.8rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .logo-icon {
+      font-size: 2rem;
+      color: var(--secondary);
+      filter: drop-shadow(0 0 6px rgba(255,215,0,0.6));
+    }
+
+    .logo-area span {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      background: linear-gradient(135deg, #FFD700, #FFB347);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .btn-back-premium {
+      background: rgba(255,215,0,0.15);
+      border: 1px solid var(--secondary);
+      padding: 0.5rem 1.2rem;
+      border-radius: 40px;
+      color: var(--secondary);
+      font-weight: 600;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-back-premium:hover {
+      background: var(--secondary);
+      color: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* HERO PREMIUM */
+    .hero-premium {
+      text-align: center;
+      padding: 4rem 1.5rem 3rem;
+      background: radial-gradient(circle at 10% 30%, rgba(90,14,153,0.4), transparent);
+    }
+
+    .hero-badge {
+      background: rgba(255,215,0,0.2);
+      backdrop-filter: blur(4px);
+      padding: 0.3rem 1rem;
+      border-radius: 60px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--secondary);
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .hero-premium h1 {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      background: linear-gradient(135deg, #fff, var(--secondary));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 1rem;
+    }
+
+    .hero-premium p {
+      max-width: 650px;
+      margin: 0 auto 2rem;
+      font-size: 1.1rem;
+      opacity: 0.85;
+    }
+
+    /* GRID PREMIUM */
+    .simulados-grid-premium {
+      max-width: 1300px;
+      margin: 2rem auto;
+      padding: 0 1.5rem 4rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .sim-card {
+      background: rgba(255,255,255,0.05);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,215,0,0.2);
+      border-radius: var(--radius);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      text-decoration: none;
+      color: white;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sim-card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(145deg, rgba(255,215,0,0.05), transparent);
+      opacity: 0;
+      transition: 0.4s;
+    }
+
+    .sim-card:hover {
+      transform: translateY(-12px);
+      border-color: var(--secondary);
+      box-shadow: var(--shadow-lg);
+      background: rgba(255,255,255,0.1);
+    }
+
+    .sim-card:hover::after {
+      opacity: 1;
+    }
+
+    .card-icon {
+      font-size: 3.2rem;
+      color: var(--secondary);
+      margin-bottom: 1.2rem;
+      transition: 0.3s;
+    }
+
+    .sim-card:hover .card-icon {
+      transform: scale(1.05);
+      text-shadow: 0 0 12px gold;
+    }
+
+    .sim-card h3 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+    }
+
+    .sim-card p {
+      font-size: 0.95rem;
+      opacity: 0.8;
+      margin-bottom: 1.2rem;
+    }
+
+    .badge-new {
+      background: var(--secondary);
+      color: var(--primary-dark);
+      font-size: 0.7rem;
+      font-weight: bold;
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      display: inline-block;
+      width: fit-content;
+      margin: 0 auto 0.5rem;
+    }
+
+    .card-stats {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-top: 0.8rem;
+      font-size: 0.8rem;
+      color: var(--gray);
+    }
+
+    .card-stats i {
+      color: var(--secondary);
+      margin-right: 0.2rem;
+    }
+
+    .destaque-card {
+      border: 2px solid var(--secondary);
+      background: linear-gradient(145deg, rgba(90,14,153,0.8), rgba(0,13,26,0.9));
+      transform: scale(1.02);
+    }
+
+    /* BANNER INFORMAÇÕES */
+    .info-banner {
+      background: linear-gradient(95deg, var(--primary-dark), #1a0033);
+      margin: 0 1.5rem 3rem;
+      border-radius: 2rem;
+      padding: 2rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      border: 1px solid rgba(255,215,0,0.3);
+    }
+
+    .info-text h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-text p {
+      opacity: 0.8;
+    }
+
+    .btn-install {
+      background: var(--secondary);
+      color: var(--primary-dark);
+      border: none;
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 800;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .btn-install:hover {
+      background: #fff;
+      transform: translateY(-3px);
+    }
+
+    /* FOOTER PREMIUM */
+    .premium-footer {
+      background: #03060b;
+      padding: 2rem 1.5rem;
+      text-align: center;
+      border-top: 1px solid rgba(255,215,0,0.1);
+      margin-top: 2rem;
+    }
+
+    /* RESPONSIVO PERFEITO */
+    @media (max-width: 768px) {
+      .premium-header {
+        padding: 0.7rem 1rem;
+      }
+      .hero-premium {
+        padding: 2rem 1rem 2rem;
+      }
+      .simulados-grid-premium {
+        gap: 1.2rem;
+        padding: 0 1rem 3rem;
+      }
+      .info-banner {
+        flex-direction: column;
+        text-align: center;
+        margin: 0 1rem 2rem;
+      }
+      .btn-install {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .sim-card h3 {
+        font-size: 1.5rem;
+      }
+      .card-icon {
+        font-size: 2.5rem;
+      }
+    }
+
+    /* INSTALL TOAST */
+    .toast-install {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      background: #1e2a3a;
+      backdrop-filter: blur(12px);
+      padding: 1rem;
+      border-radius: 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1000;
+      border-left: 5px solid var(--secondary);
+      box-shadow: var(--shadow-lg);
+      animation: slideUp 0.4s ease;
+    }
+
+    .toast-install button {
+      background: var(--secondary);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 30px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    @keyframes slideUp {
+      from { transform: translateY(100%); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    /* Animação de brilho */
+    @keyframes glow {
+      0% { box-shadow: 0 0 0 0 rgba(255,215,0,0.3); }
+      70% { box-shadow: 0 0 0 10px rgba(255,215,0,0); }
+      100% { box-shadow: 0 0 0 0 rgba(255,215,0,0); }
+    }
+
+    .btn-install:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER ESTILO APP PREMIUM -->
+<div class="premium-header">
+  <div class="logo-area">
+    <i class="fas fa-anchor logo-icon"></i>
+    <span>ALPHA CURSOS NÁUTICOS</span>
+  </div>
+  <a href="index.html" class="btn-back-premium">
+    <i class="fas fa-arrow-left"></i> Início
+  </a>
+</div>
+
+<!-- HERO PROFISSIONAL -->
+<section class="hero-premium">
+  <div class="hero-badge">
+    <i class="fas fa-graduation-cap"></i> TREINAMENTO OFICIAL
+  </div>
+  <h1>Simulados  <br> <span style="color: var(--secondary);">Arrais-Amador</span></h1>
+</section>
+
+<!-- GRADE DE SIMULADOS - VERSÃO PREMIUM COM ESTILO IGUAL AO PRINCIPAL -->
+<div class="simulados-grid-premium">
+  
+  <a href="simuladoRIPEAM.html" class="sim-card">
+    <i class="fas fa-lightbulb card-icon"></i>
+    <h3>RIPEAM</h3>
+    <p>Regulamento Internacional para evitar abalroamento</p>
+    <div class="card-stats"><i class="fas fa-question-circle"></i> 40 questões  <i class="fas fa-chart-line"></i> alto índice</div>
+  </a>
+
+  <a href="simuladoRlesta.html" class="sim-card">
+    <i class="fas fa-book card-icon"></i>
+    <h3>LESTA</h3>
+    <p>Lei de Segurança do Tráfego Aquaviário</p>
+    <div class="card-stats"><i class="fas fa-clock"></i> 40 questões </div>
+  </a>
+
+  <a href="simuladoBalizamento.html" class="sim-card">
+    <i class="fas fa-map-marked-alt card-icon"></i>
+    <h3>Balizamento</h3>
+    <p>Sinalização náutica, boias e faróis</p>
+    <div class="card-stats"><i class="fas fa-flag-checkered"></i> 40 questões </div>
+  </a>
+
+  <a href="simuladoManobras.html" class="sim-card">
+    <i class="fas fa-ship card-icon"></i>
+    <h3>Manobras</h3>
+    <p>Atracar, fundear e governo da embarcação</p>
+    <div class="card-stats"><i class="fas fa-water"></i> 40 questões </div>
+  </a>
+
+  <a href="simuladoCAV.html" class="sim-card">
+    <i class="fas fa-fire-extinguisher card-icon"></i>
+    <h3>Incêndio</h3>
+    <p>Prevenção e combate a incêndio a bordo</p>
+    <div class="card-stats"><i class="fas fa-fire"></i> 40 questões </div>
+  </a>
+
+  <a href="simuladoPRISOC.html" class="sim-card">
+    <i class="fas fa-first-aid card-icon"></i>
+    <h3>Primeiros Socorros</h3>
+    <p>Primeiros socorros.</p>
+    <div class="card-stats"><i class="fas fa-heartbeat"></i> 40 questões </div>
+  </a>
+
+  <a href="simuladoSobrevivencia.html" class="sim-card destaque-card">
+    
+    <i class="fas fa-life-ring card-icon"></i>
+    <h3>Sobrevivência</h3>
+    <p>Técnicas de sobrevivência no mar.</p>
+     <div class="card-stats"><i class="fas fa-life-ring"></i> 40 questões </div>
+    
+  </a>
+
+  
+</div>
+
+<!-- BANNER PARA INSTALAÇÃO (PWA) E INFORMAÇÕES -->
+<div class="info-banner">
+  <div class="info-text">
+    <h3><i class="fas fa-mobile-alt"></i> Leve os simulados na tela inicial</h3>
+    <p>Instale este app no seu celular e estude offline com a versão completa.</p>
+  </div>
+  <button id="installButton" class="btn-install">
+    <i class="fas fa-download"></i> Instalar App
+  </button>
+</div>
+
+<!-- RODAPÉ -->
+<footer class="premium-footer">
+  <p><i class="fas fa-crown"></i> Simulados oficiais Alpha Náutica — </p>
+  <p style="margin-top: 0.5rem; font-size: 0.8rem;">© 2025 • Treinamento de excelência • PWA disponível</p>
+</footer>
+
+<script>
+  // ========== PWA - INSTALAÇÃO E SERVICE WORKER ==========
+  let deferredPrompt;
+  const installBtn = document.getElementById('installButton');
+  const toastDiv = document.createElement('div');
+  
+  // Registro do Service Worker para tornar o app instalável e funcional offline (cache)
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js').then(reg => {
+      console.log('✅ Service Worker registrado com sucesso', reg);
+    }).catch(err => {
+      console.warn('⚠️ Service Worker falhou', err);
+    });
+  }
+
+  // Evento beforeinstallprompt - Chrome/Edge/Samsung Internet
+  window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
+    if (installBtn) {
+      installBtn.style.display = 'inline-flex';
+    }
+    // Exibir toast opcional caso queira incentivar
+    showInstallToast();
+  });
+
+  function showInstallToast() {
+    if (!document.querySelector('.toast-install')) {
+      const toast = document.createElement('div');
+      toast.className = 'toast-install';
+      toast.innerHTML = `
+        <span><i class="fas fa-rocket"></i> Instale o app para acesso rápido e offline!</span>
+        <button id="toastInstallBtn">Instalar</button>
+      `;
+      document.body.appendChild(toast);
+      document.getElementById('toastInstallBtn').addEventListener('click', () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(choiceResult => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('Usuário aceitou instalação PWA');
+            }
+            deferredPrompt = null;
+          });
+        }
+        toast.remove();
+      });
+      setTimeout(() => {
+        if(toast) toast.remove();
+      }, 8000);
+    }
+  }
+
+  if (installBtn) {
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === 'accepted') {
+          console.log('✅ App instalado');
+        }
+        deferredPrompt = null;
+        installBtn.style.display = 'none';
+      } else {
+        // Fallback: instrução para iOS ou navegadores sem suporte
+        alert('Para instalar no seu dispositivo: No Android, clique em "Adicionar à tela inicial". No iPhone, use o botão Compartilhar e "Adicionar à Tela de Início".');
+      }
+    });
+  }
+
+  // Detectar se já está rodando como standalone (app instalado)
+  if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
+    console.log('App rodando no modo standalone (instalado)');
+    if (installBtn) installBtn.style.display = 'none';
+  }
+
+  // Animação de entrada nos cards
+  const cards = document.querySelectorAll('.sim-card');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0px)';
+      }
+    });
+  }, { threshold: 0.1 });
+  
+  cards.forEach(card => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    card.style.transition = 'opacity 0.6s ease, transform 0.5s ease';
+    observer.observe(card);
+  });
+  
+  // Simular estatísticas e efeito de loading opcional (apenas visual)
+  console.log('Página de simulados premium pronta para PWA e mobile');
+  
+  // Adicionar suporte a navegação por gestos (back button)
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) {
+      window.location.reload(); // força atualização para manter service worker
+    }
+  });
+  
+  // Evitar zoom indesejado em inputs (não há inputs, mas garantia)
+  document.querySelectorAll('input, textarea, select').forEach(el => {
+    el.addEventListener('touchstart', function(e) {
+      this.style.fontSize = '16px';
+    });
+  });
+</script>
+
+<!-- ATENÇÃO: Criação de manifest.json dinâmico para garantir instalação offline -->
+<script>
+  (function ensureManifest() {
+    // Se já existir link para manifest, não recria
+    if (document.querySelector('link[rel="manifest"]')) return;
+    const manifestData = {
+      name: "Simulados Náuticos Alpha",
+      short_name: "AlphaNautica",
+      description: "Simulados para Habilitação Náutica - Marinha do Brasil",
+      start_url: "/simulados-app.html",
+      display: "standalone",
+      theme_color: "#5a0e99",
+      background_color: "#000d1a",
+      icons: [
+        {
+          src: "icons/icon-72x72.png",
+          sizes: "72x72",
+          type: "image/png",
+          purpose: "any maskable"
+        },
+        {
+          src: "icons/icon-96x96.png",
+          sizes: "96x96",
+          type: "image/png"
+        },
+        {
+          src: "icons/icon-128x128.png",
+          sizes: "128x128",
+          type: "image/png"
+        },
+        {
+          src: "icons/icon-144x144.png",
+          sizes: "144x144",
+          type: "image/png"
+        },
+        {
+          src: "icons/icon-152x152.png",
+          sizes: "152x152",
+          type: "image/png"
+        },
+        {
+          src: "icons/icon-192x192.png",
+          sizes: "192x192",
+          type: "image/png"
+        },
+        {
+          src: "icons/icon-384x384.png",
+          sizes: "384x384",
+          type: "image/png"
+        },
+        {
+          src: "icons/icon-512x512.png",
+          sizes: "512x512",
+          type: "image/png"
+        }
+      ]
+    };
+    const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+    const manifestURL = URL.createObjectURL(blob);
+    const link = document.createElement('link');
+    link.rel = 'manifest';
+    link.href = manifestURL;
+    document.head.appendChild(link);
+    console.log('manifest gerado dinamicamente para PWA');
+  })();
+</script>
+
+<!-- SIMULAÇÃO DE ÍCONES caso não existam, mas garantia de compatibilidade -->
+<style>
+  /* fallback visual dos cards mesmo sem imagens */
+  .sim-card .card-icon {
+    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  }
+  body {
+    background-attachment: fixed;
+  }
+  .premium-header {
+    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  }
+  /* Efeito de luz no hover dos cards */
+  .sim-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
+    transition: 0.6s;
+    z-index: 0;
+  }
+  .sim-card:hover::before {
+    left: 100%;
+  }
+  .sim-card > * {
+    position: relative;
+    z-index: 2;
+  }
+  .btn-install {
+    animation: glow 2.2s infinite;
+  }
+  .destaque-card {
+    background: linear-gradient(145deg, #6b1eb3, #2f0752);
+    border-width: 2px;
+  }
+  @media (max-width: 560px) {
+    .simulados-grid-premium {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<!-- Adiciona metatags para iOS home screen -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Simulados Náuticos">
+<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+
+</body>
+</html>
