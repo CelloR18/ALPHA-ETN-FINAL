@@ -5,80 +5,109 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Simulado Balizamento - Interativo Passo a Passo</title>
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f5f5f5;
-        padding: 20px;
-        color: #333;
-    }
-    h1 {
-        text-align: center;
-        margin-bottom: 30px;
-    }
-    .question-container {
-        background-color: #fff;
-        border-radius: 10px;
-        padding: 25px;
-        margin: 0 auto;
-        max-width: 700px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        transition: opacity 0.4s ease;
-    }
-    .options button {
-        display: block;
-        margin: 10px 0;
-        padding: 12px 15px;
-        width: 100%;
-        text-align: left;
-        cursor: pointer;
-        border: 2px solid #ccc;
-        border-radius: 8px;
-        background-color: #fefefe;
-        font-size: 16px;
-        transition: all 0.3s ease;
-    }
-    .options button:hover:not(:disabled) {
-        background-color: #e0f0ff;
-    }
-    .options button.correct {
-        background-color: #4CAF50;
-        color: white;
-        border-color: #4CAF50;
-    }
-    .options button.wrong {
-        background-color: #F44336;
-        color: white;
-        border-color: #F44336;
-    }
-    .options button:disabled {
-        cursor: not-allowed;
-        opacity: 0.85;
-    }
-    #nextBtn {
-        margin-top: 20px;
-        padding: 10px 20px;
-        font-size: 16px;
-        border-radius: 8px;
-        border: none;
-        background-color: #2196F3;
-        color: white;
-        cursor: pointer;
-        display: none;
-        transition: background-color 0.3s ease;
-    }
-    #nextBtn:hover {
-        background-color: #0b7dda;
-    }
-    #resultado {
-        margin-top: 40px;
-        font-size: 22px;
-        font-weight: bold;
-        text-align: center;
-        padding: 15px;
-        background-color: #fff;
-        border-radius: 10px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    padding: 20px;
+    color: #fff;
+}
+
+/* TÍTULO */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: #ffffff;
+}
+
+/* CARD PRINCIPAL */
+.question-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(12px);
+    border-radius: 15px;
+    padding: 30px;
+    margin: 0 auto;
+    max-width: 750px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+/* PERGUNTA */
+#question {
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+/* BOTÕES */
+.options button {
+    display: block;
+    margin: 10px 0;
+    padding: 14px;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    border-radius: 10px;
+    border: none;
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.25s ease;
+}
+
+/* HOVER */
+.options button:hover:not(:disabled) {
+    background: #2196F3;
+    transform: scale(1.02);
+}
+
+/* CORRETO */
+.correct {
+    background: #4CAF50 !important;
+    color: #fff;
+    box-shadow: 0 0 10px #4CAF50;
+}
+
+/* ERRADO */
+.wrong {
+    background: #F44336 !important;
+    color: #fff;
+    box-shadow: 0 0 10px #F44336;
+}
+
+/* BOTÃO PRÓXIMA */
+#nextBtn {
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: linear-gradient(45deg, #2196F3, #00c6ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    display: none;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+#nextBtn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0,198,255,0.6);
+}
+
+/* RESULTADO */
+#resultado {
+    margin-top: 40px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    background: rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
 </style>
 </head>
 <body>
@@ -310,7 +339,107 @@ const questions = [
             "em todos os casos de perigo."
         ],
         answer: 3
-    }
+    },
+    {
+question: "Uma bóia com cores brancas e encarnadas em faixas verticais indica:",
+options: ["águas seguras.", "canal preferencial.", "limite lateral de canal.", "perigo isolado.", "bifurcação de canal."],
+answer: 0
+},
+{
+question: "À noite, a cor das luzes dos sinais cardinais, perigo isolado e águas seguras é:",
+options: ["amarela.", "verde.", "encarnada.", "azul.", "branca."],
+answer: 4
+},
+{
+question: "São situações normalmente indicadas por balizamento, exceto:",
+options: ["perigos naturais e limites laterais dos canais.", "zonas de acidentes marítimos importantes.", "área de regatas e pontos de espera das eclusas.", "novos perigos.", "Quadrante de águas seguras."],
+answer: 4
+},
+{
+question: "São sinais de balizamento, exceto:",
+options: ["sinais laterais e sinais especiais.", "sinais de pontes e sinais de perigos.", "sinais cardinais e sinais laterais.", "sinais de perigo isolado e sinais cardinais.", "sinais de águas seguras e sinais de perigo isolado."],
+answer: 1
+},
+{
+question: "O sistema de balizamento poderá ser dotado de um sistema que emite um sinal na tela do radar e que facilita, portanto, a sua identificação. Como se chama este dispositivo?",
+options: ["Interscan.", "Navcan.", "Racon.", "Delta.", "Sarsat."],
+answer: 2
+},
+{
+question: "À noite, foi avistada uma luz verde piscando e, pela carta náutica, verificou-se a aproximação da entrada de um porto. Qual seria o formato provável deste sinal?",
+options: ["cilíndrico.", "cônico.", "esférico.", "cúbico.", "retângulo."],
+answer: 1
+},
+{
+question: "Durante o dia, observou-se uma haste em forma de pilar, com duas esferas pretas na sua parte de cima. Provavelmente estamos diante de:",
+options: ["um balizamento cego.", "uma bóia cônica.", "uma baliza.", "um balizamento de águas seguras.", "um perigo isolado."],
+answer: 4
+},
+{
+question: "Durante o dia, observou-se um pilar com dois cones pretos em cima. Provavelmente estamos diante de:",
+options: ["um balizamento luminoso.", "uma bóia de bifurcação de canal.", "um canal preferencial.", "um quadrante de águas seguras.", "um balizamento cego."],
+answer: 3
+},
+{
+question: "Uma bóia, à noite, emitindo uma luz amarela, pode significar:",
+options: ["perigo isolado.", "área de recreação.", "bifurcação de canal.", "águas seguras.", "zona de acidentes."],
+answer: 1
+},
+{
+question: "A marca de tope de balizamento de águas seguras é indicada por:",
+options: ["duas esferas pretas.", "uma esfera preta.", "uma esfera encarnada.", "um cone encarnado.", "um cilindro verde."],
+answer: 1
+},
+{
+question: "A marca de tope de balizamento de uma bóia de sinal especial é indicada pela letra:",
+options: ["a) “E”.", "b) “W”.", "c) “X”.", "d) “Y”.", "e) “H”"],
+answer: 2
+},
+{
+question: "Os sinais cardinais podem ser usados, exceto:",
+options: ["para indicar que as águas mais profundas estão no quadrante designado por ele.", "para indicar o quadrante seguro para se navegar.", "para chamar atenção de um ponto notável.", "para indicar ao navegante da rosa-dos-ventos que possui águas seguras.", "para delimitar a área em que o navegador deve se limitar a passar."],
+answer: 4
+},
+{
+question: "O balizamento de interior de porto obedecerá a regras definidas e deverá ser utilizado, pelo navegante, como:",
+options: ["orientação para uma navegação segura.", "uma rota a ser seguida obrigatoriamente, por qualquer embarcação.", "uma separação de locais e zonas de tráfego, dos canais.", "apenas um auxílio nas manobras de socorro de embarcações, em águas restritas.", "uma rota a ser seguida apenas como orientação."],
+answer: 0
+},
+{
+question: "No balizamento de uma hidrovia observou-se um sinal “X” numa placa, à margem do rio, que significa:",
+options: ["seguir meio do canal.", "seguir margem.", "trocar de margem.", "perigo isolado.", "bifurcação de canal."],
+answer: 2
+},
+{
+question: "No balizamento de uma hidrovia observou-se um sinal “H” numa placa, à margem do rio, que significa:",
+options: ["seguir meio do canal.", "seguir margem.", "trocar de margem.", "bifurcação de canal.", "perigo isolado."],
+answer: 0
+},
+{
+question: "No balizamento de uma hidrovia observou-se um sinal “Y” numa placa, à margem do rio, que significa:",
+options: ["seguir meio do canal.", "seguir margem.", "trocar de margem.", "bifurcação de canal.", "perigo isolado."],
+answer: 3
+},
+{
+question: "No balizamento de uma hidrovia observou-se um sinal “+” numa placa, à margem do rio, que significa:",
+options: ["seguir meio do canal.", "trocar de margem.", "perigo isolado.", "bifurcação de canal.", "seguir margem."],
+answer: 0
+},
+{
+question: "No balizamento de uma hidrovia observou-se um sinal “ ” numa placa, à margem do rio, que significa:",
+options: ["seguir meio do canal.", "seguir margem.", "trocar de margem.", "bifurcação de canal.", "perigo isolado."],
+answer: 1
+},
+{
+question: "Numa ponte que atravessa o rio, observou-se dois losangos amarelos, um ligado ao outro pelos pontos laterais, isto significa que o:",
+options: ["tráfego está proibido.", "tráfego está à direita de quem desce ou sobe o rio.", "tráfego está à direita de quem sobe e desce o rio.", "tráfego é permitido com sentido único.", "tráfego é permitido nos dois sentidos."],
+answer: 4
+},
+{
+question: "Numa ponte que atravessava o rio, observou-se um losango amarelo, isto significa que o:",
+options: ["tráfego está proibido.", "tráfego é permitido com sentido único.", "tráfego é permitido nos dois sentidos.", "tráfego está à direita de quem desce ou sobe o rio.", "tráfego está à esquerda de quem desce ou sobre o rio."],
+answer: 1
+}
 ];
 
 let score = 0;
