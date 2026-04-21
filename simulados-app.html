@@ -3,24 +3,59 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Alpha  | Simulados </title>
+  <title>Alpha | Simulados Náuticos</title>
   
   <!-- Google Fonts + Ícones -->
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   
-  <!-- Manifest e PWA com LOGO ALPHA -->
+  <!-- MANIFEST CORRIGIDO - USANDO CAMINHOS REAIS -->
   <link rel="manifest" href="manifest.json" />
-  <meta name="theme-color" content="#5a0e99" />
+  
+  <!-- METATAGS PARA iOS - CORRIGIDAS -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Alpha Náutica" />
+  <meta name="theme-color" content="#5a0e99" />
   
-  <!-- ÍCONES PARA INSTALAÇÃO (LOGO ALPHA) -->
+  <!-- ÍCONES PARA INSTALAÇÃO - VERSÃO CORRIGIDA (USANDO CAMINHOS ABSOLUTOS E RELATIVOS) -->
+  <!-- Para dispositivos Apple (iOS) -->
   <link rel="apple-touch-icon" href="logo_alpha_transparente.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="57x57" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="72x72" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="76x76" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="114x114" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="120x120" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="144x144" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="152x152" href="logo_alpha_transparente.png" />
+  <link rel="apple-touch-icon" sizes="167x167" href="logo_alpha_transparente.png />
+  <link rel="apple-touch-icon" sizes="180x180" href="logo_alpha_transparente.png" />
+  
+  <!-- Para Android/Chrome -->
   <link rel="icon" type="image/png" sizes="192x192" href="logo_alpha_transparente.png" />
-  <link rel="icon" type="image/png" sizes="96x96" href="logo_alpha_transparente.png" />
+  <link rel="icon" type="image/png" sizes="512x512" href="logo_alpha_transparente.png" />
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  
+  <!-- IMAGEM DE FALBACK - CASO NÃO ENCONTRE O ÍCONE, USA O EMOJI -->
+  <style>
+    /* Fallback visual enquanto a imagem não carrega */
+    .icon-fallback {
+      display: inline-block;
+      width: 180px;
+      height: 180px;
+      background: linear-gradient(135deg, #5a0e99, #FFD700);
+      border-radius: 20%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+    }
+    
+    /* Geração dinâmica de ícone se a imagem não existir */
+    .dynamic-icon {
+      position: relative;
+    }
+  </style>
   
   <style>
     * {
@@ -103,6 +138,7 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      text-decoration: none;
     }
 
     .btn-back-premium:hover {
@@ -170,6 +206,7 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      cursor: pointer;
     }
 
     .sim-card::after {
@@ -377,6 +414,21 @@
     .btn-install:active {
       transform: scale(0.97);
     }
+    
+    /* Banner de aviso sobre ícones */
+    .icon-warning-banner {
+      background: rgba(255,100,0,0.2);
+      border-left: 4px solid #FFD700;
+      padding: 1rem;
+      margin: 1rem;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      display: none;
+    }
+    
+    .icon-warning-banner.show {
+      display: block;
+    }
   </style>
 </head>
 <body>
@@ -400,7 +452,9 @@
   <h1>Simulados  <br> <span style="color: var(--secondary);">Arrais-Amador</span></h1>
 </section>
 
-<!-- GRADE DE SIMULADOS - VERSÃO PREMIUM COM ESTILO IGUAL AO PRINCIPAL -->
+
+
+<!-- GRADE DE SIMULADOS -->
 <div class="simulados-grid-premium">
   
   <a href="simuladoRIPEAM.html" class="sim-card">
@@ -446,17 +500,12 @@
   </a>
 
   <a href="simuladoSobrevivencia.html" class="sim-card destaque-card">
-    
     <i class="fas fa-life-ring card-icon"></i>
     <h3>Sobrevivência</h3>
     <p>Técnicas de sobrevivência no mar.</p>
      <div class="card-stats"><i class="fas fa-life-ring"></i> 40 questões </div>
-    
   </a>
-
-  
 </div>
-
 
 <!-- RODAPÉ -->
 <footer class="premium-footer">
@@ -465,60 +514,165 @@
 </footer>
 
 <script>
+  // ========== GERENCIAMENTO DE ÍCONES E FALLBACK ==========
+  
+  // Função para verificar se o ícone existe
+  function checkIconExists(url, callback) {
+    const img = new Image();
+    img.onload = () => callback(true);
+    img.onerror = () => callback(false);
+    img.src = url;
+  }
+  
+  // Verificar ícone principal
+  checkIconExists('logo_alpha.png', (exists) => {
+    if (!exists) {
+      document.getElementById('iconWarning').classList.add('show');
+      console.warn('⚠️ Ícone logo_alpha.png não encontrado! O ícone pode não aparecer na tela inicial.');
+    } else {
+      console.log('✅ Ícone encontrado!');
+    }
+  });
+  
+  // Função para gerar guia de criação do ícone
+  window.generateIconGuide = function() {
+    const guideHtml = `
+      <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #1e2a3a; padding: 2rem; border-radius: 20px; z-index: 10000; max-width: 90%; box-shadow: 0 20px 40px rgba(0,0,0,0.5); border: 2px solid #FFD700;">
+        <h3 style="color: #FFD700; margin-bottom: 1rem;"><i class="fas fa-image"></i> Como adicionar o ícone:</h3>
+        <p style="margin-bottom: 1rem;">Para o ícone aparecer na tela inicial, você precisa:</p>
+        <ol style="margin-left: 1.5rem; margin-bottom: 1rem;">
+          <li>Salvar uma imagem quadrada (mínimo 512x512) como <strong>logo_alpha.png</strong></li>
+          <li>Colocar na mesma pasta deste arquivo (simulados-app.html)</li>
+          <li>Ou usar o método alternativo abaixo:</li>
+        </ol>
+        <button onclick="generateFallbackIcon()" style="background: #FFD700; color: #000; padding: 0.8rem 1.5rem; border: none; border-radius: 40px; font-weight: bold; cursor: pointer; margin: 0.5rem;">
+          <i class="fas fa-magic"></i> Gerar ícone automaticamente (canvas)
+        </button>
+        <button onclick="this.parentElement.remove()" style="background: #666; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 40px; cursor: pointer; margin: 0.5rem;">
+          Fechar
+        </button>
+      </div>
+    `;
+    const div = document.createElement('div');
+    div.innerHTML = guideHtml;
+    document.body.appendChild(div);
+  };
+  
+  // Função para gerar ícone via canvas (fallback)
+  window.generateFallbackIcon = function() {
+    const canvas = document.createElement('canvas');
+    canvas.width = 512;
+    canvas.height = 512;
+    const ctx = canvas.getContext('2d');
+    
+    // Fundo gradiente
+    const gradient = ctx.createLinearGradient(0, 0, 512, 512);
+    gradient.addColorStop(0, '#5a0e99');
+    gradient.addColorStop(1, '#FFD700');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 512, 512);
+    
+    // Borda
+    ctx.strokeStyle = '#fff';
+    ctx.lineWidth = 15;
+    ctx.strokeRect(20, 20, 472, 472);
+    
+    // Desenhar âncora
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 300px "Font Awesome 6 Free"';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('⚓', 256, 280);
+    
+    // Texto ALPHA
+    ctx.font = 'bold 60px Anton, sans-serif';
+    ctx.fillStyle = '#FFD700';
+    ctx.fillText('ALPHA', 256, 440);
+    
+    // Download do ícone
+    canvas.toBlob((blob) => {
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'logo_alpha.png';
+      a.click();
+      URL.revokeObjectURL(url);
+      
+      alert('✅ Ícone gerado e baixado! Coloque o arquivo "logo_alpha.png" na mesma pasta do aplicativo e reinstale na tela inicial.');
+      
+      // Fechar o modal
+      const modal = document.querySelector('div[style*="position: fixed"]');
+      if(modal) modal.remove();
+    }, 'image/png');
+  };
+  
   // ========== PWA - INSTALAÇÃO E SERVICE WORKER ==========
   let deferredPrompt;
   const installBtn = document.getElementById('installButton');
-  const toastDiv = document.createElement('div');
   
-  // Registro do Service Worker para tornar o app instalável e funcional offline (cache)
+  // Criar botão de instalação no banner de informações
+  const infoBanner = document.querySelector('.info-banner');
+  if (infoBanner && !installBtn) {
+    const newInstallBtn = document.createElement('button');
+    newInstallBtn.id = 'installButton';
+    newInstallBtn.className = 'btn-install';
+    newInstallBtn.innerHTML = '<i class="fas fa-download"></i> Instalar App';
+    infoBanner.appendChild(newInstallBtn);
+  }
+  
+  // Registro do Service Worker
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js').then(reg => {
-      console.log('✅ Service Worker registrado com sucesso', reg);
+      console.log('✅ Service Worker registrado', reg);
     }).catch(err => {
       console.warn('⚠️ Service Worker falhou', err);
     });
   }
-
-  // Evento beforeinstallprompt - Chrome/Edge/Samsung Internet
+  
+  // Evento beforeinstallprompt
   window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     deferredPrompt = e;
-    if (installBtn) {
-      installBtn.style.display = 'inline-flex';
+    const installBtnElement = document.getElementById('installButton');
+    if (installBtnElement) {
+      installBtnElement.style.display = 'inline-flex';
     }
-    // Exibir toast opcional caso queira incentivar
     showInstallToast();
   });
-
+  
   function showInstallToast() {
     if (!document.querySelector('.toast-install')) {
       const toast = document.createElement('div');
       toast.className = 'toast-install';
       toast.innerHTML = `
-        <span><i class="fas fa-rocket"></i> Instale o app para acesso rápido e offline!</span>
+        <span><i class="fas fa-rocket"></i> Instale o app para acesso rápido e ícone na tela inicial!</span>
         <button id="toastInstallBtn">Instalar</button>
       `;
       document.body.appendChild(toast);
-      document.getElementById('toastInstallBtn').addEventListener('click', () => {
-        if (deferredPrompt) {
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(choiceResult => {
-            if (choiceResult.outcome === 'accepted') {
-              console.log('Usuário aceitou instalação PWA');
-            }
-            deferredPrompt = null;
-          });
-        }
-        toast.remove();
-      });
+      const toastBtn = document.getElementById('toastInstallBtn');
+      if (toastBtn) {
+        toastBtn.addEventListener('click', () => {
+          if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then(choiceResult => {
+              if (choiceResult.outcome === 'accepted') {
+                console.log('✅ App instalado');
+              }
+              deferredPrompt = null;
+            });
+          }
+          toast.remove();
+        });
+      }
       setTimeout(() => {
         if(toast) toast.remove();
-      }, 8000);
+      }, 10000);
     }
   }
-
-  if (installBtn) {
-    installBtn.addEventListener('click', async () => {
+  
+  const finalInstallBtn = document.getElementById('installButton');
+  if (finalInstallBtn) {
+    finalInstallBtn.addEventListener('click', async () => {
       if (deferredPrompt) {
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
@@ -526,21 +680,20 @@
           console.log('✅ App instalado');
         }
         deferredPrompt = null;
-        installBtn.style.display = 'none';
+        finalInstallBtn.style.display = 'none';
       } else {
-        // Fallback: instrução para iOS ou navegadores sem suporte
-        alert('Para instalar no seu dispositivo: No Android, clique em "Adicionar à tela inicial". No iPhone, use o botão Compartilhar e "Adicionar à Tela de Início".');
+        alert('📱 Para instalar no iPhone: Toque em Compartilhar → "Adicionar à Tela de Início"\n\n📱 No Android: Toque no menu (3 pontos) → "Instalar aplicativo"');
       }
     });
   }
-
-  // Detectar se já está rodando como standalone (app instalado)
+  
+  // Detectar standalone
   if (window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true) {
-    console.log('App rodando no modo standalone (instalado)');
-    if (installBtn) installBtn.style.display = 'none';
+    console.log('App rodando como standalone');
+    if (finalInstallBtn) finalInstallBtn.style.display = 'none';
   }
-
-  // Animação de entrada nos cards
+  
+  // Animação dos cards
   const cards = document.querySelectorAll('.sim-card');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -558,32 +711,22 @@
     observer.observe(card);
   });
   
-  // Simular estatísticas e efeito de loading opcional (apenas visual)
-  console.log('Página de simulados premium pronta para PWA e mobile');
-  
-  // Adicionar suporte a navegação por gestos (back button)
+  // Forçar recarregamento ao voltar
   window.addEventListener('pageshow', (event) => {
     if (event.persisted) {
-      window.location.reload(); // força atualização para manter service worker
+      window.location.reload();
     }
-  });
-  
-  // Evitar zoom indesejado em inputs (não há inputs, mas garantia)
-  document.querySelectorAll('input, textarea, select').forEach(el => {
-    el.addEventListener('touchstart', function(e) {
-      this.style.fontSize = '16px';
-    });
   });
 </script>
 
-<!-- ATENÇÃO: Criação de manifest.json dinâmico para garantir instalação offline -->
+<!-- Manifesto gerado dinamicamente como fallback -->
 <script>
   (function ensureManifest() {
-    // Se já existir link para manifest, não recria
-    if (document.querySelector('link[rel="manifest"]')) return;
+    if (document.querySelector('link[rel="manifest"][href="manifest.json"]')) return;
+    
     const manifestData = {
-      name: "Simulados Náuticos Alpha",
-      short_name: "AlphaNautica",
+      name: "Alpha Cursos Náuticos - Simulados",
+      short_name: "Alpha Náutica",
       description: "Simulados para Habilitação Náutica - Marinha do Brasil",
       start_url: "/simulados-app.html",
       display: "standalone",
@@ -591,108 +734,50 @@
       background_color: "#000d1a",
       icons: [
         {
-          src: "icons/icon-72x72.png",
-          sizes: "72x72",
+          src: "logo_alpha.png",
+          sizes: "512x512",
           type: "image/png",
           purpose: "any maskable"
         },
         {
-          src: "icons/icon-96x96.png",
-          sizes: "96x96",
-          type: "image/png"
-        },
-        {
-          src: "icons/icon-128x128.png",
-          sizes: "128x128",
-          type: "image/png"
-        },
-        {
-          src: "icons/icon-144x144.png",
-          sizes: "144x144",
-          type: "image/png"
-        },
-        {
-          src: "icons/icon-152x152.png",
-          sizes: "152x152",
-          type: "image/png"
-        },
-        {
-          src: "icons/icon-192x192.png",
+          src: "logo_alpha.png",
           sizes: "192x192",
           type: "image/png"
         },
         {
-          src: "icons/icon-384x384.png",
-          sizes: "384x384",
-          type: "image/png"
-        },
-        {
-          src: "icons/icon-512x512.png",
+          src: "logo_alpha.png",
           sizes: "512x512",
           type: "image/png"
         }
       ]
     };
-    const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
-    const manifestURL = URL.createObjectURL(blob);
-    const link = document.createElement('link');
-    link.rel = 'manifest';
-    link.href = manifestURL;
-    document.head.appendChild(link);
-    console.log('manifest gerado dinamicamente para PWA');
+    
+    // Verifica se o ícone existe, se não, usa um ícone gerado dinamicamente
+    checkIconExists('logo_alpha.png', (exists) => {
+      if (!exists) {
+        manifestData.icons = [{
+          src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%235a0e99'/%3E%3Ctext x='50' y='67' font-size='50' text-anchor='middle' fill='%23FFD700' font-family='Arial'%3E⚓%3C/text%3E%3C/svg%3E",
+          sizes: "512x512",
+          type: "image/svg+xml"
+        }];
+      }
+      
+      const blob = new Blob([JSON.stringify(manifestData)], {type: 'application/json'});
+      const manifestURL = URL.createObjectURL(blob);
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = manifestURL;
+      document.head.appendChild(link);
+      console.log('✅ Manifest gerado dinamicamente');
+    });
   })();
 </script>
 
-<!-- SIMULAÇÃO DE ÍCONES caso não existam, mas garantia de compatibilidade -->
-<style>
-  /* fallback visual dos cards mesmo sem imagens */
-  .sim-card .card-icon {
-    text-shadow: 0 2px 5px rgba(0,0,0,0.3);
-  }
-  body {
-    background-attachment: fixed;
-  }
-  .premium-header {
-    box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  }
-  /* Efeito de luz no hover dos cards */
-  .sim-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,215,0,0.1), transparent);
-    transition: 0.6s;
-    z-index: 0;
-  }
-  .sim-card:hover::before {
-    left: 100%;
-  }
-  .sim-card > * {
-    position: relative;
-    z-index: 2;
-  }
-  .btn-install {
-    animation: glow 2.2s infinite;
-  }
-  .destaque-card {
-    background: linear-gradient(145deg, #6b1eb3, #2f0752);
-    border-width: 2px;
-  }
-  @media (max-width: 560px) {
-    .simulados-grid-premium {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>
-
-<!-- Adiciona metatags para iOS home screen -->
+<!-- Metatags para iOS -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Simulados Náuticos">
-<link rel="apple-touch-icon" href="icons/icon-192x192.png">
+<meta name="apple-mobile-web-app-title" content="Alpha Náutica">
+
 
 </body>
 </html>
