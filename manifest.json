@@ -1,7 +1,7 @@
 {
   "name": "Simulado Náutico",
   "short_name": "Simulado",
-  "start_url": "./simulado-app.html",
+  "start_url": "./simulados-app.html",
   "display": "standalone",
   "background_color": "#0f2027",
   "theme_color": "#0f2027",
