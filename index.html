@@ -1305,6 +1305,11 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+<script>
+if (window.matchMedia('(display-mode: standalone)').matches) {
+  window.location.href = "simulados-app.html";
+}
+</script>
 <a href="simulados-app.html" class="btn-simulados-app">
   <i class="fas fa-play"></i> Simulados
 </a>
