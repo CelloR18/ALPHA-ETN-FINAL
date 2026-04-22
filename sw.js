@@ -2,7 +2,7 @@ const CACHE_NAME = "simulado-v1";
 
 const urlsToCache = [
   "./",
-  "./index.html",
+  "./simulado-app.html",
   "./manifest.json",
   "./icon-192.png",
   "./icon-512.png"
