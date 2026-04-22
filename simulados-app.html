@@ -9,9 +9,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   
-  <!-- MANIFEST CORRIGIDO - USANDO CAMINHOS REAIS -->
-  <link rel="manifest" href="manifest.json" />
-  
+  <link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#0f2027">
+
+<!-- iPhone -->
+<link rel="apple-touch-icon" href="icon-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Simulado Náutico">
+
   <!-- METATAGS PARA iOS - CORRIGIDAS -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -777,7 +783,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Alpha Náutica">
-
+<script>
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("sw.js")
+    .then(() => console.log("App pronto para uso offline"))
+    .catch(err => console.log("Erro SW:", err));
+}
+</script>c:\Users\home\Desktop\backup\apple-touch-icon.png c:\Users\home\Desktop\backup\favicon-16x16.png c:\Users\home\Desktop\backup\favicon-32x32.png c:\Users\home\Desktop\backup\android-chrome-192x192.png c:\Users\home\Desktop\backup\android-chrome-512x512.png
 
 </body>
 </html>
